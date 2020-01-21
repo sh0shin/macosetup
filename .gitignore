@@ -11,8 +11,15 @@
 *.dmg
 *.pkg
 
+Backup.d/*
+
 Config.d/*
 !Config.d/Sample.sh
+
+File.d/*
+!File.d/motd.in
+!File.d/sudo.80admin.in
+
 Local.d/*
 !Local.d/Sample.sh
 
