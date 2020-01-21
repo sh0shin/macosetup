@@ -1,0 +1,7 @@
+# sudoers.d/80admin
+#
+
+%admin    ALL=(ALL) NOPASSWD: ALL
+
+# vim: set syn=sudoers sw=2 ts=2 et :
+# eof
