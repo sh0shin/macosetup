@@ -23,5 +23,5 @@ sudo systemsetup -setlocalsubnetname "${_sharing_computername:-macOSetup}"
 # Remote Login
 sudo systemsetup -f -setremotelogin "${_sharing_remotelogin:-off}" 2>/dev/null
 
-# vim: set syn=sh sw=2 ts=2 et :
+# vim: set syn=bash sw=2 ts=2 et :
 # eof
