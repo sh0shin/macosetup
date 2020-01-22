@@ -13,10 +13,10 @@ sudo systemsetup -setusingnetworktime "${_date_time_usingnetworktime:-on}"
 sudo systemsetup -setnetworktimeserver "${_date_time_networktimeserver:-de.pool.ntp.org}"
 
 # Time Zone
-sudo systemsetup -settimezone "${_date_time_timezone:-"Europe/Berlin"}"
+sudo systemsetup -settimezone "${_date_time_timezone:-Europe/Berlin}"
 
 # Clock
-defaults write com.apple.menuextra.clock DateFormat -string "${_date_time_dateformat:-"EEE d. MMM HH:mm:ss"}"
+defaults write com.apple.menuextra.clock DateFormat -string "${_date_time_dateformat:-EEE d. MMM HH:mm:ss}"
 
-# vim: set syn=sh sw=2 ts=2 et :
+# vim: set syn=bash sw=2 ts=2 et :
 # eof
