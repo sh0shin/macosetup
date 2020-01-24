@@ -55,11 +55,11 @@ _main()
   # Run selected only
   if [[ $# -gt 0 ]]
   then
-    for _run in $@
+    for _run in "$@"
     do
       test -x "$_run" && source "$_run"
-      exit $?
     done
+    exit 0
   fi
 
   # Run all
