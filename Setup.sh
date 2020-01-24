@@ -24,9 +24,21 @@ _osupport()
   fi
 }
 
+_sipstatus()
+{
+  _sip_status=$(csrutil status | awk -F'status: ' '{print $2}')
+  if [[ "$_sip_status" = 'enabled' ]]
+  then
+    echo 'WARNING: System Integrity Protection is enabled!'
+    echo 'WARNING: Some settings may fail!'
+    read -p 'Press RETURN to continue.' _wait
+  fi
+}
+
 _main()
 {
   _osupport
+  _sipstatus
 
   _config="$1"
 
