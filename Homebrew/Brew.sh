@@ -19,6 +19,8 @@ fi
 if [[ -n "${_brew_formulae[@]}" ]]
 then
 
+  brew update
+
   for _formulae in "${_brew_formulae[@]}"
   do
     brew info "$_formulae" | grep -qi "not installed" && \
