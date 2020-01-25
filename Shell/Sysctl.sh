@@ -8,9 +8,16 @@
 [[ "${_sysctl_enabled:-false}" == false ]] && return
 echo "${BASH_SOURCE[0]}"
 
-# Defaults
+# Config
 IFS=$'\n'
-echo "echo \"${_sysctl[*]}\" >/private/etc/sysctl.conf" | sudo -s
+echo "echo \"${_sysctl_flags[*]}\" >/private/etc/sysctl.conf" | sudo -s
+unset IFS
 
-# vim: set syn=sh sw=2 ts=2 et :
+# Set
+for _flag in "${_sysctl_flags[@]}"
+do
+  sudo sysctl "$_flag"
+done
+
+# vim: set syn=bash sw=2 ts=2 et :
 # eof
