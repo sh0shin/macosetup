@@ -152,7 +152,14 @@ echo "${BASH_SOURCE[0]}"
 #_icloud_new_docs_to_cloud=false
 
 # Internet Accounts
+
 # Software Update
+#_software_update_enabled=true
+#_software_update_auto_check=true
+#_software_update_auto_download=false
+#_software_update_autoinstall_macos=false
+#_software_update_autoinstall_data_security=true
+
 # Network
 # Bluetooth
 # Extensions
@@ -164,7 +171,10 @@ echo "${BASH_SOURCE[0]}"
 
 # Users & Groups
 # Parental Controls
+
 # Siri
+#_siri_enabled=true
+#_siri_assistant_enabled=false
 
 # Date & Time
 #_date_time_enabled=true
