@@ -136,7 +136,10 @@ echo "${BASH_SOURCE[0]}"
 #_firewall_stealthmode=off
 
 # Spotlight
+
 # Notifications
+#_notifications_enabled=true
+#_notifications_sort_order=1
 
 # Displays
 # Energy Saver
