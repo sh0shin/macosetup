@@ -142,7 +142,19 @@ echo "${BASH_SOURCE[0]}"
 #_notifications_sort_order=1
 
 # Displays
+
 # Energy Saver
+#_energy_saver_enabled=true
+#_battery_display_sleep=5
+#_battery_system_sleep=5
+#_battery_disk_sleep=10
+#_battery_reduce_brightness=true
+#_battery_power_nap=false
+#_adapter_display_sleep=15
+#_adapter_system_sleep=15
+#_adapter_disk_sleep=10
+#_adapter_wake_on_lan=true
+#_adapter_power_nap=true
 
 # Keyboard
 #_keyboard_enabled=true
