@@ -142,27 +142,27 @@ echo "${BASH_SOURCE[0]}"
 # Energy Saver
 
 # Keyboard
-_keyboard_enabled=true
-_keyboard_repeat=2
-_keyboard_inital_repeat=15
-_keyboard_fn_state=true
-_keyboard_auto_spelling=false
-_keyboard_auto_spelling=false
-_keyboard_auto_capitalise=false
-_keyboard_space_fullstop=false
-_keyboard_smart_quote=false
-_keyboard_smart_dash=false
-_keyboard_ui_mode=3
+#_keyboard_enabled=true
+#_keyboard_repeat=2
+#_keyboard_inital_repeat=15
+#_keyboard_fn_state=true
+#_keyboard_auto_spelling=false
+#_keyboard_auto_spelling=false
+#_keyboard_auto_capitalise=false
+#_keyboard_space_fullstop=false
+#_keyboard_smart_quote=false
+#_keyboard_smart_dash=false
+#_keyboard_ui_mode=3
 
 # Mouse
 # Trackpad
 # Printers & Scanners
 
 # Sound
-_sound_enabled=true
-_sound_effects="/System/Library/Sounds/Basso.aiff"
-_sound_play_effects=true
-_sound_change_feedback=false
+#_sound_enabled=true
+#_sound_effects="/System/Library/Sounds/Basso.aiff"
+#_sound_play_effects=true
+#_sound_change_feedback=false
 
 # Startup Disk
 
