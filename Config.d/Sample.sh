@@ -279,6 +279,12 @@ echo "${BASH_SOURCE[0]}"
 #_finder_disable_ds_network=true
 #_finder_disable_ds_usb=true
 
+# Screenshot
+#_screenshot_enabled=true
+#_screenshot_disable_shadow=true
+#_screenshot_location="$HOME/Pictures/Screenshots"
+#_screenshot_type="png"
+
 # iTerm2
 #_iterm_enabled=true
 #_iterm_prefs_custom=false
