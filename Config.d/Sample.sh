@@ -255,6 +255,12 @@ echo "${BASH_SOURCE[0]}"
 
 ## Applications
 
+# Activity Monitor
+#_activity_monitor_enabled=true
+#_activity_monitor_icon=5
+#_activity_monitor_disk_graph=1
+#_activity_monitor_network_graph=1
+
 # Finder
 #_finder_enabled=true
 #_finder_desktop_show_hdd=false
