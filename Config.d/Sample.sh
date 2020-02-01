@@ -144,7 +144,13 @@ echo "${BASH_SOURCE[0]}"
 # Mouse
 # Trackpad
 # Printers & Scanners
+
 # Sound
+_sound_enabled=true
+_sound_effects="/System/Library/Sounds/Basso.aiff"
+_sound_play_effects=true
+_sound_change_feedback=false
+
 # Startup Disk
 
 # iCloud
