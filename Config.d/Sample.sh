@@ -136,6 +136,10 @@ echo "${BASH_SOURCE[0]}"
 #_firewall_stealthmode=off
 
 # Spotlight
+#_spotlight_enabled=true
+##_spotlight_search_items=()
+#_spotlight_suggestions_disabled=true
+#_spotlight_exclusions=()
 
 # Notifications
 #_notifications_enabled=true
