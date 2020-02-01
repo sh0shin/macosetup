@@ -140,7 +140,20 @@ echo "${BASH_SOURCE[0]}"
 
 # Displays
 # Energy Saver
+
 # Keyboard
+_keyboard_enabled=true
+_keyboard_repeat=2
+_keyboard_inital_repeat=15
+_keyboard_fn_state=true
+_keyboard_auto_spelling=false
+_keyboard_auto_spelling=false
+_keyboard_auto_capitalise=false
+_keyboard_space_fullstop=false
+_keyboard_smart_quote=false
+_keyboard_smart_dash=false
+_keyboard_ui_mode=3
+
 # Mouse
 # Trackpad
 # Printers & Scanners
