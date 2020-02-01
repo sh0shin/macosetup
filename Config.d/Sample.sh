@@ -285,6 +285,15 @@ echo "${BASH_SOURCE[0]}"
 #_screenshot_location="$HOME/Pictures/Screenshots"
 #_screenshot_type="png"
 
+# Clipy
+#_clipy_enabled=true
+#_clipy_automatic_checks=false
+#_clipy_collect_crash_report=false
+#_clipy_input_paste=false
+#_clipy_max_history=540
+#_clipy_show_status=2
+#_clipy_login_item=true
+
 # iTerm2
 #_iterm_enabled=true
 #_iterm_prefs_custom=false
