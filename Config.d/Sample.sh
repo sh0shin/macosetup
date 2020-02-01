@@ -279,6 +279,11 @@ echo "${BASH_SOURCE[0]}"
 #_finder_disable_ds_network=true
 #_finder_disable_ds_usb=true
 
+# iTerm2
+#_iterm_enabled=true
+#_iterm_prefs_custom=false
+#_iterm_prefs_custom_folder="~/.iterm2"
+
 ## Misc
 # Dock Icons (Depends on dockutil!)
 #_dock_icons_enabled=false
