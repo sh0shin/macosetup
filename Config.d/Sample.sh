@@ -285,6 +285,10 @@ echo "${BASH_SOURCE[0]}"
 #_screenshot_location="$HOME/Pictures/Screenshots"
 #_screenshot_type="png"
 
+# Atom
+#_atom_enabled=false
+#_atom_packages=()
+
 # Clipy
 #_clipy_enabled=true
 #_clipy_automatic_checks=false
