@@ -279,6 +279,10 @@ echo "${BASH_SOURCE[0]}"
 #_finder_disable_ds_network=true
 #_finder_disable_ds_usb=true
 
+# Disk Utility
+#_disk_utility_enabled=true
+#_disk_utility_show_all=true
+
 # Screenshot
 #_screenshot_enabled=true
 #_screenshot_disable_shadow=true
