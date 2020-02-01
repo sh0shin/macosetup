@@ -170,6 +170,15 @@ echo "${BASH_SOURCE[0]}"
 #_sharing_remotelogin=off
 
 # Users & Groups
+#_users_groups_enabled=true
+#_users_groups_autologin_user=
+#_users_groups_guest_enabled=false
+#_users_groups_show_fullname=true
+#_users_groups_poweroff_disabled=true
+#_users_groups_inputmenu=false
+#_users_groups_password_hint=0
+#_users_groups_switching_menu=1
+
 # Parental Controls
 
 # Siri
