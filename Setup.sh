@@ -57,7 +57,7 @@ _main()
   then
     for _run in "$@"
     do
-      test -x "$_run" && source "$_run"
+      test -e "$_run" && source "$_run"
     done
     exit 0
   fi
@@ -65,11 +65,11 @@ _main()
   # Run all
   for _run in Shell/*.sh Homebrew/*.sh SystemPreferences/*.sh Applications/*.sh Misc/*.sh
   do
-    test -x "$_run" && source "$_run"
+    test -e "$_run" && source "$_run"
   done
 
   # Local
-  test -x "Local.d/$_local" && source "Local.d/$_local"
+  test -e "Local.d/$_local" && source "Local.d/$_local"
 }
 
 if [[ $# -lt 1 ]]
