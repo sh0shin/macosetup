@@ -180,7 +180,11 @@ _sound_change_feedback=false
 #_software_update_autoinstall_data_security=true
 
 # Network
+
 # Bluetooth
+#_bluetooth_enabled=true
+#_bluetooth_auto_seek=false
+
 # Extensions
 
 # Sharing
