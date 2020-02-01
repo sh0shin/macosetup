@@ -245,6 +245,14 @@ echo "${BASH_SOURCE[0]}"
 
 # Accessibility
 
+# Misc
+#_misc_enabled=false
+#_misc_allow_unknown_servers=true
+#_misc_admin_host_info="HostName"
+#_misc_disable_fde_auto_login=true
+#_misc_logout_saves_state=false
+#...
+
 ## Applications
 
 ## Misc
