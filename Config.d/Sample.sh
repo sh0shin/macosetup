@@ -255,6 +255,30 @@ echo "${BASH_SOURCE[0]}"
 
 ## Applications
 
+# Finder
+#_finder_enabled=true
+#_finder_desktop_show_hdd=false
+#_finder_desktop_show_external_hdd=false
+#_finder_desktop_show_removal=false
+#_finder_desktop_show_servers=true
+#_finder_new_window_target="PfHm"
+#_finder_show_all_files=true
+#_finder_extension_change_warning=false
+#_finder_remove_from_icloud_warning=true
+#_finder_warn_on_empty_trash=false
+#_finder_remove_old_trash=false
+#_finder_sort_folders_first=true
+#_finder_default_search="SCcf"
+#_finder_desktop_view_group_by="None"
+#_finder_desktop_view_arrange_by="grid"
+#_finder_desktop_view_grid_spacing=21
+#_finder_desktop_view_icon_size=48
+#_finder_view_style="Nlsv"
+#_finder_show_all_extensions=true
+#_finder_posix_path_in_title=true
+#_finder_disable_ds_network=true
+#_finder_disable_ds_usb=true
+
 ## Misc
 # Dock Icons (Depends on dockutil!)
 #_dock_icons_enabled=false
