@@ -1,0 +1,160 @@
+#!/usr/bin/env bash
+#
+
+# Don't run directly!
+[[ "$_" == "$0" ]] && exit 255
+
+# Mail
+[[ "${_mail_enabled:-false}" == false ]] && return
+echo "${BASH_SOURCE[0]}"
+
+# ~/Library/Containers/com.apple.mail/Data/Library/Preferences/com.apple.mail
+
+# General
+# Default email reader
+# Check for new messages
+# New messages sound (None)
+defaults write com.apple.mail NewMessagesSoundName -string ""
+
+# Play sounds for other mail actions (Disabled)
+defaults write com.apple.mail PlayMailSounds -bool false
+
+# Dock unread count
+# 1 - Inbox Only
+# 2 - All Mailboxes
+# 4 - Today
+defaults write com.apple.mail MailDockBadge -int 2
+
+# New message notifications
+# 1 - Inbox Only
+# 2 - VIP
+# 3 - Contacts
+# 4 - Today
+# 5 - All Mailboxes
+defaults write com.apple.mail MailUserNotificationScope -int 5
+
+# Downloads folder
+#TODO
+
+# Remove unedited downloads
+# false - Never
+# true  - When Mail Quits
+defaults write com.apple.mail DeleteAttachmentsEnabled -bool true
+defaults write com.apple.mail DeleteAttachmentsAfterHours -int 0
+
+# Add invitations to Calendar automatically
+#TODO
+
+# Automatically try sending later if outgoing server is unavailable
+defaults write com.apple.mail SuppressDeliveryFailure -bool true
+
+# Prefer opening messages in split view when in full screen
+defaults write com.apple.mail FullScreenPreferSplit -bool true
+
+# When searching all mailboxes, include results from
+#TODO
+
+# Accounts
+# Junk Mail
+# Fonts & Colours
+
+# Use fixed-width font for plain text messages
+defaults write com.apple.mail AutoSelectFont -bool true
+
+# Colour quoted text
+defaults write com.apple.mail ColorQuoterColorIncoming -bool true
+#TODO Colours
+
+
+# Viewing
+#########
+
+# Use classic layout
+#TODO
+
+# Show To/CC label in the message list
+defaults write com.apple.mail EnableToCcInMessageList -bool true
+
+# Show contact photos in the message list
+defaults write com.apple.mail EnableContactPhotos -bool true
+
+# List Preview
+# 0 - None
+# 1...5 Lines
+defaults write com.apple.mail NumberOfSnippetLines -int 3
+
+# Display unread messages with bold font
+defaults write com.apple.mail ShouldShowUnreadMessagesInBold -bool true
+
+# Load remote content in messages (Disabled)
+defaults write com.apple.mail-shared DisableURLLoading -bool true
+
+# Use Smart Addresses
+#TODO
+
+# Use dark backgrounds for messages
+defaults write com.apple.mail ViewMessagesWithDarkBackgrounds -bool true
+
+# View conversations
+# Highlight messages with colour when not grouped
+#TODO
+
+# Include related messages
+defaults write com.apple.mail ConversationViewSpansMailboxes -bool true
+
+# Mark all messages as read when opening a conversation
+defaults write com.apple.mail ConversationViewMarkAllAsRead -bool false
+
+# Show most recent message at the top
+defaults write com.apple.mail ConversationViewSortDescending -bool true
+
+
+# Composing
+###########
+
+# Message Format
+# Plain - Plain Text
+# MIME  - Rich Text
+defaults write com.apple.mail SendFormat -string Plain
+
+# Check spelling
+# InlineSpellCheckingEnabled - as I type
+# SpellCheckingOnSendEnabled - when I click Send
+# NoSpellCheckingEnabled     - never
+defaults write com.apple.mail SpellCheckingBehavior -string InlineSpellCheckingEnabled
+
+# Automatically Cc:/Bcc: myself
+defaults write com.apple.mail ReplyToSelf -bool false
+defaults write com.apple.mail BccSelf -bool false
+
+# When sending to a group, show all member addresses
+#TODO
+# Mark addresses not ending with
+#TODO
+# Send new messsages from
+#TODO
+
+# Use the same message format as the original message
+defaults write com.apple.mail AutoReplyFormat -bool false
+
+# Quote the text of the original message
+defaults write com.apple.mail ReplyQuotesOriginal -bool true
+
+# Increase quote level
+defaults write com.apple.mail SupressQuoteBarsInComposeWindows -bool false
+
+# When quoting text in replies or forwards
+# true  - Include all of the original message text
+# false - Include selected text, if any; otherwhise include all text
+defaults write com.apple.mail AlwaysIncludeOriginalMessage -bool false
+
+# Signatures
+############
+#TODO
+
+# Rules
+#######
+#TODO
+
+# vim: set syn=bash sw=2 ts=2 et :
+# eof

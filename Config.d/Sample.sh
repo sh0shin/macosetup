@@ -261,6 +261,9 @@ echo "${BASH_SOURCE[0]}"
 #_activity_monitor_disk_graph=1
 #_activity_monitor_network_graph=1
 
+# Contacts
+#_contacts_enabled=false
+
 # Finder
 #_finder_enabled=true
 #_finder_desktop_show_hdd=false
@@ -288,6 +291,9 @@ echo "${BASH_SOURCE[0]}"
 # Disk Utility
 #_disk_utility_enabled=true
 #_disk_utility_show_all=true
+
+# Mail
+#_mail_enabled=false
 
 # Screenshot
 #_screenshot_enabled=true
