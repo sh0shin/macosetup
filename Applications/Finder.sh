@@ -68,10 +68,17 @@ defaults write com.apple.finder _FXSortFoldersFirstOnDesktop -bool "${_finder_so
 defaults write com.apple.finder FXDefaultSearchScope -string "${_finder_default_search:-SCcf}"
 
 # View Options
-/usr/libexec/PlistBuddy -c "Set :DesktopViewSettings:GroupBy ${_finder_desktop_view_group_by:-None}" ~/Library/Preferences/com.apple.finder.plist
-/usr/libexec/PlistBuddy -c "Set :DesktopViewSettings:IconViewSettings:arrangeBy ${_finder_desktop_view_arrange_by:-grid}" ~/Library/Preferences/com.apple.finder.plist
-/usr/libexec/PlistBuddy -c "Set :DesktopViewSettings:IconViewSettings:gridSpacing ${_finder_desktop_view_grid_spacing:-21}" ~/Library/Preferences/com.apple.finder.plist
-/usr/libexec/PlistBuddy -c "Set :DesktopViewSettings:IconViewSettings:iconSize ${_finder_desktop_view_icon_size:-48}" ~/Library/Preferences/com.apple.finder.plist
+/usr/libexec/PlistBuddy -c "Set :DesktopViewSettings:GroupBy ${_finder_desktop_view_group_by:-None}" ~/Library/Preferences/com.apple.finder.plist || \
+  /usr/libexec/PlistBuddy -c "Add :DesktopViewSettings:GroupBy string ${_finder_desktop_view_group_by:-None}" ~/Library/Preferences/com.apple.finder.plist
+
+/usr/libexec/PlistBuddy -c "Set :DesktopViewSettings:IconViewSettings:arrangeBy ${_finder_desktop_view_arrange_by:-grid}" ~/Library/Preferences/com.apple.finder.plist || \
+  /usr/libexec/PlistBuddy -c "Add :DesktopViewSettings:IconViewSettings:arrangeBy string ${_finder_desktop_view_arrange_by:-grid}" ~/Library/Preferences/com.apple.finder.plist
+
+/usr/libexec/PlistBuddy -c "Set :DesktopViewSettings:IconViewSettings:gridSpacing ${_finder_desktop_view_grid_spacing:-21}" ~/Library/Preferences/com.apple.finder.plist || \
+  /usr/libexec/PlistBuddy -c "Add :DesktopViewSettings:IconViewSettings:gridSpacing integer ${_finder_desktop_view_grid_spacing:-21}" ~/Library/Preferences/com.apple.finder.plist
+
+/usr/libexec/PlistBuddy -c "Set :DesktopViewSettings:IconViewSettings:iconSize ${_finder_desktop_view_icon_size:-48}" ~/Library/Preferences/com.apple.finder.plist || \
+  /usr/libexec/PlistBuddy -c "Add :DesktopViewSettings:IconViewSettings:iconSize integer ${_finder_desktop_view_icon_size:-48}" ~/Library/Preferences/com.apple.finder.plist
 
 # View Style
 # Icons:    icnv
