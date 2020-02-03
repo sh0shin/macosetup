@@ -24,39 +24,39 @@ defaults write com.apple.loginwindow TALLogoutSavesState -bool "${_misc_logout_s
 # TODO
 
 # Show ~/Library
-#chflags nohidden ~/Library
+chflags nohidden ~/Library
 
 # Show /Volumes
-#sudo chflags nohidden /Volumes
+sudo chflags nohidden /Volumes
 
 # Rename /
-#diskutil rename / "${_misc_root_volume_name:-System}"
+diskutil rename / "${_misc_root_volume_name:-System}"
 
 # Change hibernate mode
 # `man pmset`
 #sudo pmset hibernatemode 25
 
 # Menu Extras (System UI Server)
-#defaults write com.apple.systemuiserver "NSStatusItem Visible Siri" -bool false
+defaults write com.apple.systemuiserver "NSStatusItem Visible Siri" -bool false
 
-#defaults write com.apple.systemuiserver "NSStatusItem Visible com.apple.menuextra.TimeMachine" -bool true
-#defaults write com.apple.systemuiserver "NSStatusItem Visible com.apple.menuextra.airport" -bool true
-#defaults write com.apple.systemuiserver "NSStatusItem Visible com.apple.menuextra.battery" -bool true
-#defaults write com.apple.systemuiserver "NSStatusItem Visible com.apple.menuextra.bluetooth" -bool true
-#defaults write com.apple.systemuiserver "NSStatusItem Visible com.apple.menuextra.clock" -bool true
-#defaults write com.apple.systemuiserver "NSStatusItem Visible com.apple.menuextra.volume" -bool true
+defaults write com.apple.systemuiserver "NSStatusItem Visible com.apple.menuextra.TimeMachine" -bool true
+defaults write com.apple.systemuiserver "NSStatusItem Visible com.apple.menuextra.airport" -bool true
+defaults write com.apple.systemuiserver "NSStatusItem Visible com.apple.menuextra.battery" -bool true
+defaults write com.apple.systemuiserver "NSStatusItem Visible com.apple.menuextra.bluetooth" -bool true
+defaults write com.apple.systemuiserver "NSStatusItem Visible com.apple.menuextra.clock" -bool true
+defaults write com.apple.systemuiserver "NSStatusItem Visible com.apple.menuextra.volume" -bool true
 
-#defaults write com.apple.systemuiserver menuExtras -array \
-#  "/System/Library/CoreServices/Menu Extras/AirPort.menu" \
-#  "/System/Library/CoreServices/Menu Extras/Battery.menu" \
-#  "/System/Library/CoreServices/Menu Extras/Bluetooth.menu" \
-#  "/System/Library/CoreServices/Menu Extras/Clock.menu" \
-#  "/System/Library/CoreServices/Menu Extras/Displays.menu" \
-#  "/System/Library/CoreServices/Menu Extras/TimeMachine.menu" \
-#  "/System/Library/CoreServices/Menu Extras/Volume.menu"
+defaults write com.apple.systemuiserver menuExtras -array \
+  "/System/Library/CoreServices/Menu Extras/AirPort.menu" \
+  "/System/Library/CoreServices/Menu Extras/Battery.menu" \
+  "/System/Library/CoreServices/Menu Extras/Bluetooth.menu" \
+  "/System/Library/CoreServices/Menu Extras/Clock.menu" \
+  "/System/Library/CoreServices/Menu Extras/Displays.menu" \
+  "/System/Library/CoreServices/Menu Extras/TimeMachine.menu" \
+  "/System/Library/CoreServices/Menu Extras/Volume.menu"
 
 # Restart
-#killall -1 SystemUIServer
+killall -1 SystemUIServer
 
 # vim: set syn=bash sw=2 ts=2 et :
 # eof
