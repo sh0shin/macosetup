@@ -16,6 +16,9 @@ brew tap homebrew/cask
 # Tapping homebrew/cask-drivers
 brew tap homebrew/cask-drivers
 
+# Tapping homebrew/cask-fonts
+#brew tap homebrew/cask-fonts
+
 # Install Casks
 if [[ -n "${_brew_casks[@]}" ]]
 then
