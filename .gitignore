@@ -11,6 +11,8 @@
 *.dmg
 *.pkg
 
+defaults.*
+
 Backup.d/*
 
 Config.d/*
@@ -23,5 +25,6 @@ File.d/*
 Local.d/*
 !Local.d/Sample.sh
 
+!.git
 !.git_keep
 !.gitkeep
