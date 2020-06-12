@@ -4,8 +4,8 @@
 # Don't run directly!
 [[ "$_" == "$0" ]] && exit 255
 
-# Cask
-[[ ${_cask_enabled:-true} == false ]] && return
+# Brew Cask
+[[ ${_brew_cask_enabled:-true} == false ]] && return
 [[ ${_brew_enabled:-true} == false ]] && return
 [[ ${_xcode_enabled:-true} == false ]] && return
 echo "${BASH_SOURCE[0]}"
@@ -13,11 +13,11 @@ echo "${BASH_SOURCE[0]}"
 # Tapping homebrew/cask
 brew tap homebrew/cask
 
-# Tapping homebrew/cask-drivers
-brew tap homebrew/cask-drivers
-
-# Tapping homebrew/cask-fonts
-#brew tap homebrew/cask-fonts
+# Tapping cask taps
+for _tap in "${_brew_cask_taps[@]}"
+do
+  brew tap "$_tap"
+done
 
 # Install Casks
 if [[ -n "${_brew_casks[@]}" ]]
@@ -31,7 +31,13 @@ then
       brew cask install "$_cask"
   done
 
-  [[ ${_brew_upgrade:-true} == true ]] && brew cask upgrade
+  if [[ ${_brew_cask_upgrade_greedy:-false} == true ]]
+  then
+    brew cask upgrade --greedy
+  elif [[ ${_brew_cask_upgrade:-true} == true ]]
+  then
+    brew cask upgrade
+  fi
 fi
 
 # Cleanup
