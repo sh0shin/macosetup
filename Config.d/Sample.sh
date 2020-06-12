@@ -320,11 +320,6 @@ echo "${BASH_SOURCE[0]}"
 #_clipy_show_status=2
 #_clipy_login_item=true
 
-# Cursorcerer
-#_cursorcerer_enabled=true
-#_cursorcerer_auto_show=true
-#_cursorcerer_idle_hide=10
-
 # iTerm2
 #_iterm_enabled=true
 #_iterm_prefs_custom=false
