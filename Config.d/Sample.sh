@@ -344,5 +344,13 @@ echo "${BASH_SOURCE[0]}"
 #_pyenv_venv_git="https://github.com/pyenv/pyenv-virtualenv.git"
 #_pyenv_versions=()
 
+# RbEnv
+#_rbenv_enabled=false
+#_rbenv_root="$HOME/.rbenv"
+#_rbenv_git="https://github.com/rbenv/rbenv.git"
+#_rbenv_build_enabled=true
+#_rbenv_build_git="https://github.com/rbenv/ruby-build.git"
+#_rbenv_versions=()
+
 # vim: set syn=bash sw=2 ts=2 et :
 # eof
