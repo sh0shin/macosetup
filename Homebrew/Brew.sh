@@ -15,6 +15,9 @@ then
   /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
 fi
 
+# Analytics
+brew analytics ${_brew_analytics:-off}
+
 # Install Formulae
 if [[ -n "${_brew_formulae[@]}" ]]
 then

@@ -23,6 +23,7 @@ echo "${BASH_SOURCE[0]}"
 
 ## Homebrew (Depends on Xcode!)
 #_brew_enabled=true
+#_brew_analytics=off
 #_brew_cask_enabled=true
 #_brew_formulae=()
 #_brew_casks=()
