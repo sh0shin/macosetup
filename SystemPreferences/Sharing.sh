@@ -9,10 +9,12 @@
 echo "${BASH_SOURCE[0]}"
 
 # Computer Name
-sudo systemsetup -setcomputername "${_sharing_computername:-macOSetup}"
-sudo systemsetup -setlocalsubnetname "${_sharing_computername:-macOSetup}"
-#sudo scutil --set ComputerName "${_computername:-macOSetup}"
-#sudo scutil --set LocalHostName "${_computername:-macOSetup}"
+#sudo systemsetup -setcomputername "${_sharing_computername:-macOSetup}"
+#sudo systemsetup -setlocalsubnetname "${_sharing_computername:-macOSetup}"
+sudo scutil --set ComputerName "${_computername:-macOSetup}"
+sudo scutil --set HostName "${_computername:-macOSetup}"
+sudo scutil --set LocalHostName "${_computername:-macOSetup}"
+sudo defaults write /Library/Preferences/SystemConfiguration/com.apple.smb.server NetBIOSName -string "${_computername:-macOSetup}"
 
 # File Sharing
 ## Remove Public Folder
