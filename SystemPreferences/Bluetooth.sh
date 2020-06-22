@@ -10,6 +10,7 @@ echo "${BASH_SOURCE[0]}"
 
 # Turn Bluetooth On/Off
 #sudo defaults write /Library/Preferences/com.apple.Bluetooth ControllerPowerState -int 0
+#sudo killall -HUP bluetoothd
 
 # Show Bluetooth in menu bar (See: SystemPreferences/Misc.sh)
 
