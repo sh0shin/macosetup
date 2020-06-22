@@ -21,6 +21,7 @@ sudo defaults write /Library/Preferences/com.apple.loginwindow DisableFDEAutoLog
 # Disable Reopen windows when logging back in
 defaults write com.apple.loginwindow TALLogoutSavesState -bool "${_misc_logout_saves_state:-false}"
 
+exit 0
 # TODO
 
 # Show ~/Library
