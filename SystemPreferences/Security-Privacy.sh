@@ -48,17 +48,17 @@ fi
 #/usr/libexec/ApplicationFirewall/socketfilterfw --help
 
 # Turn On/Off Firewall
-sudo /usr/libexec/ApplicationFirewall/socketfilterfw --setglobalstate ${_firewall_state:-off}
+#sudo /usr/libexec/ApplicationFirewall/socketfilterfw --setglobalstate ${_firewall_state:-off}
 
 # Firewall Options
 # Block all incoming connections
-sudo /usr/libexec/ApplicationFirewall/socketfilterfw --setblockall ${_firewall_blockall:-off}
+#sudo /usr/libexec/ApplicationFirewall/socketfilterfw --setblockall ${_firewall_blockall:-off}
 # Automatically allow built-in software to receive incoming connections
-sudo /usr/libexec/ApplicationFirewall/socketfilterfw --setallowsigned ${_firewall_signed:-off}
+#sudo /usr/libexec/ApplicationFirewall/socketfilterfw --setallowsigned ${_firewall_signed:-off}
 # Automatically allow downloaded signed software to recive incoming connections
-sudo /usr/libexec/ApplicationFirewall/socketfilterfw --setallowsignedapp ${_firewall_signedapp:-off}
+#sudo /usr/libexec/ApplicationFirewall/socketfilterfw --setallowsignedapp ${_firewall_signedapp:-off}
 # Enable stealth mode
-sudo /usr/libexec/ApplicationFirewall/socketfilterfw --setstealthmode ${_firewall_stealthmode:-off}
+#sudo /usr/libexec/ApplicationFirewall/socketfilterfw --setstealthmode ${_firewall_stealthmode:-off}
 
 # Privacy
 #TODO
