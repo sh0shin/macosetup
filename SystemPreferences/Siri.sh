@@ -10,6 +10,8 @@ echo "${BASH_SOURCE[0]}"
 
 # Enable Ask Siri
 defaults write com.apple.assistant.support "Assistant Enabled" -bool "${_siri_assistant_enabled:-false}"
+defaults write com.apple.assistant.support "Dictation Enabled" -bool "${_siri_dictation_enabled:-false}"
+defaults write com.apple.assistant.support "Siri Data Sharing Opt-In Status" "${_siri_data_sharing_status:-0}";
 
 # TODO
 # Keyboard Shortcut

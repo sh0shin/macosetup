@@ -233,6 +233,8 @@ echo "${BASH_SOURCE[0]}"
 # Siri
 #_siri_enabled=true
 #_siri_assistant_enabled=false
+#_siri_dictation_enabled=false
+#_siri_data_sharing_status=0
 
 # Date & Time
 #_date_time_enabled=true
