@@ -9,7 +9,7 @@
 [[ ${_xcode_enabled:-true} == false ]] && return
 echo "${BASH_SOURCE[0]}"
 
-# Install Homebrew
+# Install Homebrew (TODO: UPDATE TO BASH VERSION!)
 if [[ ! -x /usr/local/bin/brew ]]
 then
   /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
