@@ -35,6 +35,11 @@ _sipstatus()
   fi
 }
 
+_doneinfo()
+{
+  echo "INFO: A reboot might be a good idea now ;)"
+}
+
 _main()
 {
   _osupport
@@ -70,6 +75,8 @@ _main()
 
   # Local
   test -e "Local.d/$_local" && source "Local.d/$_local"
+
+  _doneinfo
 }
 
 if [[ $# -lt 1 ]]
