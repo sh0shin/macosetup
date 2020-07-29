@@ -27,5 +27,21 @@ sudo defaults write /Library/Preferences/com.apple.SoftwareUpdate AutomaticallyI
 sudo defaults write /Library/Preferences/com.apple.SoftwareUpdate ConfigDataInstall -bool "${_software_update_autoinstall_data_security:-true}"
 sudo defaults write /Library/Preferences/com.apple.SoftwareUpdate CriticalUpdateInstall -bool "${_software_update_autoinstall_data_security:-true}"
 
+# Update
+if [[ ${_software_update_list:-false} == true ]]
+then
+  softwareupdate --list
+fi
+
+if [[ ${_software_update_install_all:-false} == true ]]
+then
+  softwareupdate --install --all
+fi
+
+if [[ ${_software_update_install_recommended:-false} == true ]]
+then
+  softwareupdate --install --recommended
+fi
+
 # vim: set syn=bash sw=2 ts=2 et :
 # eof

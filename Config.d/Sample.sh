@@ -211,6 +211,9 @@ echo "${BASH_SOURCE[0]}"
 #_software_update_auto_download=false
 #_software_update_autoinstall_macos=false
 #_software_update_autoinstall_data_security=true
+#_software_update_list=false
+#_software_update_install_all=false
+#_software_update_install_recommended=false
 
 # Network
 
