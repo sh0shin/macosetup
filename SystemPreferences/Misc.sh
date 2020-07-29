@@ -56,6 +56,9 @@ defaults write com.apple.systemuiserver menuExtras -array \
   "/System/Library/CoreServices/Menu Extras/TimeMachine.menu" \
   "/System/Library/CoreServices/Menu Extras/Volume.menu"
 
+# Show battery percent in taskbar
+defaults write com.apple.menuextra.battery "ShowPercent" -string "${_misc_show_battery_percentage:-NO}"
+
 # Restart
 killall -1 SystemUIServer
 

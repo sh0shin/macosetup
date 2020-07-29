@@ -270,6 +270,7 @@ echo "${BASH_SOURCE[0]}"
 #_misc_admin_host_info="HostName"
 #_misc_disable_fde_auto_login=true
 #_misc_logout_saves_state=false
+#_misc_show_battery_percentage:NO
 #...
 
 ## Applications
