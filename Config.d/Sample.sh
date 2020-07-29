@@ -25,11 +25,18 @@ echo "${BASH_SOURCE[0]}"
 #_brew_enabled=true
 #_brew_analytics=off
 #_brew_cask_enabled=true
-#_brew_formulae=()
-#_brew_casks=()
-#_brew_cask_taps=()
-# homebrew/cask-drivers
-# homebrew/cask-fonts
+#_brew_formulae=(
+  #bash
+  #bash-completion
+#)
+#_brew_casks=(
+  #atom
+  #google-chrome
+#)
+#_brew_cask_taps=(
+  #homebrew/cask-drivers
+  #homebrew/cask-fonts
+#)
 #_brew_upgrade=true
 #_brew_cask_upgrade=true
 #_brew_cask_upgrade_greedy=false
@@ -312,7 +319,9 @@ echo "${BASH_SOURCE[0]}"
 
 # Atom
 #_atom_enabled=false
-#_atom_packages=()
+#_atom_packages=(
+  #...
+#)
 
 # Clipy
 #_clipy_enabled=true
