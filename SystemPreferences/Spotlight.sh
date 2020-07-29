@@ -37,7 +37,8 @@ defaults write com.apple.lookup.shared LookupSuggestionsDisabled -bool "${_spotl
 
 # Privacy
 # Prevent Spotlight from searching these locations
-sudo defaults write /.Spotlight-V100/VolumeConfiguration Exclusions -array "${_spotlight_exclusions[@]}"
+# TODO: Check due to failure "defaults[12449:28233] Could not write domain /.Spotlight-V100/VolumeConfiguration; exiting"
+# sudo defaults write /.Spotlight-V100/VolumeConfiguration Exclusions -array "${_spotlight_exclusions[@]}"
 
 # Restart
 sudo killall mds &>/dev/null
