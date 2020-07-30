@@ -143,6 +143,7 @@ echo "${BASH_SOURCE[0]}"
 #_security_privacy_enabled=true
 #_lock_message="macOSetup"
 #_filevault_enabled=true
+
 #_firewall_state=off
 #_firewall_blockall=off
 #_firewall_signed=off
