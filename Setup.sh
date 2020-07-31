@@ -4,10 +4,6 @@
 # macOSetup
 #
 
-# Variables
-export _user="$(whoami)"
-export _fullname="$(finger ${_user} | awk '/Name:/ { print $4 }')"
-
 # Functions
 _usage()
 {
@@ -24,13 +20,19 @@ _osupport()
   fi
 }
 
+_variables()
+{
+  export _user="$(whoami)"
+  export _fullname="$(finger ${_user} | awk '/Name:/ { print $4 }')"
+  export _sip_status=$(csrutil status | awk -F'status: ' '{print $2}')
+}
+
 _sipstatus()
 {
-  _sip_status=$(csrutil status | awk -F'status: ' '{print $2}')
   if [[ "$_sip_status" = 'enabled' ]]
   then
-    echo 'WARNING: System Integrity Protection is enabled!'
-    echo 'WARNING: Some settings may fail!'
+    echo 'WARN: System Integrity Protection is enabled!'
+    echo 'WARN: Some settings may fail!'
     read -p 'Press RETURN to continue.' _wait
   fi
 }
@@ -38,11 +40,17 @@ _sipstatus()
 _doneinfo()
 {
   echo "INFO: A reboot might be a good idea now ;)"
+  if [[ "$_sip_status" == 'disabled.' ]]
+  then
+    echo "INFO: System Integrity Protection is disabled!"
+  fi
+  exit 0
 }
 
 _main()
 {
   _osupport
+  _variables
   _sipstatus
 
   _config="$1"
@@ -64,7 +72,7 @@ _main()
     do
       test -e "$_run" && source "$_run"
     done
-    exit 0
+    _doneinfo
   fi
 
   # Run all
