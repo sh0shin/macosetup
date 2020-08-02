@@ -15,23 +15,29 @@ sudo defaults write /Library/Preferences/com.apple.NetworkAuthorization AllowUnk
 # Display Admin Host Info on loginwindow
 sudo defaults write /Library/Preferences/com.apple.loginwindow AdminHostInfo -string "${_misc_admin_host_info:-HostName}"
 
-# Disable FileVault enabled Auto Login
-sudo defaults write /Library/Preferences/com.apple.loginwindow DisableFDEAutoLogin -bool "${_misc_disable_fde_auto_login:-true}"
+# Disable FileVault Auto Login
+sudo defaults write /Library/Preferences/com.apple.loginwindow DisableFDEAutoLogin -bool "${_misc_disable_fde_auto_login:-false}"
 
 # Disable Reopen windows when logging back in
 defaults write com.apple.loginwindow TALLogoutSavesState -bool "${_misc_logout_saves_state:-false}"
 
-exit 0
-# TODO
-
 # Show ~/Library
-chflags nohidden ~/Library
+if [[ "${_misc_nohidden_library:-false}" == true ]]
+then
+  chflags nohidden ~/Library
+fi
 
 # Show /Volumes
-sudo chflags nohidden /Volumes
+if [[ "${_misc_nohidden_volumes:-false}" == true ]]
+then
+  sudo chflags nohidden /Volumes
+fi
 
 # Rename /
-diskutil rename / "${_misc_root_volume_name:-System}"
+if [[ "${_misc_root_volume_rename:-false}" == true ]]
+then
+  diskutil rename / "${_misc_root_volume_name:-macOSystem}"
+fi
 
 # Change hibernate mode
 # `man pmset`

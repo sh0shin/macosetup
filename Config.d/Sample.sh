@@ -269,8 +269,12 @@ echo "${BASH_SOURCE[0]}"
 #_misc_enabled=false
 #_misc_allow_unknown_servers=true
 #_misc_admin_host_info="HostName"
-#_misc_disable_fde_auto_login=true
+#_misc_disable_fde_auto_login=false
 #_misc_logout_saves_state=false
+#_misc_nohidden_library=false
+#_misc_nohidden_volumes=false
+#_misc_root_volume_rename=false
+#_misc_root_volume_name=macOSystem
 #_misc_show_battery_percentage=NO
 #...
 
