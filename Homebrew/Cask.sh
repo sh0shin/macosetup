@@ -23,8 +23,6 @@ done
 if [[ -n "${_brew_casks[@]}" ]]
 then
 
-  brew update
-
   for _cask in "${_brew_casks[@]}"
   do
     brew cask info "$_cask" | grep -qi "not installed" && \
