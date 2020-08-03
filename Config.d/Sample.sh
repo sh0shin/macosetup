@@ -186,6 +186,7 @@ echo "${BASH_SOURCE[0]}"
 #_keyboard_space_fullstop=false
 #_keyboard_smart_quote=false
 #_keyboard_smart_dash=false
+#_keyboard_input_menu=false
 #_keyboard_ui_mode=3
 
 # Mouse

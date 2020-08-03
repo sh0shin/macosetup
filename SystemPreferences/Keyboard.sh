@@ -48,7 +48,8 @@ defaults write NSGlobalDomain NSAutomaticDashSubstitutionEnabled -bool "${_keybo
 #TODO
 
 # Input Sources
-#TODO
+# Show input menu in menu bar
+defaults write com.apple.TextInputMenu visible -bool "${_keyboard_input_menu:-false}"
 
 # Dictation
 #TODO
