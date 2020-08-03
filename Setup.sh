@@ -23,7 +23,7 @@ _osupport()
 _variables()
 {
   export _user="$(whoami)"
-  export _fullname="$(finger ${_user} | awk '/Name:/ { print $4 }')"
+  export _fullname="$(finger -m ${_user} | awk '/Name:/ { print $4 }')"
   export _sip_status=$(csrutil status | awk -F'status: ' '{print $2}')
 }
 
