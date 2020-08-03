@@ -227,6 +227,7 @@ echo "${BASH_SOURCE[0]}"
 # Sharing
 #_sharing_enabled=true
 #_sharing_computername="macOSetup"
+#_sharing_remove_public_folder=false
 #_sharing_remotelogin=off
 
 # Users & Groups
