@@ -5,8 +5,14 @@
 echo "${BASH_SOURCE[0]}"
 
 ## Shell
+# Motd
 #_motd_enabled=true
 #_motd_file="motd.in"
+
+# Shells
+#_homebrew_shells=false
+#_homebrew_bash=false
+#_homebrew_zsh=false
 
 # Sudo
 #_sudo_enabled=true
