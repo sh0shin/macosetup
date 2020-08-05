@@ -1,4 +1,4 @@
-name: telegram message
+name: push notification
 on: [push]
 jobs:
 
@@ -12,3 +12,4 @@ jobs:
       with:
         to: ${{ secrets.TELEGRAM_TO }}
         token: ${{ secrets.TELEGRAM_TOKEN }}
+        args: ${{ github.event_name }}
