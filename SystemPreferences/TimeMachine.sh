@@ -18,6 +18,9 @@ sudo defaults write /Library/Preferences/com.apple.TimeMachine SkipSystemFiles -
 # Defaults: /System/Library/CoreServices/backupd.bundle/Contents/Resources/StdExclusions.plist
 sudo defaults write /Library/Preferences/com.apple.TimeMachine SkipPaths -array "${_timemachine_skip_paths[@]}"
 
+#TODO
+# tmutil addexclusion item
+
 # Back up while on battery power
 sudo defaults write /Library/Preferences/com.apple.TimeMachine RequiresACPower -bool "${_timemachine_require_acpower:-true}"
 
