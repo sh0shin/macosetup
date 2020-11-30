@@ -17,10 +17,10 @@ then
 fi
 
 # Analytics
-brew analytics ${_brew_analytics:-off}
+brew analytics "${_brew_analytics:-off}"
 
 # Install Formulae
-if [[ -n "${_brew_formulae[@]}" ]]
+if [[ -n "${_brew_formulae[*]:-()}" ]]
 then
 
   for _formulae in "${_brew_formulae[@]}"
@@ -33,7 +33,7 @@ then
 fi
 
 # Cleanup
-[[ ${_brew_cleanup:-false} == true ]] && brew cleanup --prune=${_brew_cleanup_prune:-0}
+[[ ${_brew_cleanup:-false} == true ]] && brew cleanup --prune="${_brew_cleanup_prune:-0}"
 
-# vim: set syn=bash sw=2 ts=2 et :
+# vim: set ft=sh syn=sh sw=2 ts=2 et :
 # eof
