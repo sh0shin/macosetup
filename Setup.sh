@@ -33,7 +33,7 @@ _sipstatus()
   then
     echo 'WARN: System Integrity Protection is enabled!'
     echo 'WARN: Some settings may fail!'
-    read -p 'Press RETURN to continue.' _wait
+    read -p 'Press RETURN to continue.' -r
   fi
 }
 
@@ -94,5 +94,5 @@ else
   _main "$@"
 fi
 
-# vim: set syn=bash sw=2 ts=2 et :
+# vim: set ft=sh syn=sh sw=2 ts=2 et :
 # eof
