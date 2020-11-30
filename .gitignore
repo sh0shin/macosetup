@@ -11,7 +11,8 @@
 *.dmg
 *.pkg
 
-defaults.*
+[Dd]efaults.*
+Debug.sh
 
 Backup.d/*
 
