@@ -363,9 +363,11 @@ echo "${BASH_SOURCE[0]}"
 # PyEnv
 #_pyenv_enabled=false
 #_pyenv_root="$HOME/.pyenv"
-#_pyenv_git="https://github.com/pyenv/pyenv.git"
+#_pyenv_git_enabled=false
+#_pyenv_git_url="https://github.com/pyenv/pyenv.git"
 #_pyenv_venv_enabled=false
-#_pyenv_venv_git="https://github.com/pyenv/pyenv-virtualenv.git"
+#_pyenv_venv_git_enabled=false
+#_pyenv_venv_git_url="https://github.com/pyenv/pyenv-virtualenv.git"
 #_pyenv_versions=()
 
 # RbEnv
@@ -376,5 +378,5 @@ echo "${BASH_SOURCE[0]}"
 #_rbenv_build_git="https://github.com/rbenv/ruby-build.git"
 #_rbenv_versions=()
 
-# vim: set syn=bash sw=2 ts=2 et :
+# vim: set ft=sh syn=sh sw=2 ts=2 et :
 # eof
