@@ -25,16 +25,16 @@ then
 
   for _cask in "${_brew_casks[@]}"
   do
-    brew cask info "$_cask" | grep -qi "not installed" && \
-      brew cask install "$_cask"
+    brew info --cask "$_cask" | grep -qi "not installed" && \
+      brew install --cask "$_cask"
   done
 
   if [[ ${_brew_cask_upgrade_greedy:-false} == true ]]
   then
-    brew cask upgrade --greedy
+    brew upgrade --cask --greedy
   elif [[ ${_brew_cask_upgrade:-true} == true ]]
   then
-    brew cask upgrade
+    brew upgrade --cask
   fi
 fi
 
