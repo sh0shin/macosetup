@@ -14,7 +14,7 @@ defaults write com.apple.dock persistent-apps -array
 defaults write com.apple.dock persistent-others -array
 
 # Apps
-for _app in "${_dock_icons_apps[@]}"
+for _app in "${_dock_icons_apps[@]:-()}"
 do
   if [ -e "$_app" ]
   then
@@ -26,7 +26,7 @@ done
 # Downloads
 /usr/local/bin/dockutil --no-restart --section others --add ~/Downloads --view list --display folder
 
-for _other in "${_dock_icons_others[@]}"
+for _other in "${_dock_icons_others[@]:-()}"
 do
   if [ -e "$_other" ]
   then
@@ -37,5 +37,5 @@ done
 # Restart
 killall Dock
 
-# vim: set syn=bash sw=2 ts=2 et :
+# vim: set ft=sh syn=sh sw=2 ts=2 et :
 # eof
