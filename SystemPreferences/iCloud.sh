@@ -11,5 +11,5 @@ echo "${BASH_SOURCE[0]}"
 # Default Save Location
 defaults write NSGlobalDomain NSDocumentSaveNewDocumentsToCloud -bool ${_icloud_new_docs_to_cloud:-false}
 
-# vim: set syn=bash sw=2 ts=2 et :
+# vim: set ft=sh syn=sh sw=2 ts=2 et :
 # eof

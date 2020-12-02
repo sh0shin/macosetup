@@ -43,5 +43,5 @@ then
   softwareupdate --install --recommended
 fi
 
-# vim: set syn=bash sw=2 ts=2 et :
+# vim: set ft=sh syn=sh sw=2 ts=2 et :
 # eof

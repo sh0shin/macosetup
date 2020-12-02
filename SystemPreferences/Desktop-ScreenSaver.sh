@@ -18,5 +18,5 @@ defaults -currentHost write com.apple.screensaver idleTime -int ${_screensaver_i
 # Show with clock
 defaults -currentHost write com.apple.screensaver showClock -bool ${_screensaver_showclock:-false}
 
-# vim: set syn=bash sw=2 ts=2 et :
+# vim: set ft=sh syn=sh sw=2 ts=2 et :
 # eof

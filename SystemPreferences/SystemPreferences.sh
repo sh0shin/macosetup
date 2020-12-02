@@ -11,5 +11,5 @@ echo "${BASH_SOURCE[0]}"
 # Hidden
 defaults write com.apple.systempreferences HiddenPreferencePanes -array "${_sysprefs_hidden[@]}"
 
-# vim: set syn=bash sw=2 ts=2 et :
+# vim: set ft=sh syn=sh sw=2 ts=2 et :
 # eof

@@ -48,5 +48,5 @@ sleep 5
 sudo mdutil -i on / >/dev/null
 sudo mdutil -E / >/dev/null
 
-# vim: set syn=bash sw=2 ts=2 et :
+# vim: set ft=sh syn=sh sw=2 ts=2 et :
 # eof

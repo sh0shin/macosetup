@@ -28,5 +28,5 @@ fi
 # Remote Login
 sudo systemsetup -f -setremotelogin "${_sharing_remotelogin:-off}"
 
-# vim: set syn=bash sw=2 ts=2 et :
+# vim: set ft=sh syn=sh sw=2 ts=2 et :
 # eof

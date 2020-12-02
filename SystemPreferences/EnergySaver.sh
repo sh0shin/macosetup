@@ -50,5 +50,5 @@ sudo /usr/libexec/PlistBuddy -c "Set :'AC Power':DarkWakeBackgroundTasks ${_adap
 
 # Show battery status in menu bar (See: SystemPreferences/Misc.sh)
 
-# vim: set syn=bash sw=2 ts=2 et :
+# vim: set ft=sh syn=sh sw=2 ts=2 et :
 # eof

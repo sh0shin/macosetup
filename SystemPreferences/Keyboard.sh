@@ -61,5 +61,5 @@ defaults write com.apple.TextInputMenu visible -bool "${_keyboard_input_menu:-fa
 # 3 : All controls
 defaults write NSGlobalDomain AppleKeyboardUIMode -int "${_keyboard_ui_mode:-3}"
 
-# vim: set syn=bash sw=2 ts=2 et :
+# vim: set ft=sh syn=sh sw=2 ts=2 et :
 # eof

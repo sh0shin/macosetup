@@ -18,5 +18,5 @@ sudo systemsetup -settimezone "${_date_time_timezone:-Europe/Berlin}"
 # Clock
 defaults write com.apple.menuextra.clock DateFormat -string "${_date_time_dateformat:-EEE d. MMM HH:mm:ss}"
 
-# vim: set syn=bash sw=2 ts=2 et :
+# vim: set ft=sh syn=sh sw=2 ts=2 et :
 # eof

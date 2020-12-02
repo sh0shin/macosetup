@@ -19,5 +19,5 @@ defaults write com.apple.assistant.support "Siri Data Sharing Opt-In Status" -in
 # Siri Voice
 # Voice Feedback
 
-# vim: set syn=bash sw=2 ts=2 et :
+# vim: set ft=sh syn=sh sw=2 ts=2 et :
 # eof

@@ -23,5 +23,5 @@ echo "${BASH_SOURCE[0]}"
 #defaults write com.apple.Safari TouchIDToAutoFill -bool false
 #defaults write com.apple.Safari TouchIDToAutoFill -bool true
 
-# vim: set syn=bash sw=2 ts=2 et :
+# vim: set ft=sh syn=sh sw=2 ts=2 et :
 # eof
