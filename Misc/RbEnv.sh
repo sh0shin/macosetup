@@ -33,14 +33,14 @@ then
 fi
 
 # versions
-if [[ -n "${_rbenv_versions[@]}" ]]
+if [[ -n "${_rbenv_versions[*]:-()}" ]]
 then
   for _version in "${_rbenv_versions[@]}"
   do
-    echo $_version
+    echo "$_version"
     rbenv install -s "$_version"
   done
 fi
 
-# vim: set syn=bash sw=2 ts=2 et :
+# vim: set ft=sh syn=sh sw=2 ts=2 et :
 # eof
