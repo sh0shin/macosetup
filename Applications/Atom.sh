@@ -10,10 +10,10 @@
 echo "${BASH_SOURCE[0]}"
 
 # apm install...
-for _pkg in ${_atom_packages[@]}
+for _pkg in "${_atom_packages[@]:-()}"
 do
   apm install "$_pkg"
 done
 
-# vim: set syn=bash sw=2 ts=2 et :
+# vim: set ft=sh syn=sh sw=2 ts=2 et :
 # eof
