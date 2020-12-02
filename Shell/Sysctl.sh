@@ -10,7 +10,7 @@ echo "${BASH_SOURCE[0]}"
 
 # Config
 IFS=$'\n'
-echo "echo \"${_sysctl_flags[*]}\" >/private/etc/sysctl.conf" | sudo -s
+echo "echo \"${_sysctl_flags[*]:-()}\" >/private/etc/sysctl.conf" | sudo -s
 unset IFS
 
 # Set
@@ -19,5 +19,5 @@ do
   sudo sysctl "$_flag"
 done
 
-# vim: set syn=bash sw=2 ts=2 et :
+# vim: set ft=sh syn=sh sw=2 ts=2 et :
 # eof

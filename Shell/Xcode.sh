@@ -9,16 +9,16 @@
 echo "${BASH_SOURCE[0]}"
 
 # Install Xcode Command Line Tools
-if ! $(xcode-select -p &>/dev/null)
+if ! xcode-select -p &>/dev/null
 then
   xcode-select --install 2>/dev/null
 
   # Wait for installation to finish
-  until $(xcode-select -p &>/dev/null)
+  until xcode-select -p &>/dev/null
   do
     sleep 5
   done
 fi
 
-# vim: set syn=bash sw=2 ts=2 et :
+# vim: set ft=sh syn=sh sw=2 ts=2 et :
 # eof
