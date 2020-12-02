@@ -28,17 +28,17 @@ then
   # Enable
   if [[ "$_filevault_status" = "false" ]]
   then
-    sudo fdesetup enable -user $(whoami)
+    sudo fdesetup enable -user "$(whoami)"
     echo 'Run "fdesetup status" in another terminal to see the progress.'
-    read -p 'Press RETURN to continue.' _wait
+    read -p 'Press RETURN to continue.' -r
   fi
 else
   # Disable
   if [[ "$_filevault_status" = "true" ]]
   then
-    sudo fdesetup disable -user $(whoami)
+    sudo fdesetup disable -user "$(whoami)"
     echo 'Run "fdesetup status" in another terminal to see the progress.'
-    read -p 'Press RETURN to continue.' _wait
+    read -p 'Press RETURN to continue.' -r
   fi
 fi
 
@@ -48,22 +48,22 @@ fi
 #/usr/libexec/ApplicationFirewall/socketfilterfw --help
 
 # Turn On/Off Firewall
-sudo /usr/libexec/ApplicationFirewall/socketfilterfw --setglobalstate ${_firewall_state:-off}
+sudo /usr/libexec/ApplicationFirewall/socketfilterfw --setglobalstate "${_firewall_state:-off}"
 
 # Firewall Options
 if [[ "${_firewall_state:-off}" == "on" ]]
 then
   # Block all incoming connections
-  sudo /usr/libexec/ApplicationFirewall/socketfilterfw --setblockall ${_firewall_blockall:-off}
+  sudo /usr/libexec/ApplicationFirewall/socketfilterfw --setblockall "${_firewall_blockall:-off}"
 
   # Automatically allow built-in software to receive incoming connections
-  sudo /usr/libexec/ApplicationFirewall/socketfilterfw --setallowsigned ${_firewall_signed:-off}
+  sudo /usr/libexec/ApplicationFirewall/socketfilterfw --setallowsigned "${_firewall_signed:-off}"
 
   # Automatically allow downloaded signed software to recive incoming connections
-  sudo /usr/libexec/ApplicationFirewall/socketfilterfw --setallowsignedapp ${_firewall_signedapp:-off}
+  sudo /usr/libexec/ApplicationFirewall/socketfilterfw --setallowsignedapp "${_firewall_signedapp:-off}"
 
   # Enable stealth mode
-  sudo /usr/libexec/ApplicationFirewall/socketfilterfw --setstealthmode ${_firewall_stealthmode:-off}
+  sudo /usr/libexec/ApplicationFirewall/socketfilterfw --setstealthmode "${_firewall_stealthmode:-off}"
 fi
 
 # Privacy
@@ -85,5 +85,5 @@ fi
 # Automation:         TODO
 # Advertising:        TODO
 
-# vim: set syn=bash sw=2 ts=2 et :
+# vim: set ft=sh syn=sh sw=2 ts=2 et :
 # eof
