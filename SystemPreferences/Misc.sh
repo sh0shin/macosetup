@@ -44,6 +44,10 @@ fi
 #sudo pmset hibernatemode 25
 
 # Menu Extras (System UI Server)
+
+# TODO
+exit 0
+
 defaults write com.apple.systemuiserver "NSStatusItem Visible Siri" -bool false
 
 defaults write com.apple.systemuiserver "NSStatusItem Visible com.apple.menuextra.TimeMachine" -bool true
@@ -68,5 +72,5 @@ defaults write com.apple.menuextra.battery "ShowPercent" -string "${_misc_show_b
 # Restart
 killall -1 SystemUIServer
 
-# vim: set syn=bash sw=2 ts=2 et :
+# vim: set ft=sh syn=sh sw=2 ts=2 et :
 # eof
