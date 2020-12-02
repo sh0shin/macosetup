@@ -16,5 +16,5 @@ defaults write com.clipy-app.Clipy kCPYPrefMaxHistorySizeKey -int "${_clipy_max_
 defaults write com.clipy-app.Clipy kCPYPrefShowStatusItemKey -int "${_clipy_show_status:-2}"
 defaults write com.clipy-app.Clipy loginItem -bool "${_clipy_login_item:-true}"
 
-# vim: set syn=bash sw=2 ts=2 et :
+# vim: set ft=sh syn=sh sw=2 ts=2 et :
 # eof
