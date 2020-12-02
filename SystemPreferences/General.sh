@@ -24,16 +24,16 @@ esac
 defaults write NSGlobalDomain AppleHighlightColor -string "${_general_accent_colour:-0.847059 0.847059 0.862745}"
 
 # Highlight colour
-defaults write NSGlobalDomain AppleAquaColorVariant -int ${_general_highlight_colour:-6}
+defaults write NSGlobalDomain AppleAquaColorVariant -int "${_general_highlight_colour:-6}"
 
 # Sidebar icon size
 # Small  : 1
 # Medium : 2
 # Large  : 3
-defaults write NSGlobalDomain NSTableViewDefaultSizeMode -int ${_general_sidebar_icon_size:-1}
+defaults write NSGlobalDomain NSTableViewDefaultSizeMode -int "${_general_sidebar_icon_size:-1}"
 
 # Automatically hide and show the menu bar
-defaults write NSGlobalDomain _HIHideMenuBar -bool ${_general_autohide_menu_bar:-false}
+defaults write NSGlobalDomain _HIHideMenuBar -bool "${_general_autohide_menu_bar:-false}"
 
 # Show scroll bars
 # 'Automatic', 'WhenScrolling', 'Always'
@@ -49,7 +49,7 @@ defaults write NSGlobalDomain AppleShowScrollBars -string "${_general_show_scrol
 #TODO
 
 # Close windows when quitting an app
-defaults write NSGlobalDomain NSQuitAlwaysKeepsWindows -bool ${_general_close_quit:-false}
+defaults write NSGlobalDomain NSQuitAlwaysKeepsWindows -bool "${_general_close_quit:-false}"
 
 # Recent items Documents, Apps and Servers
 #TODO

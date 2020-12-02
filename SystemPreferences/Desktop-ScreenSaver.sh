@@ -13,10 +13,10 @@ echo "${BASH_SOURCE[0]}"
 
 # Screen Saver
 # Start after
-defaults -currentHost write com.apple.screensaver idleTime -int ${_screensaver_idletime:-1200}
+defaults -currentHost write com.apple.screensaver idleTime -int "${_screensaver_idletime:-1200}"
 
 # Show with clock
-defaults -currentHost write com.apple.screensaver showClock -bool ${_screensaver_showclock:-false}
+defaults -currentHost write com.apple.screensaver showClock -bool "${_screensaver_showclock:-false}"
 
 # vim: set ft=sh syn=sh sw=2 ts=2 et :
 # eof

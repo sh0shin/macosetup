@@ -16,7 +16,7 @@ sudo defaults write /Library/Preferences/com.apple.TimeMachine SkipSystemFiles -
 
 # Skip Paths
 # Defaults: /System/Library/CoreServices/backupd.bundle/Contents/Resources/StdExclusions.plist
-sudo defaults write /Library/Preferences/com.apple.TimeMachine SkipPaths -array "${_timemachine_skip_paths[@]}"
+sudo defaults write /Library/Preferences/com.apple.TimeMachine SkipPaths -array "${_timemachine_skip_paths[@]:-()}"
 
 #TODO
 # tmutil addexclusion item
