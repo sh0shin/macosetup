@@ -22,9 +22,13 @@ _osupport()
 
 _variables()
 {
-  export _user="$(whoami)"
-  export _fullname="$(finger -m ${_user} | awk '/Name:/ { print $4 }')"
-  export _sip_status=$(csrutil status | awk -F'status: ' '{print $2}')
+  _user="$(whoami)"
+  _fullname="$(finger -m "${_user}" | awk '/Name:/ { print $4 }')"
+  _sip_status=$(csrutil status | awk -F'status: ' '{print $2}')
+
+  export _user
+  export _fullname
+  export _sip_status
 }
 
 _sipstatus()
@@ -57,6 +61,7 @@ _main()
 
   if [[ -e "$_config" ]]
   then
+    # shellcheck source=/dev/null
     source "$_config"
     _local="$(basename "$_config")"
     shift
@@ -70,6 +75,7 @@ _main()
   then
     for _run in "$@"
     do
+      # shellcheck source=/dev/null
       test -e "$_run" && source "$_run"
     done
     _doneinfo
@@ -78,10 +84,12 @@ _main()
   # Run all
   for _run in Shell/*.sh Homebrew/*.sh SystemPreferences/*.sh Applications/*.sh Misc/*.sh
   do
+    # shellcheck source=/dev/null
     test -e "$_run" && source "$_run"
   done
 
   # Local
+  # shellcheck source=/dev/null
   test -e "Local.d/$_local" && source "Local.d/$_local"
 
   _doneinfo
