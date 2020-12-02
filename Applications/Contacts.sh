@@ -35,5 +35,5 @@ defaults write com.apple.AddressBook ABShortNameStyle -int 2
 # Address Format
 defaults write com.apple.AddressBook ABDefaultAddressCountryCode -string 'de'
 
-# vim: set syn=bash sw=2 ts=2 et :
+# vim: set ft=sh syn=sh sw=2 ts=2 et :
 # eof

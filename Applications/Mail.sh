@@ -156,5 +156,5 @@ defaults write com.apple.mail AlwaysIncludeOriginalMessage -bool false
 #######
 #TODO
 
-# vim: set syn=bash sw=2 ts=2 et :
+# vim: set ft=sh syn=sh sw=2 ts=2 et :
 # eof
