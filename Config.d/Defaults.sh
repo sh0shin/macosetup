@@ -267,6 +267,8 @@ echo "${BASH_SOURCE[0]}"
 #_timemachine_autobackup=false
 #_timemachine_skipsystemfiles=true
 #_timemachine_skip_paths=()
+#_timemachine_exclusions=()
+#_timemachine_exclusions_home=()
 #_timemachine_require_acpower=true
 #_timemachine_notify_deleted=true
 ##_timemachine_maxsize=262144
