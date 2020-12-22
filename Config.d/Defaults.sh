@@ -375,9 +375,11 @@ echo "${BASH_SOURCE[0]}"
 # RbEnv
 #_rbenv_enabled=false
 #_rbenv_root="$HOME/.rbenv"
-#_rbenv_git="https://github.com/rbenv/rbenv.git"
+#_rbenv_git_enabled=false
+#_rbenv_git_url="https://github.com/rbenv/rbenv.git"
 #_rbenv_build_enabled=true
-#_rbenv_build_git="https://github.com/rbenv/ruby-build.git"
+#_rbenv_build_git_enabled=false
+#_rbenv_build_git_url="https://github.com/rbenv/ruby-build.git"
 #_rbenv_versions=()
 
 # vim: set ft=sh syn=sh sw=2 ts=2 et :
