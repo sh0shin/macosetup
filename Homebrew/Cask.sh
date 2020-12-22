@@ -13,7 +13,7 @@ echo "${BASH_SOURCE[0]}"
 # Tapping homebrew/cask
 brew tap homebrew/cask
 
-# Tapping cask taps
+# Cask taps
 for _tap in "${_brew_cask_taps[@]:-()}"
 do
   brew tap "$_tap"

@@ -19,6 +19,12 @@ fi
 # Analytics
 brew analytics "${_brew_analytics:-off}"
 
+# Taps
+for _tap in "${_brew_taps[@]:-()}"
+do
+  brew tap "$_tap"
+done
+
 # Install Formulae
 if [[ -n "${_brew_formulae[*]:-()}" ]]
 then
