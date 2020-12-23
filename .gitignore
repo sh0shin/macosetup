@@ -1,31 +1,60 @@
+# generic
 *.bak
-*.o
+*.core
+*.log
 *.old
 *.orig
 *.rej
+*.sw[p-z]
 *~
-.*.swp
+.*.sw[p-z]
+
+# macos
 .DS_Store
 .VolumeIcon.icns
 
+# windows
+*.lnk
+[Dd]esktop.ini
+[Tt]humbs.db
+
+# c
+*.o
+*.so
+
+# jekyll
+.jekyll-metadata
+.sass-cache/
+_site/
+
+# python
+*.py[cod]
+__pycache__/
+
+# ruby
+Gemfile.lock
+
+# terraform
+**/.terraform/
+**/terraform.tfstate.d/
+*.tfstate
+*.tfstate.*
+.terraform.lock.hcl
+
+# local
 *.dmg
 *.pkg
 
-[Dd]efaults.*
-Debug.sh
-
-Backup.d/*
-
 Config.d/*
-!Config.d/Sample.sh
+!Config.d/Defaults.sh
 
 File.d/*
-!File.d/motd.in
-!File.d/sudo.80admin.in
+!File.d/**.in
 
 Local.d/*
 !Local.d/Sample.sh
 
+# excludes
 !.git
 !.git_keep
 !.gitkeep
