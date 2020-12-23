@@ -10,6 +10,3 @@ echo "${BASH_SOURCE[0]}"
 
 sudo cp "File.d/${_sudo_file:-sudo.80admin.in}" "${_sudo_path:-/private/etc/sudoers.d}/${_sudo_dest:-80admin}"
 sudo chmod 0440 "${_sudo_path:-/private/etc/sudoers.d}/${_sudo_dest:-80admin}"
-
-# vim: set ft=sh syn=sh sw=2 ts=2 et :
-# eof

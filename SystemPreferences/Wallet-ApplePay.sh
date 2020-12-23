@@ -8,7 +8,4 @@
 [[ "${_wallet_apple_pay_enabled:-false}" == false ]] && return
 echo "${BASH_SOURCE[0]}"
 
-# ...
-
-# vim: set ft=sh syn=sh sw=2 ts=2 et :
-# eof
+# TODO

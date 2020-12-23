@@ -10,6 +10,3 @@ echo "${BASH_SOURCE[0]}"
 
 # Show All Devices
 defaults write com.apple.DiskUtility SidebarShowAllDevices -bool "${_disk_utility_show_all:-true}"
-
-# vim: set ft=sh syn=sh sw=2 ts=2 et :
-# eof

@@ -13,6 +13,3 @@ echo "${BASH_SOURCE[0]}"
 defaults write com.apple.screencapture disable-shadow -bool "${_screenshot_disable_shadow:-true}"
 defaults write com.apple.screencapture location -string "${_screenshot_location:-$HOME/Pictures/Screenshots}"
 defaults write com.apple.screencapture type -string "${_screenshot_type:-png}"
-
-# vim: set ft=sh syn=sh sw=2 ts=2 et :
-# eof

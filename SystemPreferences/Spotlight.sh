@@ -47,6 +47,3 @@ sleep 5
 # Re-Index
 sudo mdutil -i on / >/dev/null
 sudo mdutil -E / >/dev/null
-
-# vim: set ft=sh syn=sh sw=2 ts=2 et :
-# eof

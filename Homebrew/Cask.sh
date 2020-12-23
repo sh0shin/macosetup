@@ -40,6 +40,3 @@ fi
 
 # Cleanup
 [[ ${_brew_cleanup:-false} == true ]] && brew cleanup --prune="${_brew_cleanup_prune:-0}"
-
-# vim: set ft=sh syn=sh sw=2 ts=2 et :
-# eof
