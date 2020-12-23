@@ -1,0 +1,50 @@
+# generic
+*.bak
+*.core
+*.log
+*.old
+*.orig
+*.rej
+*.sw[p-z]
+*~
+.*.sw[p-z]
+
+# macos
+.DS_Store
+.VolumeIcon.icns
+
+# windows
+*.lnk
+[Dd]esktop.ini
+[Tt]humbs.db
+
+# c
+*.o
+*.so
+
+# jekyll
+.jekyll-metadata
+.sass-cache/
+_site/
+
+# python
+*.py[cod]
+__pycache__/
+
+# ruby
+Gemfile.lock
+
+# terraform
+**/.terraform/
+**/terraform.tfstate.d/
+*.tfstate
+*.tfstate.*
+.terraform.lock.hcl
+
+# local
+#...
+
+# excludes
+!.git
+!.git_keep
+!.gitkeep
