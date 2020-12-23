@@ -12,4 +12,4 @@ sudo touch /private/etc/motd
 sudo chown root:admin /private/etc/motd
 sudo chmod 0664 /private/etc/motd
 
-cat "File.d/${_motd_file:-motd.in}" > /private/etc/motd
+cat "file.d/${_motd_file:-motd.in}" > /private/etc/motd

@@ -82,7 +82,7 @@ _main()
   fi
 
   # Run all
-  for _run in Shell/*.sh Homebrew/*.sh SystemPreferences/*.sh Applications/*.sh Misc/*.sh
+  for _run in shell/*.sh homebrew/*.sh system_preferences/*.sh applications/*.sh misc/*.sh
   do
     # shellcheck source=/dev/null
     test -e "$_run" && source "$_run"
@@ -90,7 +90,7 @@ _main()
 
   # Local
   # shellcheck source=/dev/null
-  test -e "Local.d/$_local" && source "Local.d/$_local"
+  test -e "local.d/$_local" && source "local.d/$_local"
 
   _doneinfo
 }

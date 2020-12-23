@@ -45,14 +45,14 @@ Gemfile.lock
 *.dmg
 *.pkg
 
-Config.d/*
-!Config.d/Defaults.sh
+config.d/*
+!config.d/defaults.sh
 
-File.d/*
-!File.d/**.in
+file.d/*
+!file.d/**.in
 
-Local.d/*
-!Local.d/Sample.sh
+local.d/*
+!local.d/sample.sh
 
 # excludes
 !.git
