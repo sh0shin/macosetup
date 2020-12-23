@@ -14,6 +14,3 @@ for _pkg in "${_atom_packages[@]:-()}"
 do
   apm install "$_pkg"
 done
-
-# vim: set ft=sh syn=sh sw=2 ts=2 et :
-# eof

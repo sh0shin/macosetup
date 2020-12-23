@@ -29,6 +29,3 @@ echo "${BASH_SOURCE[0]}"
 # Enable double tap on Apple Pencil
 #defaults write com.apple.sidecar.display doubleTapEnabled -bool true
 #defaults write com.apple.sidecar.display doubleTapEnabled -bool false
-
-# vim: set ft=sh syn=sh sw=2 ts=2 et :
-# eof

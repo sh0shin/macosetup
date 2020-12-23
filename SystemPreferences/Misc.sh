@@ -71,6 +71,3 @@ defaults write com.apple.menuextra.battery "ShowPercent" -string "${_misc_show_b
 
 # Restart
 killall -1 SystemUIServer
-
-# vim: set ft=sh syn=sh sw=2 ts=2 et :
-# eof

@@ -49,6 +49,3 @@ sudo /usr/libexec/PlistBuddy -c "Set :'AC Power':DarkWakeBackgroundTasks ${_adap
   sudo /usr/libexec/PlistBuddy -c "Add :'AC Power':DarkWakeBackgroundTasks bool ${_adapter_power_nap:-true}" /Library/Preferences/com.apple.PowerManagement.plist
 
 # Show battery status in menu bar (See: SystemPreferences/Misc.sh)
-
-# vim: set ft=sh syn=sh sw=2 ts=2 et :
-# eof

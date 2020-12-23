@@ -382,6 +382,3 @@ echo "${BASH_SOURCE[0]}"
 #_rbenv_build_git_enabled=false
 #_rbenv_build_git_url="https://github.com/rbenv/ruby-build.git"
 #_rbenv_versions=()
-
-# vim: set ft=sh syn=sh sw=2 ts=2 et :
-# eof

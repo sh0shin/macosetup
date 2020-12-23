@@ -84,6 +84,3 @@ fi
 # Full Disk Access:   kTCCServiceSystemPolicyAllFiles
 # Automation:         TODO
 # Advertising:        TODO
-
-# vim: set ft=sh syn=sh sw=2 ts=2 et :
-# eof

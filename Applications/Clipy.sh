@@ -15,6 +15,3 @@ defaults write com.clipy-app.Clipy kCPYPrefInputPasteCommandKey -bool "${_clipy_
 defaults write com.clipy-app.Clipy kCPYPrefMaxHistorySizeKey -int "${_clipy_max_history:-540}"
 defaults write com.clipy-app.Clipy kCPYPrefShowStatusItemKey -int "${_clipy_show_status:-2}"
 defaults write com.clipy-app.Clipy loginItem -bool "${_clipy_login_item:-true}"
-
-# vim: set ft=sh syn=sh sw=2 ts=2 et :
-# eof

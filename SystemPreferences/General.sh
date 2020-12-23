@@ -59,6 +59,3 @@ defaults write NSGlobalDomain NSQuitAlwaysKeepsWindows -bool "${_general_close_q
 
 # User font smoothing when available
 #TODO
-
-# vim: set ft=sh syn=sh sw=2 ts=2 et :
-# eof

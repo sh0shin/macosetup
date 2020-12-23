@@ -45,6 +45,3 @@ sudo defaults write /Library/Preferences/com.apple.TimeMachine AlwaysShowDeleted
 # Other/Hidden
 # MaxSize
 #sudo defaults write /Library/Preferences/com.apple.TimeMachine MaxSize -integer "${_timemachine_maxsize:-262144}"
-
-# vim: set ft=sh syn=sh sw=2 ts=2 et :
-# eof

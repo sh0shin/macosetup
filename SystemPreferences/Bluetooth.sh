@@ -23,6 +23,3 @@ defaults write com.apple.systempreferences BluetoothAutoSeekPointingDevice -bool
 
 # Allow Bluetooth devices to wake this computer
 #TODO
-
-# vim: set ft=sh syn=sh sw=2 ts=2 et :
-# eof

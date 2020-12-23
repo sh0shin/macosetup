@@ -42,6 +42,3 @@ if [[ ${_software_update_install_recommended:-false} == true ]]
 then
   softwareupdate --install --recommended
 fi
-
-# vim: set ft=sh syn=sh sw=2 ts=2 et :
-# eof

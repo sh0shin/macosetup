@@ -101,6 +101,3 @@ defaults write com.apple.desktopservices DSDontWriteUSBStores -bool "${_finder_d
 
 # Restart
 killall Finder
-
-# vim: set ft=sh syn=sh sw=2 ts=2 et :
-# eof

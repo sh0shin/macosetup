@@ -13,6 +13,3 @@ sudo chown root:admin /private/etc/motd
 sudo chmod 0664 /private/etc/motd
 
 cat "File.d/${_motd_file:-motd.in}" > /private/etc/motd
-
-# vim: set ft=sh syn=sh sw=2 ts=2 et :
-# eof

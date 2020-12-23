@@ -17,6 +17,3 @@ defaults write com.apple.ActivityMonitor DiskGraphType -int "${_activity_monitor
 
 # Network (Data)
 defaults write com.apple.ActivityMonitor NetworkGraphType -int "${_activity_monitor_network_graph:-1}"
-
-# vim: set ft=sh syn=sh sw=2 ts=2 et :
-# eof

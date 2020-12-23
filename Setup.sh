@@ -101,6 +101,3 @@ then
 else
   _main "$@"
 fi
-
-# vim: set ft=sh syn=sh sw=2 ts=2 et :
-# eof

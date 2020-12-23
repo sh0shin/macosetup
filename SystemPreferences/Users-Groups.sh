@@ -38,6 +38,3 @@ sudo defaults write /Library/Preferences/com.apple.loginwindow RetriesUntilHint 
 # 1 : Account Name
 # 2 : Icon
 defaults write NSGlobalDomain userMenuExtraStyle -int "${_users_groups_switching_menu:-1}"
-
-# vim: set ft=sh syn=sh sw=2 ts=2 et :
-# eof

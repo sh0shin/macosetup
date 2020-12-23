@@ -51,6 +51,3 @@ defaults write com.apple.dock wvous-bl-modifier -int "${_missioncontrol_hc_bl_mo
 # Bottom right
 defaults write com.apple.dock wvous-br-corner   -int "${_missioncontrol_hc_br:-10}"
 defaults write com.apple.dock wvous-br-modifier -int "${_missioncontrol_hc_br_mod:-0}"
-
-# vim: set ft=sh syn=sh sw=2 ts=2 et :
-# eof
