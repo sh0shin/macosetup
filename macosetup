@@ -39,7 +39,7 @@ readonly _msx_self="$(basename "$0")"
 readonly _msx_version="v0.0.1"
 readonly _msx_url="https://sh0shin.org/macosetup"
 
-check_support()
+_msx_check_support()
 {
   if [[ "$OSTYPE" != darwin* ]]
   then
@@ -48,7 +48,7 @@ check_support()
   fi
 }
 
-check_sip()
+_msx_check_sip()
 {
   if [[ "$_msx_sip_status" == "enabled" ]]
   then
@@ -61,7 +61,7 @@ check_sip()
   fi
 }
 
-check_config()
+_msx_check_config()
 {
   if [[ -e "$_msx_config" ]]
   then
@@ -73,7 +73,7 @@ check_config()
   fi
 }
 
-list_module()
+_msx_list_module()
 {
   local _msx_find_module
 
@@ -101,25 +101,25 @@ list_module()
   done
 }
 
-check_module()
+_msx_check_module()
 {
   echo "check module"
 }
 
-run_module()
+_msx_run_module()
 {
   echo "run module"
 }
 
-show_usage()
+_msx_show_usage()
 {
   echo "$_msx_self $_msx_version ( $_msx_url )"
   echo "Usage: $_msx_self [-Dhl] -c config [-m module ]"
 }
 
-show_help()
+_msx_show_help()
 {
-  show_usage
+  _msx_show_usage
   echo "Options:"
   echo "  -D        : Enable debug output"
   echo "  -c config : Use configuration file (required)"
@@ -130,11 +130,11 @@ show_help()
   exit 1
 }
 
-main()
+_msx_main()
 {
-  check_support
-  check_sip
-  check_config # search_config?!
+  _msx_check_support
+  _msx_check_sip
+  _msx_check_config # search_config?!
 
   # config (DEBUG only)
   for _msx_search in "${_msx_config_search[@]}"
@@ -178,10 +178,10 @@ do
       _msx_config="$OPTARG"
       ;;
     h)
-      show_help
+      _msx_show_help
       ;;
     l)
-      list_module
+      _msx_list_module
       exit 0
       ;;
     m)
@@ -189,16 +189,16 @@ do
       ;;
     \?)
       echo "-$OPTARG is invalid!"
-      show_usage
+      _msx_show_usage
       exit 1
       ;;
     :)
       echo "-$OPTARG requires an argument!"
-      show_usage
+      _msx_show_usage
       exit 1
       ;;
     *)
-      show_usage
+      _msx_show_usage
       exit 1
     ;;
   esac
@@ -207,13 +207,13 @@ done
 if [[ -z "$_msx_config" ]]
 then
   echo "-c is mandatory!"
-  show_usage
+  _msx_show_usage
   exit 1
 fi
 
 if [[ "$OPTIND" -eq 1 ]] || [[ "$OPTIND" -le "$#" ]]
 then
-  show_usage
+  _msx_show_usage
 else
-  main
+  _msx_main
 fi
