@@ -50,7 +50,7 @@ if [[ -n "${_rbenv_versions[*]}" ]]
 then
   for _version in "${_rbenv_versions[@]}"
   do
-    echo "rbenv version $_version"
+    echo "[I] rbenv version $_version"
     rbenv install -s "$_version"
   done
 fi
