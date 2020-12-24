@@ -75,32 +75,29 @@ check_config()
 
 list_module()
 {
-  local _find_module=()
+  local _msx_find_module
 
-  echo "list module"
-
-  # TODO: Skip further search if found
   for _msx_category in "${_msx_module_category[@]}"
   do
+    echo "searching category: $_msx_category"
 
     for _msx_search in "${_msx_module_search[@]}"
     do
-
       if [[ -d "$_msx_search/$_msx_category" ]]
       then
-        _msx_find_module+=( "$(find "$_msx_search/$_msx_category" -iname '*.msx' -print)" )
+        echo "found path: $_msx_search/$_msx_category"
+
+        _msx_find_module="$(echo "$_msx_search/$_msx_category"/*.msx)"
+
+        echo "found module:"
+        for _msx_module in $_msx_find_module
+        do
+          _module="${_msx_module##*/}"
+          echo "  ${_module%.msx}"
+        done
+        break
       fi
-
     done
-  done
-
-  for _msx_module in ${_msx_find_module[@]}
-  do
-    _msx_module_name="$(basename "$_msx_module")"
-    _msx_module_path="$(basename "$(dirname "$_msx_module")")"
-
-    echo "* $_msx_module_path $_msx_module_name"
-
   done
 }
 
