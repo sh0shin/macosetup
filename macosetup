@@ -16,6 +16,11 @@ _msx_module_search=(
   "$(cd "$(dirname "${BASH_SOURCE[0]}")" && echo "$PWD")/share"
 )
 
+_msx_file_search=(
+  "$_msx_share/files"
+  "$(cd "$(dirname "${BASH_SOURCE[0]}")" && echo "$PWD")/share/files"
+)
+
 readonly _msx_module_order=(
   "shell"
   "homebrew"
@@ -23,6 +28,11 @@ readonly _msx_module_order=(
   "applications"
   "misc"
 )
+
+# user
+readonly _msx_username="$(whoami)"
+readonly _msx_fullname="$(finger -m "${_msx_username}" | awk '/Name:/ { print $4 }')"
+readonly _msx_sip_status="$(csrutil status | awk -F'status: ' '{print $2}')"
 
 # version
 readonly _msx_self="$(basename "$0")"
@@ -38,12 +48,26 @@ check_support()
   fi
 }
 
+check_sip()
+{
+  if [[ "$_msx_sip_status" == "enabled" ]]
+  then
+    echo "[W] System Integrity Protection is enabled"
+    echo "[W] Some settings may fail!"
+    read -p "Press RETURN to continue." -r
+  elif [[ "$_msx_sip_status" == "disabled." ]]
+  then
+    echo "[I] System Integrity Protection is disabled!"
+  fi
+}
+
 check_config()
 {
   if [[ -e "$_msx_config" ]]
   then
     echo "[I] using config: $_msx_config"
   else
+    # TODO: search config in $_msx_config_search
     echo "[E] config not found: $_msx_config"
     #exit 1
   fi
@@ -51,17 +75,42 @@ check_config()
 
 list_module()
 {
-  :
+  local _find_module=()
+
+  echo "list module"
+
+  for _msx_order in "${_msx_module_order[@]}"
+  do
+
+    for _msx_search in "${_msx_module_search[@]}"
+    do
+
+      if [[ -d "$_msx_search/$_msx_order" ]]
+      then
+        _find_module+=( "$(find "$_msx_search/$_msx_order" -iname '*.msx' -print)" )
+      fi
+
+    done
+  done
+
+  for _msx_module in ${_find_module[@]}
+  do
+    _msx_module_name="$(basename "$_msx_module")"
+    _msx_module_path="$(basename "$(dirname "$_msx_module")")"
+
+    echo "* $_msx_module_path $_msx_module_name"
+
+  done
 }
 
 check_module()
 {
-  :
+  echo "check module"
 }
 
 run_module()
 {
-  :
+  echo "run module"
 }
 
 show_usage()
@@ -75,7 +124,7 @@ show_help()
   show_usage
   echo "Options:"
   echo "  -D        : Enable debug output"
-  echo "  -c config : Use configuration file (default: none)"
+  echo "  -c config : Use configuration file (required)"
   echo "  -h        : Show this help"
   echo "  -l        : List available modules"
   echo "  -m module : Use module only, may be specified multiple times (default: all)"
@@ -86,22 +135,35 @@ show_help()
 main()
 {
   check_support
-  check_config
+  check_sip
+  check_config # search_config?!
+
+  # config (DEBUG only)
+  for _msx_search in "${_msx_config_search[@]}"
+  do
+    echo "config search: $_msx_search"
+  done
 
   # module (DEBUG only)
   if [[ -n "${_msx_module_select[*]}" ]]
   then
     for _msx_module in "${_msx_module_select[@]}"
     do
-      echo "running: $_msx_module"
+      echo "run: $_msx_module"
     done
   else
-    echo "running: all"
+    echo "run: all"
   fi
 
   for _msx_search in "${_msx_module_search[@]}"
   do
-    echo "module searching: $_msx_search"
+    echo "module search: $_msx_search"
+  done
+
+  # files (DEBUG only)
+  for _msx_search in "${_msx_file_search[@]}"
+  do
+    echo "file search: $_msx_search"
   done
 
   echo "done."
@@ -121,7 +183,8 @@ do
       show_help
       ;;
     l)
-      list_msx
+      list_module
+      exit 0
       ;;
     m)
       _msx_module_select+=("$OPTARG")
@@ -146,6 +209,8 @@ done
 if [[ -z "$_msx_config" ]]
 then
   echo "-c is mandatory!"
+  show_usage
+  exit 1
 fi
 
 if [[ "$OPTIND" -eq 1 ]] || [[ "$OPTIND" -le "$#" ]]
