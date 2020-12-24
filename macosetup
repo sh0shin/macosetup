@@ -21,7 +21,7 @@ _msx_file_search=(
   "$(cd "$(dirname "${BASH_SOURCE[0]}")" && echo "$PWD")/share/files"
 )
 
-readonly _msx_module_order=(
+readonly _msx_module_category=(
   "shell"
   "homebrew"
   "system_preferences"
@@ -80,15 +80,15 @@ list_module()
   echo "list module"
 
   # TODO: Skip further search if found
-  for _msx_order in "${_msx_module_order[@]}"
+  for _msx_category in "${_msx_module_category[@]}"
   do
 
     for _msx_search in "${_msx_module_search[@]}"
     do
 
-      if [[ -d "$_msx_search/$_msx_order" ]]
+      if [[ -d "$_msx_search/$_msx_category" ]]
       then
-        _msx_find_module+=( "$(find "$_msx_search/$_msx_order" -iname '*.msx' -print)" )
+        _msx_find_module+=( "$(find "$_msx_search/$_msx_category" -iname '*.msx' -print)" )
       fi
 
     done
