@@ -16,11 +16,13 @@ _msx_module_search=(
   "$(cd "$(dirname "${BASH_SOURCE[0]}")" && echo "$PWD")/share"
 )
 
-_msx_module_category=(
+readonly _msx_module_order=(
   "shell"
+  "homebrew"
+  "system_preferences"
   "applications"
+  "misc"
 )
-
 
 # version
 readonly _msx_self="$(basename "$0")"
