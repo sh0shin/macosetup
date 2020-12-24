@@ -5,9 +5,9 @@ Bash script based macOS setup environment
 ## Quick usage
 
 0. Disable SIP (optional but recommended)
-1. Create a configuration file (see: config.d/defaults.sh)
+1. Create a configuration file (see: etc/default.cfg)
 2. Open Terminal
-3. Run `./macosetup.sh path/to/your/config-file`
+3. Run `./macosetup -c path/to/your/config-file`
 4. Enable SIP (optional but recommended)
 
 ## macOS versions
