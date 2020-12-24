@@ -1,0 +1,78 @@
+#!/usr/bin/env bash
+#
+
+# version
+_msx_self="$(basename "$0")"
+_msx_version="v0.0.1"
+_msx_url="https://sh0shin.org/macosetup"
+
+list_msx()
+{
+  :
+}
+
+check_msx()
+{
+  :
+}
+
+show_usage()
+{
+  echo "$_msx_self $_msx_version ( $_msx_url )"
+  echo "Usage: $_msx_self [-Dhl] <-c config> [-m module ]"
+}
+
+show_help()
+{
+  show_usage
+  echo "Options:"
+  echo "  -D        : Enable debug output"
+  echo "  -c config : Use configuration file (default: NONE)"
+  echo "  -h        : Show this help"
+  echo "  -l        : List available modules"
+  echo "  -m module : Use module only, may be specified multiple times (default: all)"
+  echo
+  exit 1
+}
+
+while getopts ":Dc:hlm:" opt
+do
+  case "$opt" in
+    D)
+      set -x
+    ;;
+    c)
+      _msx_cfg="$OPTARG"
+      echo "Config $_msx_cfg"
+      ;;
+    h)
+      show_help
+      ;;
+    l)
+      list_msx
+      ;;
+    m)
+      _msx_modules+=("$OPTARG")
+      for _msx_module in "${_msx_modules[@]}"; do echo "running: $_msx_module"; done
+      ;;
+    \?)
+      echo "-$OPTARG is invalid!"
+      show_usage
+      exit 1
+      ;;
+    :)
+      echo "-$OPTARG requires an argument!"
+      show_usage
+      exit 1
+      ;;
+    *)
+      show_usage
+      exit 1
+    ;;
+  esac
+done
+
+if [[ "$OPTIND" -eq 1 ]] || [[ "$OPTIND" -le "$#" ]]
+then
+  show_usage
+fi
