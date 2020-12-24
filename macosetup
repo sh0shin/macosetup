@@ -87,13 +87,13 @@ list_module()
 
       if [[ -d "$_msx_search/$_msx_order" ]]
       then
-        _find_module+=( "$(find "$_msx_search/$_msx_order" -iname '*.msx' -print)" )
+        _msx_find_module+=( "$(find "$_msx_search/$_msx_order" -iname '*.msx' -print)" )
       fi
 
     done
   done
 
-  for _msx_module in ${_find_module[@]}
+  for _msx_module in ${_msx_find_module[@]}
   do
     _msx_module_name="$(basename "$_msx_module")"
     _msx_module_path="$(basename "$(dirname "$_msx_module")")"
