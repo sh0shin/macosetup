@@ -1,20 +1,22 @@
 #!/usr/bin/env bash
-#
+# shellcheck disable=SC2154
 
 # Don't run directly!
 [[ "$_" == "$0" ]] && exit 255
+[[ "$0" == "${BASH_SOURCE[0]}" ]] && exit 255
 
 # Dock Icons (Requires: dockutil)
-[[ "${_dock_icons_enabled:-false}" == false ]] && return
-[[ -x "/usr/local/bin/dockutil" ]] || return
-echo "${BASH_SOURCE[0]}"
+[[ "${_dock_icons_enabled:-false}" == false ]] && return 1
+[[ -x "/usr/local/bin/dockutil" ]] || return 1
+
+echo "[M] $(basename "${BASH_SOURCE[0]%.msx}")"
 
 # Clear all Icons
 defaults write com.apple.dock persistent-apps -array
 defaults write com.apple.dock persistent-others -array
 
 # Apps
-for _app in "${_dock_icons_apps[@]:-()}"
+for _app in "${_dock_icons_apps[@]}"
 do
   if [ -e "$_app" ]
   then
@@ -26,7 +28,7 @@ done
 # Downloads
 /usr/local/bin/dockutil --no-restart --section others --add ~/Downloads --view list --display folder
 
-for _other in "${_dock_icons_others[@]:-()}"
+for _other in "${_dock_icons_others[@]}"
 do
   if [ -e "$_other" ]
   then

@@ -1,12 +1,13 @@
 #!/usr/bin/env bash
-#
+# shellcheck disable=SC2154
 
 # Don't run directly!
-[[ "$_" == "$0" ]] && exit 255
+[[ "$0" == "${BASH_SOURCE[0]}" ]] && exit 255
 
 # pyenv
-[[ "${_pyenv_enabled:-false}" == false ]] && return
-echo "${BASH_SOURCE[0]}"
+[[ "${_pyenv_enabled:-false}" == false ]] && return 1
+
+echo "[M] $(basename "${BASH_SOURCE[0]%.msx}")"
 
 export PYENV_ROOT="${_pyenv_root:-$HOME/.pyenv}"
 export PATH="$PYENV_ROOT/bin:$PATH"
@@ -51,7 +52,7 @@ then
 fi
 
 # versions
-if [[ -n "${_pyenv_versions[*]:-()}" ]]
+if [[ -n "${_pyenv_versions[*]}" ]]
 then
   for _version in "${_pyenv_versions[@]}"
   do
