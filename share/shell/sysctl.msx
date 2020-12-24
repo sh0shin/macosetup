@@ -1,16 +1,17 @@
 #!/usr/bin/env bash
-#
+# shellcheck disable=SC2154
 
 # Don't run directly!
-[[ "$_" == "$0" ]] && exit 255
+[[ "$0" == "${BASH_SOURCE[0]}" ]] && exit 255
 
 # Sysctl
 [[ "${_sysctl_enabled:-false}" == false ]] && return
-echo "${BASH_SOURCE[0]}"
+
+echo "[M] $(basename "${BASH_SOURCE[0]%.msx}")"
 
 # Config
 IFS=$'\n'
-echo "echo \"${_sysctl_flags[*]:-()}\" >/private/etc/sysctl.conf" | sudo -s
+echo "echo \"${_sysctl_flags[*]}\" >/private/etc/sysctl.conf" | sudo -s
 unset IFS
 
 # Set

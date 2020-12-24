@@ -1,12 +1,13 @@
 #!/usr/bin/env bash
-#
+# shellcheck disable=SC2154
 
 # Don't run directly!
-[[ "$_" == "$0" ]] && exit 255
+[[ "$0" == "${BASH_SOURCE[0]}" ]] && exit 255
 
 # Xcode
 [[ "${_xcode_enabled:-true}" == false ]] && return
-echo "${BASH_SOURCE[0]}"
+
+echo "[M] $(basename "${BASH_SOURCE[0]%.msx}")"
 
 # Install Xcode Command Line Tools
 if ! xcode-select -p &>/dev/null
