@@ -75,28 +75,52 @@ _msx_check_config()
 
 _msx_get_module()
 {
-  local _msx_category _msx_search _msx_module_found
+  local _msx_module_wanted _msx_wanted _msx_category _msx_search _msx_module_found
+  _msx_module_wanted=("$@")
 
-  for _msx_category in "${_msx_module_category[@]}"
+  for _msx_wanted in "${_msx_module_wanted[@]:-"all"}"
   do
-    for _msx_search in "${_msx_module_search[@]}"
+    for _msx_category in "${_msx_module_category[@]}"
     do
-      if [[ -d "$_msx_search/$_msx_category" ]]
-      then
-        _msx_module_found+="$(echo -n "$_msx_search/$_msx_category"/*.msx) "
-        break
-      fi
+      for _msx_search in "${_msx_module_search[@]}"
+      do
+        if [[ -d "$_msx_search/$_msx_category" ]]
+        then
+          if [[ "$_msx_wanted" == "all" ]]
+          then
+            _msx_module_found+="$(echo -n "$_msx_search/$_msx_category"/*.msx) "
+            break
+          else
+            if [[ -f "$_msx_search/$_msx_category/$_msx_wanted.msx" ]]
+            then
+              _msx_module_found+="$_msx_search/$_msx_category/$_msx_wanted.msx"
+              break
+            fi
+          fi
+        fi
+      done
     done
   done
-  # return
   echo "$_msx_module_found"
 }
 
 _msx_list_module()
 {
-  local _msx_module_found=$(_msx_get_module)
-  local _msx_module
+  local _msx_module_wanted _msx_module_found _msx_module
+  _msx_module_wanted=("$@")
+  _msx_module_found=$(_msx_get_module "${_msx_module_wanted[@]}")
 
+  # only wanted module
+  if [[ -n "${_msx_module_wanted[*]}" ]] && [[ -z "$_msx_module_found" ]]
+  then
+    for _msx_module in "${_msx_module_wanted[@]}"
+    do
+      echo "module $_msx_module not found!"
+    done
+    return 1
+  fi
+
+  # all modules
   for _msx_module in $_msx_module_found
   do
     local _category_tmp="${_msx_module%/*}"
@@ -106,7 +130,7 @@ _msx_list_module()
     local _module="${_module_tmp%.msx}"
 
     echo "${_category} ${_module}"
-  done
+  done | column -t
 }
 
 _msx_check_module()
@@ -189,7 +213,7 @@ do
       _msx_show_help
       ;;
     l)
-      _msx_list_module | column -t
+      _msx_list_module "${_msx_module_select[@]}"
       exit 0
       ;;
     m)
