@@ -1,28 +1,28 @@
 #!/usr/bin/env bash
-#
+# shellcheck disable=SC2154
 
 # Don't run directly!
-[[ "$_" == "$0" ]] && exit 255
+[[ "$0" == "${BASH_SOURCE[0]}" ]] && exit 255
 
 # Brew Cask
-[[ ${_brew_cask_enabled:-true} == false ]] && return
-[[ ${_brew_enabled:-true} == false ]] && return
-[[ ${_xcode_enabled:-true} == false ]] && return
-echo "${BASH_SOURCE[0]}"
+[[ ${_brew_cask_enabled:-true} == false ]] && return 1
+[[ ${_brew_enabled:-true} == false ]] && return 1
+[[ ${_xcode_enabled:-true} == false ]] && return 1
+
+echo "[M] $(basename "${BASH_SOURCE[0]%.msx}")"
 
 # Tapping homebrew/cask
 brew tap homebrew/cask
 
 # Cask taps
-for _tap in "${_brew_cask_taps[@]:-()}"
+for _tap in "${_brew_cask_taps[@]}"
 do
   brew tap "$_tap"
 done
 
 # Install Casks
-if [[ -n "${_brew_casks[*]:-()}" ]]
+if [[ -n "${_brew_casks[*]}" ]]
 then
-
   for _cask in "${_brew_casks[@]}"
   do
     brew info --cask "$_cask" | grep -qi "not installed" && \
