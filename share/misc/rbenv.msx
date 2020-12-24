@@ -1,12 +1,13 @@
 #!/usr/bin/env bash
-#
+# shellcheck disable=SC2154
 
 # Don't run directly!
-[[ "$_" == "$0" ]] && exit 255
+[[ "$0" == "${BASH_SOURCE[0]}" ]] && exit 255
 
 # rbenv
 [[ "${_rbenv_enabled:-false}" == false ]] && return
-echo "${BASH_SOURCE[0]}"
+
+echo "[M] $(basename "${BASH_SOURCE[0]%.msx}")"
 
 export RBENV_ROOT="${_rbenv_root:-$HOME/.rbenv}"
 export PATH="$RBENV_ROOT/bin:$PATH"
@@ -32,7 +33,7 @@ fi
 # ruby-build from git
 if [[ "${_rbenv_build_enabled:-true}" == true ]]
 then
-  if [[ "$_rbenv_build_git_enabled:-false}" == true ]]
+  if [[ "${_rbenv_build_git_enabled:-false}" == true ]]
   then
     if [[ -d "$RBENV_ROOT/plugins/ruby-build/.git" ]]
     then
@@ -45,11 +46,11 @@ then
 fi
 
 # versions
-if [[ -n "${_rbenv_versions[*]:-()}" ]]
+if [[ -n "${_rbenv_versions[*]}" ]]
 then
   for _version in "${_rbenv_versions[@]}"
   do
-    echo "rbenv version $_version"
+    echo "[I] rbenv version $_version"
     rbenv install -s "$_version"
   done
 fi

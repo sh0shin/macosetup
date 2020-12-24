@@ -1,12 +1,13 @@
 #!/usr/bin/env bash
-#
+# shellcheck disable=SC2154
 
 # Don't run directly!
-[[ "$_" == "$0" ]] && exit 255
+[[ "$0" == "${BASH_SOURCE[0]}" ]] && exit 255
 
 # Shells
-[[ "${_homebrew_shells:-false}" == false ]] && return
-echo "${BASH_SOURCE[0]}"
+[[ "${_homebrew_shells:-false}" == false ]] && return 1
+
+echo "[M] $(basename "${BASH_SOURCE[0]%.msx}")"
 
 # Homebrew bash
 if [[ "${_homebrew_bash:-false}" == true ]]

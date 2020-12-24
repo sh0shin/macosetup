@@ -1,0 +1,12 @@
+#!/usr/bin/env bash
+# shellcheck disable=SC2154
+
+# Don't run directly!
+[[ "$0" == "${BASH_SOURCE[0]}" ]] && exit 255
+
+# Sample
+[[ "${_sample_enabled:-false}" == false ]] && return 1
+
+echo "[M] $(basename "${BASH_SOURCE[0]%.msx}")"
+
+# ...

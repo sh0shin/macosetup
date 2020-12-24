@@ -1,0 +1,14 @@
+#!/usr/bin/env bash
+# shellcheck disable=SC2154
+
+# Don't run directly!
+[[ "$0" == "${BASH_SOURCE[0]}" ]] && exit 255
+
+# Sudo
+[[ "${_sudo_enabled:-true}" == false ]] && return
+
+echo "[M] $(basename "${BASH_SOURCE[0]%.msx}")"
+
+# TODO
+#sudo cp "file.d/${_sudo_file:-sudo.80admin.in}" "${_sudo_path:-/private/etc/sudoers.d}/${_sudo_dest:-80admin}"
+#sudo chmod 0440 "${_sudo_path:-/private/etc/sudoers.d}/${_sudo_dest:-80admin}"

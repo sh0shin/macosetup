@@ -1,13 +1,14 @@
 #!/usr/bin/env bash
-#
+# shellcheck disable=SC2154
 
 # Don't run directly!
-[[ "$_" == "$0" ]] && exit 255
+[[ "$0" == "${BASH_SOURCE[0]}" ]] && exit 255
 
 # Brew
-[[ ${_brew_enabled:-true} == false ]] && return
-[[ ${_xcode_enabled:-true} == false ]] && return
-echo "${BASH_SOURCE[0]}"
+[[ ${_brew_enabled:-true} == false ]] && return 1
+[[ ${_xcode_enabled:-true} == false ]] && return 1
+
+echo "[M] $(basename "${BASH_SOURCE[0]%.msx}")"
 
 # Install Homebrew
 if [[ ! -x /usr/local/bin/brew ]]
@@ -20,15 +21,14 @@ fi
 brew analytics "${_brew_analytics:-off}"
 
 # Taps
-for _tap in "${_brew_taps[@]:-()}"
+for _tap in "${_brew_taps[@]}"
 do
   brew tap "$_tap"
 done
 
 # Install Formulae
-if [[ -n "${_brew_formulae[*]:-()}" ]]
+if [[ -n "${_brew_formulae[*]}" ]]
 then
-
   for _formulae in "${_brew_formulae[@]}"
   do
     brew info "$_formulae" | grep -qi "not installed" && \

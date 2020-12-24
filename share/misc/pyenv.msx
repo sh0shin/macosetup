@@ -1,12 +1,13 @@
 #!/usr/bin/env bash
-#
+# shellcheck disable=SC2154
 
 # Don't run directly!
-[[ "$_" == "$0" ]] && exit 255
+[[ "$0" == "${BASH_SOURCE[0]}" ]] && exit 255
 
 # pyenv
-[[ "${_pyenv_enabled:-false}" == false ]] && return
-echo "${BASH_SOURCE[0]}"
+[[ "${_pyenv_enabled:-false}" == false ]] && return 1
+
+echo "[M] $(basename "${BASH_SOURCE[0]%.msx}")"
 
 export PYENV_ROOT="${_pyenv_root:-$HOME/.pyenv}"
 export PATH="$PYENV_ROOT/bin:$PATH"
@@ -16,9 +17,9 @@ if [[ "${_pyenv_git_enabled:-false}" == true ]]
 then
   if [[ -d "$PYENV_ROOT/.git" ]]
   then
-    ( cd "$PYENV_ROOT" && echo git pull )
+    ( cd "$PYENV_ROOT" && git pull )
   else
-    echo git clone "${_pyenv_git_url:-https://github.com/pyenv/pyenv.git}" "$PYENV_ROOT"
+    git clone "${_pyenv_git_url:-https://github.com/pyenv/pyenv.git}" "$PYENV_ROOT"
   fi
 fi
 
@@ -36,9 +37,9 @@ then
   then
     if [[ -d "$PYENV_ROOT/plugins/pyenv-virtualenv/.git" ]]
     then
-      ( cd "$PYENV_ROOT/plugins/pyenv-virtualenv" && echo git pull )
+      ( cd "$PYENV_ROOT/plugins/pyenv-virtualenv" && git pull )
     else
-      echo git clone "${_pyenv_venv_git_url:-https://github.com/pyenv/pyenv-virtualenv.git}" "$PYENV_ROOT/plugins/pyenv-virtualenv"
+      git clone "${_pyenv_venv_git_url:-https://github.com/pyenv/pyenv-virtualenv.git}" "$PYENV_ROOT/plugins/pyenv-virtualenv"
     fi
   fi
 fi
@@ -51,11 +52,11 @@ then
 fi
 
 # versions
-if [[ -n "${_pyenv_versions[*]:-()}" ]]
+if [[ -n "${_pyenv_versions[*]}" ]]
 then
   for _version in "${_pyenv_versions[@]}"
   do
-    echo "pyenv version $_version"
+    echo "[I] pyenv version $_version"
     pyenv install -s "$_version"
   done
 fi
