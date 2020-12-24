@@ -86,10 +86,12 @@ _msx_get_module()
       do
         if [[ -d "$_msx_search/$_msx_category" ]]
         then
+          # all modules
           if [[ "$_msx_wanted" == "all" ]]
           then
             _msx_module_found+="$(echo -n "$_msx_search/$_msx_category"/*.msx) "
             break
+          # wanted module(s)
           else
             if [[ -f "$_msx_search/$_msx_category/$_msx_wanted.msx" ]]
             then
@@ -168,32 +170,15 @@ _msx_main()
   _msx_check_sip
   _msx_check_config # search_config?!
 
-  # config (DEBUG only)
-  for _msx_search in "${_msx_config_search[@]}"
-  do
-    echo "config search: $_msx_search"
-  done
+  local _msx_module_wanted _msx_module_found _msx_module
+  _msx_module_wanted=("$@")
+  _msx_module_found=$(_msx_get_module "${_msx_module_wanted[@]}")
 
-  # module (DEBUG only)
-  if [[ -n "${_msx_module_select[*]}" ]]
-  then
-    for _msx_module in "${_msx_module_select[@]}"
-    do
-      echo "run: $_msx_module"
-    done
-  else
-    echo "run: all"
-  fi
-
-  for _msx_search in "${_msx_module_search[@]}"
+  # module run
+  for _msx_module in $_msx_module_found
   do
-    echo "module search: $_msx_search"
-  done
-
-  # files (DEBUG only)
-  for _msx_search in "${_msx_file_search[@]}"
-  do
-    echo "file search: $_msx_search"
+    # shellcheck source=/dev/null
+    source "$_msx_module"
   done
 
   echo "done."
@@ -247,5 +232,5 @@ if [[ "$OPTIND" -eq 1 ]] || [[ "$OPTIND" -le "$#" ]]
 then
   _msx_show_usage
 else
-  _msx_main
+  _msx_main "${_msx_module_select[@]}"
 fi
