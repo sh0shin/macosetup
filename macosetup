@@ -7,13 +7,13 @@ _msx_etc="$_msx_prefix/etc/macosetup"
 _msx_share="$_msx_prefix/share/macosetup"
 
 _msx_config_search=(
-  "$_msx_etc"
   "$(cd "$(dirname "${BASH_SOURCE[0]}")" && echo "$PWD")/etc"
+  "$_msx_etc"
 )
 _msx_config=""
 _msx_module_search=(
-  "$_msx_share"
   "$(cd "$(dirname "${BASH_SOURCE[0]}")" && echo "$PWD")/share"
+  "$_msx_share"
 )
 
 _msx_file_search=(
@@ -79,6 +79,7 @@ list_module()
 
   echo "list module"
 
+  # TODO: Skip further search if found
   for _msx_order in "${_msx_module_order[@]}"
   do
 
