@@ -1,17 +1,63 @@
 #!/usr/bin/env bash
 #
 
-# version
-_msx_self="$(basename "$0")"
-_msx_version="v0.0.1"
-_msx_url="https://sh0shin.org/macosetup"
+# defaults
+_msx_prefix="/usr/local"
+_msx_etc="$_msx_prefix/etc/macosetup"
+_msx_share="$_msx_prefix/share/macosetup"
 
-list_msx()
+_msx_config_search=(
+  "$_msx_etc"
+  "$(cd "$(dirname "${BASH_SOURCE[0]}")" && echo "$PWD")/etc"
+)
+_msx_config=""
+_msx_module_search=(
+  "$_msx_share"
+  "$(cd "$(dirname "${BASH_SOURCE[0]}")" && echo "$PWD")/share"
+)
+
+_msx_module_category=(
+  "shell"
+  "applications"
+)
+
+
+# version
+readonly _msx_self="$(basename "$0")"
+readonly _msx_version="v0.0.1"
+readonly _msx_url="https://sh0shin.org/macosetup"
+
+check_support()
+{
+  if [[ "$OSTYPE" != darwin* ]]
+  then
+    echo "Only Darwin/macOS is supported!"
+    exit 1
+  fi
+}
+
+check_config()
+{
+  if [[ -e "$_msx_config" ]]
+  then
+    echo "[I] using config: $_msx_config"
+  else
+    echo "[E] config not found: $_msx_config"
+    #exit 1
+  fi
+}
+
+list_module()
 {
   :
 }
 
-check_msx()
+check_module()
+{
+  :
+}
+
+run_module()
 {
   :
 }
@@ -19,7 +65,7 @@ check_msx()
 show_usage()
 {
   echo "$_msx_self $_msx_version ( $_msx_url )"
-  echo "Usage: $_msx_self [-Dhl] <-c config> [-m module ]"
+  echo "Usage: $_msx_self [-Dhl] -c config [-m module ]"
 }
 
 show_help()
@@ -27,7 +73,7 @@ show_help()
   show_usage
   echo "Options:"
   echo "  -D        : Enable debug output"
-  echo "  -c config : Use configuration file (default: NONE)"
+  echo "  -c config : Use configuration file (default: none)"
   echo "  -h        : Show this help"
   echo "  -l        : List available modules"
   echo "  -m module : Use module only, may be specified multiple times (default: all)"
@@ -35,6 +81,31 @@ show_help()
   exit 1
 }
 
+main()
+{
+  check_support
+  check_config
+
+  # module (DEBUG only)
+  if [[ -n "${_msx_module_select[*]}" ]]
+  then
+    for _msx_module in "${_msx_module_select[@]}"
+    do
+      echo "running: $_msx_module"
+    done
+  else
+    echo "running: all"
+  fi
+
+  for _msx_search in "${_msx_module_search[@]}"
+  do
+    echo "module searching: $_msx_search"
+  done
+
+  echo "done."
+}
+
+# options
 while getopts ":Dc:hlm:" opt
 do
   case "$opt" in
@@ -42,8 +113,7 @@ do
       set -x
     ;;
     c)
-      _msx_cfg="$OPTARG"
-      echo "Config $_msx_cfg"
+      _msx_config="$OPTARG"
       ;;
     h)
       show_help
@@ -52,8 +122,7 @@ do
       list_msx
       ;;
     m)
-      _msx_modules+=("$OPTARG")
-      for _msx_module in "${_msx_modules[@]}"; do echo "running: $_msx_module"; done
+      _msx_module_select+=("$OPTARG")
       ;;
     \?)
       echo "-$OPTARG is invalid!"
@@ -72,7 +141,14 @@ do
   esac
 done
 
+if [[ -z "$_msx_config" ]]
+then
+  echo "-c is mandatory!"
+fi
+
 if [[ "$OPTIND" -eq 1 ]] || [[ "$OPTIND" -le "$#" ]]
 then
   show_usage
+else
+  main
 fi
