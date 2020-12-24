@@ -1,5 +1,4 @@
 #!/usr/bin/env bash
-#
 
 # defaults
 _msx_prefix="/usr/local"
@@ -66,10 +65,12 @@ _msx_check_config()
   if [[ -e "$_msx_config" ]]
   then
     echo "[I] using config: $_msx_config"
+    # shellcheck source=/dev/null
+    source "$_msx_config"
   else
     # TODO: search config in $_msx_config_search
     echo "[E] config not found: $_msx_config"
-    #exit 1
+    exit 1
   fi
 }
 
