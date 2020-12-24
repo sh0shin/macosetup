@@ -52,12 +52,12 @@ _msx_check_sip()
 {
   if [[ "$_msx_sip_status" == "enabled" ]]
   then
-    echo "[W] System Integrity Protection is enabled"
-    echo "[W] Some settings may fail!"
-    read -p "Press RETURN to continue." -r
+    echo "[W] SIP is enabled."
+    echo "[W] some settings may fail!"
+    read -p "press RETURN to continue." -r
   elif [[ "$_msx_sip_status" == "disabled." ]]
   then
-    echo "[I] System Integrity Protection is disabled!"
+    echo "[I] SIP is disabled!"
   fi
 }
 
@@ -181,7 +181,7 @@ _msx_main()
     source "$_msx_module"
   done
 
-  echo "done."
+  echo "[I] done."
 }
 
 # options
