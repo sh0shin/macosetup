@@ -24,6 +24,14 @@ List of [macOS releases](https://en.wikipedia.org/wiki/MacOS_version_history#Rel
 
  * 11 - Big Sur
 
+## Outputs
+
+ * [C] - Configuration
+ * [E] - Error
+ * [I] - Information
+ * [M] - Module
+ * [W] - Warning
+
 ## Notes
 
 ### System Integrity Protection (SIP)
