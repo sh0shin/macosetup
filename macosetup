@@ -73,31 +73,39 @@ _msx_check_config()
   fi
 }
 
-_msx_list_module()
+_msx_get_module()
 {
-  local _msx_find_module
+  local _msx_category _msx_search _msx_module_found
 
   for _msx_category in "${_msx_module_category[@]}"
   do
-    echo "searching category: $_msx_category"
-
     for _msx_search in "${_msx_module_search[@]}"
     do
       if [[ -d "$_msx_search/$_msx_category" ]]
       then
-        echo "found path: $_msx_search/$_msx_category"
-
-        _msx_find_module="$(echo "$_msx_search/$_msx_category"/*.msx)"
-
-        echo "found module:"
-        for _msx_module in $_msx_find_module
-        do
-          _module="${_msx_module##*/}"
-          echo "  ${_module%.msx}"
-        done
+        _msx_module_found+="$(echo -n "$_msx_search/$_msx_category"/*.msx) "
         break
       fi
     done
+  done
+  # return
+  echo "$_msx_module_found"
+}
+
+_msx_list_module()
+{
+  local _msx_module_found=$(_msx_get_module)
+  local _msx_module
+
+  for _msx_module in $_msx_module_found
+  do
+    local _category_tmp="${_msx_module%/*}"
+    local _module_tmp="${_msx_module##*/}"
+
+    local _category="${_category_tmp##*/}"
+    local _module="${_module_tmp%.msx}"
+
+    echo "${_category} ${_module}"
   done
 }
 
@@ -181,7 +189,7 @@ do
       _msx_show_help
       ;;
     l)
-      _msx_list_module
+      _msx_list_module | column -t
       exit 0
       ;;
     m)
