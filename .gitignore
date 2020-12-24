@@ -45,8 +45,8 @@ Gemfile.lock
 *.dmg
 *.pkg
 
-config.d/*
-!config.d/defaults.sh
+etc/*
+!etc/default.cfg
 
 file.d/*
 !file.d/**.in
