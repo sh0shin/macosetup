@@ -1,4 +1,3 @@
 # sudoers.d/80admin
-#
 
-%admin    ALL=(ALL) NOPASSWD: ALL
+%admin  ALL=(ALL) NOPASSWD: ALL
