@@ -28,7 +28,13 @@ List of [macOS releases](https://en.wikipedia.org/wiki/MacOS_version_history#Rel
 
 ### System Integrity Protection (SIP)
 Boot into [macOS Recovery](https://support.apple.com/en-us/HT201314),
-open Terminal and run:
+or alternatively from Terminal:
+```sh
+sudo nvram "recovery-boot-mode=unused"
+sudo reboot recovery
+```
+
+Open Terminal and run:
 ```sh
 # Disable SIP
 csrutil disable
