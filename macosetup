@@ -67,6 +67,7 @@ _msx_check_config()
   then
     # shellcheck source=/dev/null
     source "$_msx_config"
+    echo "[C] $(basename "${_msx_config%.cfg}")"
   else
     # TODO: search config in $_msx_config_search
     echo "[E] config not found: $_msx_config"
