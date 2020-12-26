@@ -1,21 +1,25 @@
 #!/usr/bin/env bash
-#
+# shellcheck disable=SC1090
+# shellcheck disable=SC2034
+# shellcheck disable=SC2154
 
-# Don't run directly!
-[[ "$_" == "$0" ]] && exit 255
+# defaults
+_msx_module_enabled="${_sound_enabled:-true}"
+_msx_module_appcheck=()
 
-# Sound
-[[ "${_sound_enabled:-true}" == false ]] && return
-echo "${BASH_SOURCE[0]}"
+# module main function
+_msx_module_main()
+{
+  # Sound Effects (/System/Library/Sounds/)
+  defaults write NSGlobalDomain com.apple.sound.beep.sound -string "${_sound_effects:-/System/Library/Sounds/Basso.aiff}"
 
-# Sound Effects (/System/Library/Sounds/)
-defaults write NSGlobalDomain com.apple.sound.beep.sound -string "${_sound_effects:-/System/Library/Sounds/Basso.aiff}"
+  # Play user interface sound effects
+  defaults write NSGlobalDomain com.apple.sound.uiaudio.enabled -bool "${_sound_play_effects:-true}"
 
-# Play user interface sound effects
-defaults write NSGlobalDomain com.apple.sound.uiaudio.enabled -bool "${_sound_play_effects:-true}"
+  # Play feedback when volume is changed
+  defaults write NSGlobalDomain com.apple.sound.beep.feedback -bool "${_sound_change_feedback:-false}"
 
-# Play feedback when volume is changed
-defaults write NSGlobalDomain com.apple.sound.beep.feedback -bool "${_sound_change_feedback:-false}"
-
-# Output
-# Input
+  # Output
+  # Input
+}
+:
