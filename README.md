@@ -26,13 +26,13 @@ List of [macOS releases](https://en.wikipedia.org/wiki/MacOS_version_history#Rel
 
 ## Outputs
 
- * [C] - Configuration
- * [D] - Module disabled
- * [E] - Error
- * [I] - Information
- * [M] - Module enabled
- * [W] - Warning
- * [X] - Module executed
+ * `[C]` - Configuration
+ * `[D]` - Module disabled
+ * `[E]` - Error
+ * `[I]` - Information
+ * `[M]` - Module enabled
+ * `[W]` - Warning
+ * `[X]` - Module executed
 
 ## Notes
 
