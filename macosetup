@@ -258,9 +258,15 @@ done
 
 if [[ -z "$_msx_config" ]]
 then
-  echo "-c is mandatory!"
-  _msx_show_usage
-  exit 1
+  if [[ -n "$MSX_CONFIG" ]] && \
+     [[ -e "$MSX_CONFIG" ]]
+  then
+    _msx_config="$MSX_CONFIG"
+  else
+    echo "-c is mandatory!"
+    _msx_show_usage
+    exit 1
+  fi
 fi
 
 if [[ "$OPTIND" -eq 1 ]] || [[ "$OPTIND" -le "$#" ]]
