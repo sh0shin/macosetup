@@ -22,15 +22,17 @@ List of [macOS releases](https://en.wikipedia.org/wiki/MacOS_version_history#Rel
 
 ### Unsupported versions
 
- * 11 - Big Sur
+ * 11 - Big Sur (soon)
 
 ## Outputs
 
  * [C] - Configuration
+ * [D] - Module disabled
  * [E] - Error
  * [I] - Information
- * [M] - Module
+ * [M] - Module enabled
  * [W] - Warning
+ * [X] - Module executed
 
 ## Notes
 

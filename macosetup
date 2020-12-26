@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 # shellcheck disable=SC1090
 # shellcheck disable=SC2034
+# shellcheck disable=SC2154
 
 # defaults
 _msx_prefix="/usr/local"
@@ -75,7 +76,7 @@ _msx_check_config()
   fi
 }
 
-_msx_get_module()
+_msx_module_get()
 {
   local _msx_module_wanted _msx_wanted _msx_category _msx_search _msx_module_found
   _msx_module_wanted=("$@")
@@ -108,11 +109,11 @@ _msx_get_module()
   echo "$_msx_module_found"
 }
 
-_msx_list_module()
+_msx_module_list()
 {
   local _msx_module_wanted _msx_module_found _msx_module
   _msx_module_wanted=("$@")
-  _msx_module_found=$(_msx_get_module "${_msx_module_wanted[@]}")
+  _msx_module_found=$(_msx_module_get "${_msx_module_wanted[@]}")
 
   # only wanted module
   if [[ -n "${_msx_module_wanted[*]}" ]] && [[ -z "$_msx_module_found" ]]
@@ -137,14 +138,56 @@ _msx_list_module()
   done | column -t
 }
 
-_msx_check_module()
+_msx_module_run()
 {
-  echo "check module"
-}
+  local _msx_module_found _msx_module_path _msx_module_name_msx _msx_module_name
+  local _msx_module_app _msx_module_app_found
 
-_msx_run_module()
-{
-  echo "run module"
+  _msx_module_found="$1"
+  _msx_module_app_found=0
+
+  for _msx_module_path in $_msx_module_found
+  do
+    _msx_module_name_msx="${_msx_module_path##*/}"
+    _msx_module_name="${_msx_module_name_msx%.msx}"
+
+    source "$_msx_module_path"
+
+    # enabled
+    if [[ "$_msx_module_enabled" == true ]]
+    then
+
+      # app check
+      if [[ -n "${_msx_module_appcheck[*]}" ]]
+      then
+        for _msx_module_app in "${_msx_module_appcheck[@]}"
+        do
+          if [[ -e "$_msx_module_app" ]]
+          then
+            _msx_module_app_found=1
+          fi
+        done
+
+        # app not found
+        if [[ "$_msx_module_app_found" -ne 1 ]]
+        then
+          break
+        fi
+      fi
+
+      # main
+      if [[ $(type -t _msx_module_main) == "function" ]]
+      then
+        echo "[M] $_msx_module_name"
+        _msx_module_main
+      else
+        echo "[X] $_msx_module_name"
+      fi
+
+    else
+      echo "[D] $_msx_module_name"
+    fi
+  done
 }
 
 _msx_show_usage()
@@ -172,15 +215,11 @@ _msx_main()
   _msx_check_sip
   _msx_check_config # search_config?!
 
-  local _msx_module_wanted _msx_module_found _msx_module
+  local _msx_module_wanted _msx_module_found
   _msx_module_wanted=("$@")
-  _msx_module_found=$(_msx_get_module "${_msx_module_wanted[@]}")
+  _msx_module_found=$(_msx_module_get "${_msx_module_wanted[@]}")
 
-  # module run
-  for _msx_module in $_msx_module_found
-  do
-    source "$_msx_module"
-  done
+  _msx_module_run "$_msx_module_found"
 
   echo "[I] done."
 }
@@ -199,7 +238,7 @@ do
       _msx_show_help
       ;;
     l)
-      _msx_list_module "${_msx_module_select[@]}"
+      _msx_module_list "${_msx_module_select[@]}"
       exit 0
       ;;
     m)

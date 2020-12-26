@@ -1,12 +1,23 @@
 #!/usr/bin/env bash
+# shellcheck disable=SC1090
+# shellcheck disable=SC2034
 # shellcheck disable=SC2154
 
-# Don't run directly!
-[[ "$0" == "${BASH_SOURCE[0]}" ]] && exit 255
+# defaults
+_msx_module_enabled="${_sample_enabled:-false}"
+_msx_module_appcheck=(
+  #"/System/Applications/Sample.app"
+  #"/Applications/Sample.app"
+)
 
-# Sample
-[[ "${_sample_enabled:-false}" == false ]] && return 1
+# module main function
+_msx_module_main()
+{
 
-echo "[M] $(basename "${BASH_SOURCE[0]%.msx}")"
+  # Preferences
+  # Code
+  # ...
+  echo "[I] Sample main"
+}
 
-# ...
+:
