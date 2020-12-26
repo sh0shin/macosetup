@@ -1,0 +1,46 @@
+#!/usr/bin/env bash
+# shellcheck disable=SC1090
+# shellcheck disable=SC2034
+# shellcheck disable=SC2154
+
+# defaults
+_msx_module_enabled="${_brew_enabled:-true}"
+_msx_module_appcheck=(
+  "/Library/Developer/CommandLineTools" # xCode
+)
+
+# module main function
+_msx_module_main()
+{
+  # Install Homebrew
+  if [[ ! -x /usr/local/bin/brew ]]
+  then
+    #/usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+    /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"
+  fi
+
+  # Analytics
+  brew analytics "${_brew_analytics:-off}"
+
+  # Taps
+  for _tap in "${_brew_taps[@]}"
+  do
+    brew tap "$_tap"
+  done
+
+  # Install Formulae
+  if [[ -n "${_brew_formulae[*]}" ]]
+  then
+    for _formulae in "${_brew_formulae[@]}"
+    do
+      brew info "$_formulae" | grep -qi "not installed" && \
+        brew install "$_formulae"
+    done
+
+    [[ ${_brew_upgrade:-true} == true ]] && brew upgrade
+  fi
+
+  # Cleanup
+  [[ ${_brew_cleanup:-false} == true ]] && brew cleanup --prune="${_brew_cleanup_prune:-0}"
+}
+:

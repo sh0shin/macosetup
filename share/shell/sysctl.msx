@@ -1,0 +1,24 @@
+#!/usr/bin/env bash
+# shellcheck disable=SC1090
+# shellcheck disable=SC2034
+# shellcheck disable=SC2154
+
+# defaults
+_msx_module_enabled="${_sysctl_enabled:-false}"
+_msx_module_appcheck=()
+
+# module main function
+_msx_module_main()
+{
+  # sysctl.conf
+  IFS=$'\n'
+  echo "echo \"${_sysctl_flags[*]}\" >/private/etc/sysctl.conf" | sudo -s
+  unset IFS
+
+  # set
+  for _flag in "${_sysctl_flags[@]}"
+  do
+    sudo sysctl "$_flag"
+  done
+}
+:

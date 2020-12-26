@@ -1,0 +1,23 @@
+#!/usr/bin/env bash
+# shellcheck disable=SC1090
+# shellcheck disable=SC2034
+# shellcheck disable=SC2154
+
+# defaults
+_msx_module_enabled="${_desktop_screensaver_enabled:-true}"
+_msx_module_appcheck=()
+
+# module main function
+_msx_module_main()
+{
+  # Desktop
+  # TODO
+
+  # Screen Saver
+  # Start after
+  defaults -currentHost write com.apple.screensaver idleTime -int "${_screensaver_idletime:-1200}"
+
+  # Show with clock
+  defaults -currentHost write com.apple.screensaver showClock -bool "${_screensaver_showclock:-false}"
+}
+:

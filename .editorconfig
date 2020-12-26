@@ -14,7 +14,7 @@ trim_trailing_whitespace = true
 max_line_length = 0
 trim_trailing_whitespace = false
 
-[*.sh]
+[*.{sh,msx}]
 indent_size = 2
 indent_style = space
 max_line_length = 160

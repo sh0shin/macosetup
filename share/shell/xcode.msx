@@ -1,0 +1,26 @@
+#!/usr/bin/env bash
+# shellcheck disable=SC1090
+# shellcheck disable=SC2034
+# shellcheck disable=SC2154
+
+# defaults
+_msx_module_enabled="${_xcode_enabled:-true}"
+_msx_module_appcheck=()
+
+# module main function
+_msx_module_main()
+{
+
+  # Install Xcode Command Line Tools
+  if ! xcode-select -p &>/dev/null
+  then
+    xcode-select --install 2>/dev/null
+
+    # Wait for installation to finish
+    until xcode-select -p &>/dev/null
+    do
+      sleep 5
+    done
+  fi
+}
+:

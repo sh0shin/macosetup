@@ -1,0 +1,19 @@
+#!/usr/bin/env bash
+# shellcheck disable=SC1090
+# shellcheck disable=SC2034
+# shellcheck disable=SC2154
+
+# defaults
+_msx_module_enabled="${_notifications_enabled:-true}"
+_msx_module_appcheck=()
+
+# module main function
+_msx_module_main()
+{
+  # Notification Centre sort order:
+  # Recents         - 0
+  # Recents by App  - 1
+  # Manually by App - 2
+  defaults write com.apple.ncprefs sort_order -int "${_notifications_sort_order:-1}"
+}
+:

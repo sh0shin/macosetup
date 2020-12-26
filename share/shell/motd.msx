@@ -1,0 +1,32 @@
+#!/usr/bin/env bash
+# shellcheck disable=SC1090
+# shellcheck disable=SC2034
+# shellcheck disable=SC2154
+
+# defaults
+_msx_module_enabled="${_motd_enabled:-true}"
+_msx_module_appcheck=()
+
+# module main function
+_msx_module_main()
+{
+  sudo touch /private/etc/motd
+  sudo chown root:admin /private/etc/motd
+  sudo chmod 0664 /private/etc/motd
+
+  if [[ -n "$_motd_file" ]] && \
+     [[ -e "$_motd_file" ]]
+  then
+    cat "$_motd_file" >/private/etc/motd
+  else
+    cat <<EOF >/private/etc/motd
+                              _______ _______         __
+        .--------.---.-.----.|       |     __|.-----.|  |_.--.--.-----.
+        |        |  _  |  __||   -   |__     ||  -__||   _|  |  |  _  |
+        |__|__|__|___._|____||_______|_______||_____||____|_____|   __|
+                                 https://sh0shin.org/macosetup  |__|
+
+EOF
+  fi
+}
+:

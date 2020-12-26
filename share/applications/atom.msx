@@ -1,0 +1,21 @@
+#!/usr/bin/env bash
+# shellcheck disable=SC1090
+# shellcheck disable=SC2034
+# shellcheck disable=SC2154
+
+# defaults
+_msx_module_enabled="${_atom_enabled:-false}"
+_msx_module_appcheck=(
+  "/usr/local/bin/apm"
+)
+
+# module main function
+_msx_module_main()
+{
+  # apm install...
+  for _pkg in "${_atom_packages[@]:-()}"
+  do
+    apm install "$_pkg"
+  done
+}
+:

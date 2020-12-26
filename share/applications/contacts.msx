@@ -1,0 +1,40 @@
+#!/usr/bin/env bash
+# shellcheck disable=SC1090
+# shellcheck disable=SC2034
+# shellcheck disable=SC2154
+
+# defaults
+_msx_module_enabled="${_contacts_enabled:-false}"
+_msx_module_appcheck=()
+
+# module main function
+_msx_module_main()
+{
+  # General
+  # Show First Name
+  # false : Before last name
+  # true  : Following last name
+  defaults write com.apple.AddressBook ABNameDisplay -bool false
+
+  # Sort By
+  # Last Name
+  defaults write com.apple.AddressBook ABNameSortingFormat -string 'sortingLastName sortingFirstName'
+  # First Name
+  #defaults write com.apple.AddressBook ABNameSortingFormat -string 'sortingFirstName sortingLastName'
+
+  # Short Name Format
+  # Short name format
+  # 0: Full Name
+  # 1: First Name & Last Initial
+  # 2: First Initial & Last Name
+  # 3: First Name Only
+  # 4: Last Name Only
+  defaults write com.apple.AddressBook ABShortNameStyle -int 2
+
+  # Prefer nicknames
+  # Show contacts Siri found in apps
+
+  # Address Format
+  defaults write com.apple.AddressBook ABDefaultAddressCountryCode -string 'de'
+}
+:

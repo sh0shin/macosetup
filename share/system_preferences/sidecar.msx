@@ -1,0 +1,38 @@
+#!/usr/bin/env bash
+# shellcheck disable=SC1090
+# shellcheck disable=SC2034
+# shellcheck disable=SC2154
+
+# defaults
+_msx_module_enabled="${_sidecar_enabled:-false}"
+_msx_module_appcheck=()
+
+# module main function
+_msx_module_main()
+{
+  # Show Sidebar
+  #defaults write com.apple.sidecar.display sidebarShown -bool false
+  #defaults write com.apple.sidecar.display sidebarShown -bool true
+
+  #on the left
+  #defaults write com.apple.sidecar.display sidebarRight -bool false
+  #on the right
+  #defaults write com.apple.sidecar.display sidebarRight -bool true
+
+  # Show Touch Bar
+  #defaults write com.apple.sidecar.display showTouchbar -bool false
+  #defaults write com.apple.sidecar.display showTouchbar -bool true
+
+  # on the top
+  #defaults write com.apple.sidecar.display touchBarTop -bool true
+  # on the bottom
+  #defaults write com.apple.sidecar.display touchBarTop -bool false
+
+  # Enable double tap on Apple Pencil
+  #defaults write com.apple.sidecar.display doubleTapEnabled -bool true
+  #defaults write com.apple.sidecar.display doubleTapEnabled -bool false
+
+  # TODO
+  :
+}
+:

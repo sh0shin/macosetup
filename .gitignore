@@ -45,14 +45,8 @@ Gemfile.lock
 *.dmg
 *.pkg
 
-config.d/*
-!config.d/defaults.sh
-
-file.d/*
-!file.d/**.in
-
-local.d/*
-!local.d/sample.sh
+etc/*
+!etc/default.cfg
 
 # excludes
 !.git

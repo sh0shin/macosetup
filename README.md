@@ -2,6 +2,13 @@
 
 Bash script based macOS setup environment
 
+## Quick usage
+
+0. Disable SIP (optional but recommended)
+1. Create a configuration file (see: etc/default.cfg)
+2. Open Terminal
+3. Run `./macosetup -c path/to/your/config-file`
+4. Enable SIP (optional but recommended)
 
 ## macOS versions
 
@@ -15,9 +22,43 @@ List of [macOS releases](https://en.wikipedia.org/wiki/MacOS_version_history#Rel
 
 ### Unsupported versions
 
- * 11 - Big Sur
+ * 11 - Big Sur (soon)
+
+## Outputs
+
+ * `[C]` - Configuration
+ * `[D]` - Module disabled
+ * `[E]` - Error
+ * `[I]` - Information
+ * `[M]` - Module enabled
+ * `[W]` - Warning
+ * `[X]` - Module executed
 
 ## Notes
+
+### System Integrity Protection (SIP)
+Boot into [macOS Recovery](https://support.apple.com/en-us/HT201314),
+or alternatively from Terminal:
+```sh
+sudo nvram "recovery-boot-mode=unused"
+sudo reboot recovery
+```
+
+Open Terminal and run:
+```sh
+# Disable SIP
+csrutil disable
+
+# Enable SIP
+csrutil enable
+```
+
+### Sudo
+To prevent sudo from asking for your password after time, you could add this to your sudoers file.
+```
+%admin  ALL=(ALL) NOPASSWD: ALL
+```
+The sudoers file is no longer handled by macosetup!
 
 ### Full Disk Access
 To avoid errors and permission problems, Terminal/iTerm needs **Full Disk Access**.
