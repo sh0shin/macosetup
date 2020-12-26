@@ -48,12 +48,6 @@ Gemfile.lock
 etc/*
 !etc/default.cfg
 
-file.d/*
-!file.d/**.in
-
-local.d/*
-!local.d/sample.sh
-
 # excludes
 !.git
 !.git_keep
