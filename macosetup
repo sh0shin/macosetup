@@ -137,16 +137,6 @@ _msx_list_module()
   done | column -t
 }
 
-_msx_check_module()
-{
-  echo "check module"
-}
-
-_msx_run_module()
-{
-  echo "run module"
-}
-
 _msx_show_usage()
 {
   echo "$_msx_self $_msx_version ( $_msx_url )"
