@@ -1,12 +1,16 @@
 #!/usr/bin/env bash
-#
+# shellcheck disable=SC1090
+# shellcheck disable=SC2034
+# shellcheck disable=SC2154
 
-# Don't run directly!
-[[ "$_" == "$0" ]] && exit 255
+# defaults
+_msx_module_enabled="${_disk_utility_enabled:-true}"
+_msx_module_appcheck=()
 
-# Disk Utility
-[[ "${_disk_utility_enabled:-true}" == false ]] && return
-echo "${BASH_SOURCE[0]}"
-
-# Show All Devices
-defaults write com.apple.DiskUtility SidebarShowAllDevices -bool "${_disk_utility_show_all:-true}"
+# module main function
+_msx_module_main()
+{
+  # Show All Devices
+  defaults write com.apple.DiskUtility SidebarShowAllDevices -bool "${_disk_utility_show_all:-true}"
+}
+:

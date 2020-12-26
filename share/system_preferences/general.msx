@@ -1,61 +1,65 @@
 #!/usr/bin/env bash
-#
+# shellcheck disable=SC1090
+# shellcheck disable=SC2034
+# shellcheck disable=SC2154
 
-# Don't run directly!
-[[ "$_" == "$0" ]] && exit 255
+# defaults
+_msx_module_enabled="${_general_enabled:-true}"
+_msx_module_appcheck=()
 
-# General
-[[ "${_general_enabled:-true}" == false ]] && return
-echo "${BASH_SOURCE[0]}"
+# module main function
+_msx_module_main()
+{
+  # Appearance
+  case "${_general_appearance:-dark}" in
+    # Dark
+    Dark|dark)
+      defaults write NSGlobalDomain AppleInterfaceStyle -string 'Dark'
+    ;;
+    # Light
+    Light|light)
+      defaults delete NSGlobalDomain AppleInterfaceStyle
+    ;;
+  esac
 
-# Appearance
-case "${_general_appearance:-dark}" in
-  # Dark
-  Dark|dark)
-    defaults write NSGlobalDomain AppleInterfaceStyle -string 'Dark'
-  ;;
-  # Light
-  Light|light)
-    defaults delete NSGlobalDomain AppleInterfaceStyle
-  ;;
-esac
+  # Accent colour
+  defaults write NSGlobalDomain AppleHighlightColor -string "${_general_accent_colour:-0.847059 0.847059 0.862745}"
 
-# Accent colour
-defaults write NSGlobalDomain AppleHighlightColor -string "${_general_accent_colour:-0.847059 0.847059 0.862745}"
+  # Highlight colour
+  defaults write NSGlobalDomain AppleAquaColorVariant -int "${_general_highlight_colour:-6}"
 
-# Highlight colour
-defaults write NSGlobalDomain AppleAquaColorVariant -int "${_general_highlight_colour:-6}"
+  # Sidebar icon size
+  # Small  : 1
+  # Medium : 2
+  # Large  : 3
+  defaults write NSGlobalDomain NSTableViewDefaultSizeMode -int "${_general_sidebar_icon_size:-1}"
 
-# Sidebar icon size
-# Small  : 1
-# Medium : 2
-# Large  : 3
-defaults write NSGlobalDomain NSTableViewDefaultSizeMode -int "${_general_sidebar_icon_size:-1}"
+  # Automatically hide and show the menu bar
+  defaults write NSGlobalDomain _HIHideMenuBar -bool "${_general_autohide_menu_bar:-false}"
 
-# Automatically hide and show the menu bar
-defaults write NSGlobalDomain _HIHideMenuBar -bool "${_general_autohide_menu_bar:-false}"
+  # Show scroll bars
+  # 'Automatic', 'WhenScrolling', 'Always'
+  defaults write NSGlobalDomain AppleShowScrollBars -string "${_general_show_scroll_bars:-WhenScrolling}"
 
-# Show scroll bars
-# 'Automatic', 'WhenScrolling', 'Always'
-defaults write NSGlobalDomain AppleShowScrollBars -string "${_general_show_scroll_bars:-WhenScrolling}"
+  # Click in the scroll bar to
+  #TODO
 
-# Click in the scroll bar to
-#TODO
+  # Default web browser
+  #TODO
 
-# Default web browser
-#TODO
+  # Ask to keep changes when closing documents
+  #TODO
 
-# Ask to keep changes when closing documents
-#TODO
+  # Close windows when quitting an app
+  defaults write NSGlobalDomain NSQuitAlwaysKeepsWindows -bool "${_general_close_quit:-false}"
 
-# Close windows when quitting an app
-defaults write NSGlobalDomain NSQuitAlwaysKeepsWindows -bool "${_general_close_quit:-false}"
+  # Recent items Documents, Apps and Servers
+  #TODO
 
-# Recent items Documents, Apps and Servers
-#TODO
+  # Allow Handoff between this Mac and your iCloud devices
+  #TODO
 
-# Allow Handoff between this Mac and your iCloud devices
-#TODO
-
-# User font smoothing when available
-#TODO
+  # User font smoothing when available
+  #TODO
+}
+:

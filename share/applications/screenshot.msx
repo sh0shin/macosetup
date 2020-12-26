@@ -1,15 +1,19 @@
 #!/usr/bin/env bash
-#
+# shellcheck disable=SC1090
+# shellcheck disable=SC2034
+# shellcheck disable=SC2154
 
-# Don't run directly!
-[[ "$_" == "$0" ]] && exit 255
+# defaults
+_msx_module_enabled="${_screenshot_enabled:-true}"
+_msx_module_appcheck=()
 
-# Screenshot
-[[ "${_screenshot_enabled:-true}" == false ]] && return
-echo "${BASH_SOURCE[0]}"
+# module main function
+_msx_module_main()
+{
+  [[ -d "${_screenshot_location:-$HOME/Pictures/Screenshots}" ]] || mkdir -p "${_screenshot_location:-$HOME/Pictures/Screenshots}"
 
-[[ -d "${_screenshot_location:-$HOME/Pictures/Screenshots}" ]] || mkdir -p "${_screenshot_location:-$HOME/Pictures/Screenshots}"
-
-defaults write com.apple.screencapture disable-shadow -bool "${_screenshot_disable_shadow:-true}"
-defaults write com.apple.screencapture location -string "${_screenshot_location:-$HOME/Pictures/Screenshots}"
-defaults write com.apple.screencapture type -string "${_screenshot_type:-png}"
+  defaults write com.apple.screencapture disable-shadow -bool "${_screenshot_disable_shadow:-true}"
+  defaults write com.apple.screencapture location -string "${_screenshot_location:-$HOME/Pictures/Screenshots}"
+  defaults write com.apple.screencapture type -string "${_screenshot_type:-png}"
+}
+:

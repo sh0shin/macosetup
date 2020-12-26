@@ -53,6 +53,13 @@ csrutil disable
 csrutil enable
 ```
 
+### Sudo
+To prevent sudo from asking for your password after time, you could add this to your sudoers file.
+```
+%admin  ALL=(ALL) NOPASSWD: ALL
+```
+The sudoers file is no longer handled by macosetup!
+
 ### Full Disk Access
 To avoid errors and permission problems, Terminal/iTerm needs **Full Disk Access**.
 

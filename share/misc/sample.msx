@@ -19,5 +19,4 @@ _msx_module_main()
   # ...
   echo "[I] Sample main"
 }
-
 :

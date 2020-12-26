@@ -1,20 +1,24 @@
 #!/usr/bin/env bash
-#
+# shellcheck disable=SC1090
+# shellcheck disable=SC2034
+# shellcheck disable=SC2154
 
-# Don't run directly!
-[[ "$_" == "$0" ]] && exit 255
+# defaults
+_msx_module_enabled="${_siri_enabled:-true}"
+_msx_module_appcheck=()
 
-# Siri
-[[ "${_siri_enabled:-true}" == false ]] && return
-echo "${BASH_SOURCE[0]}"
+# module main function
+_msx_module_main()
+{
+  # Enable Ask Siri
+  defaults write com.apple.assistant.support "Assistant Enabled" -bool "${_siri_assistant_enabled:-false}"
+  defaults write com.apple.assistant.support "Dictation Enabled" -bool "${_siri_dictation_enabled:-false}"
+  defaults write com.apple.assistant.support "Siri Data Sharing Opt-In Status" -int "${_siri_data_sharing_status:-0}"
 
-# Enable Ask Siri
-defaults write com.apple.assistant.support "Assistant Enabled" -bool "${_siri_assistant_enabled:-false}"
-defaults write com.apple.assistant.support "Dictation Enabled" -bool "${_siri_dictation_enabled:-false}"
-defaults write com.apple.assistant.support "Siri Data Sharing Opt-In Status" -int "${_siri_data_sharing_status:-0}"
-
-# TODO
-# Keyboard Shortcut
-# Language
-# Siri Voice
-# Voice Feedback
+  # TODO
+  # Keyboard Shortcut
+  # Language
+  # Siri Voice
+  # Voice Feedback
+}
+:

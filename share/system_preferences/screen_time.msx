@@ -1,11 +1,16 @@
 #!/usr/bin/env bash
-#
+# shellcheck disable=SC1090
+# shellcheck disable=SC2034
+# shellcheck disable=SC2154
 
-# Don't run directly!
-[[ "$_" == "$0" ]] && exit 255
+# defaults
+_msx_module_enabled="${_screen_time_enabled:-false}"
+_msx_module_appcheck=()
 
-# Screen Time
-[[ "${_screen_time_enabled:-false}" == false ]] && return
-echo "${BASH_SOURCE[0]}"
-
-# ...
+# module main function
+_msx_module_main()
+{
+  # TODO
+  :
+}
+:

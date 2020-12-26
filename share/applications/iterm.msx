@@ -1,0 +1,19 @@
+#!/usr/bin/env bash
+# shellcheck disable=SC1090
+# shellcheck disable=SC2034
+# shellcheck disable=SC2154
+
+# defaults
+_msx_module_enabled="${_iterm_enabled:-true}"
+_msx_module_appcheck=(
+  "/Applications/iTerm.app"
+)
+
+# module main function
+_msx_module_main()
+{
+  # Prefs From Custom Folder
+  defaults write com.googlecode.iterm2 LoadPrefsFromCustomFolder -bool "${_iterm_prefs_custom:-false}"
+  defaults write com.googlecode.iterm2 PrefsCustomFolder -string "${_iterm_prefs_custom_folder:-~/.iterm2}"
+}
+:

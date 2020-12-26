@@ -1,19 +1,23 @@
 #!/usr/bin/env bash
-#
+# shellcheck disable=SC1090
+# shellcheck disable=SC2034
+# shellcheck disable=SC2154
 
-# Don't run directly!
-[[ "$_" == "$0" ]] && exit 255
+# defaults
+_msx_module_enabled="${_date_time_enabled:-true}"
+_msx_module_appcheck=()
 
-# Date & Time
-[[ "${_date_time_enabled:-true}" == false ]] && return
-echo "${BASH_SOURCE[0]}"
+# module main function
+_msx_module_main()
+{
+  # Set date and time automatically (NTP)
+  sudo systemsetup -setusingnetworktime "${_date_time_usingnetworktime:-on}"
+  sudo systemsetup -setnetworktimeserver "${_date_time_networktimeserver:-de.pool.ntp.org}"
 
-# Set date and time automatically (NTP)
-sudo systemsetup -setusingnetworktime "${_date_time_usingnetworktime:-on}"
-sudo systemsetup -setnetworktimeserver "${_date_time_networktimeserver:-de.pool.ntp.org}"
+  # Time Zone
+  sudo systemsetup -settimezone "${_date_time_timezone:-Europe/Berlin}"
 
-# Time Zone
-sudo systemsetup -settimezone "${_date_time_timezone:-Europe/Berlin}"
-
-# Clock
-defaults write com.apple.menuextra.clock DateFormat -string "${_date_time_dateformat:-EEE d. MMM HH:mm:ss}"
+  # Clock
+  defaults write com.apple.menuextra.clock DateFormat -string "${_date_time_dateformat:-EEE d. MMM HH:mm:ss}"
+}
+:

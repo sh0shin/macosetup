@@ -1,56 +1,59 @@
 #!/usr/bin/env bash
+# shellcheck disable=SC1090
+# shellcheck disable=SC2034
 # shellcheck disable=SC2154
 
-# Don't run directly!
-[[ "$0" == "${BASH_SOURCE[0]}" ]] && exit 255
+# defaults
+_msx_module_enabled="${_rbenv_enabled:-false}"
+_msx_module_appcheck=()
 
-# rbenv
-[[ "${_rbenv_enabled:-false}" == false ]] && return
+# module main function
+_msx_module_main()
+{
+  export RBENV_ROOT="${_rbenv_root:-$HOME/.rbenv}"
+  export PATH="$RBENV_ROOT/bin:$PATH"
 
-echo "[M] $(basename "${BASH_SOURCE[0]%.msx}")"
-
-export RBENV_ROOT="${_rbenv_root:-$HOME/.rbenv}"
-export PATH="$RBENV_ROOT/bin:$PATH"
-
-# rbenv from git
-if [[ "${_rbenv_git_enabled:-false}" == true ]]
-then
-  if [[ -d "$RBENV_ROOT/.git" ]]
+  # rbenv from git
+  if [[ "${_rbenv_git_enabled:-false}" == true ]]
   then
-    ( cd "$RBENV_ROOT" && git pull )
-  else
-    git clone "${_rbenv_git_url:-https://github.com/rbenv/rbenv.git}" "$RBENV_ROOT"
-  fi
-fi
-
-# init
-_rbenv_bin="$(which rbenv)"
-if [[ -n "$_rbenv_bin" ]]
-then
-  eval "$(rbenv init -)"
-fi
-
-# ruby-build from git
-if [[ "${_rbenv_build_enabled:-true}" == true ]]
-then
-  if [[ "${_rbenv_build_git_enabled:-false}" == true ]]
-  then
-    if [[ -d "$RBENV_ROOT/plugins/ruby-build/.git" ]]
+    if [[ -d "$RBENV_ROOT/.git" ]]
     then
-      ( cd "$RBENV_ROOT/plugins/ruby-build" && git pull )
+      ( cd "$RBENV_ROOT" && git pull )
     else
-      mkdir "$RBENV_ROOT/plugins/ruby-build"
-      git clone "${_rbenv_build_git_url:-https://github.com/rbenv/ruby-build.git}" "$RBENV_ROOT/plugins/ruby-build"
+      git clone "${_rbenv_git_url:-https://github.com/rbenv/rbenv.git}" "$RBENV_ROOT"
     fi
   fi
-fi
 
-# versions
-if [[ -n "${_rbenv_versions[*]}" ]]
-then
-  for _version in "${_rbenv_versions[@]}"
-  do
-    echo "[I] rbenv version $_version"
-    rbenv install -s "$_version"
-  done
-fi
+  # init
+  _rbenv_bin="$(which rbenv)"
+  if [[ -n "$_rbenv_bin" ]]
+  then
+    eval "$(rbenv init -)"
+  fi
+
+  # ruby-build from git
+  if [[ "${_rbenv_build_enabled:-false}" == true ]]
+  then
+    if [[ "${_rbenv_build_git_enabled:-false}" == true ]]
+    then
+      if [[ -d "$RBENV_ROOT/plugins/ruby-build/.git" ]]
+      then
+        ( cd "$RBENV_ROOT/plugins/ruby-build" && git pull )
+      else
+        mkdir "$RBENV_ROOT/plugins/ruby-build"
+        git clone "${_rbenv_build_git_url:-https://github.com/rbenv/ruby-build.git}" "$RBENV_ROOT/plugins/ruby-build"
+      fi
+    fi
+  fi
+
+  # versions
+  if [[ -n "${_rbenv_versions[*]}" ]]
+  then
+    for _version in "${_rbenv_versions[@]}"
+    do
+      echo "[I] rbenv version $_version"
+      rbenv install -s "$_version"
+    done
+  fi
+}
+:
