@@ -1,42 +1,45 @@
 #!/usr/bin/env bash
+# shellcheck disable=SC1090
+# shellcheck disable=SC2034
 # shellcheck disable=SC2154
 
-# Don't run directly!
-[[ "$0" == "${BASH_SOURCE[0]}" ]] && exit 255
+# defaults
+_msx_module_enabled="${_brew_cask_enabled:-true}"
+_msx_module_appcheck=(
+  "/usr/local/bin/brew"
+)
 
-# Brew Cask
-[[ ${_brew_cask_enabled:-true} == false ]] && return 1
-[[ ${_brew_enabled:-true} == false ]] && return 1
-[[ ${_xcode_enabled:-true} == false ]] && return 1
+# module main function
+_msx_module_main()
+{
+  # Tapping homebrew/cask
+  brew tap homebrew/cask
 
-echo "[M] $(basename "${BASH_SOURCE[0]%.msx}")"
-
-# Tapping homebrew/cask
-brew tap homebrew/cask
-
-# Cask taps
-for _tap in "${_brew_cask_taps[@]}"
-do
-  brew tap "$_tap"
-done
-
-# Install Casks
-if [[ -n "${_brew_casks[*]}" ]]
-then
-  for _cask in "${_brew_casks[@]}"
+  # Cask taps
+  for _tap in "${_brew_cask_taps[@]}"
   do
-    brew info --cask "$_cask" | grep -qi "not installed" && \
-      brew install --cask "$_cask"
+    brew tap "$_tap"
   done
 
-  if [[ ${_brew_cask_upgrade_greedy:-false} == true ]]
+  # Install Casks
+  if [[ -n "${_brew_casks[*]}" ]]
   then
-    brew upgrade --cask --greedy
-  elif [[ ${_brew_cask_upgrade:-true} == true ]]
-  then
-    brew upgrade --cask
-  fi
-fi
+    for _cask in "${_brew_casks[@]}"
+    do
+      brew info --cask "$_cask" | grep -qi "not installed" && \
+        brew install --cask "$_cask"
+    done
 
-# Cleanup
-[[ ${_brew_cleanup:-false} == true ]] && brew cleanup --prune="${_brew_cleanup_prune:-0}"
+    if [[ ${_brew_cask_upgrade_greedy:-false} == true ]]
+    then
+      brew upgrade --cask --greedy
+    elif [[ ${_brew_cask_upgrade:-true} == true ]]
+    then
+      brew upgrade --cask
+    fi
+  fi
+
+  # Cleanup
+  [[ ${_brew_cleanup:-false} == true ]] && brew cleanup --prune="${_brew_cleanup_prune:-0}"
+}
+:
