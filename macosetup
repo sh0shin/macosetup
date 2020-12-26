@@ -18,11 +18,6 @@ _msx_module_search=(
   "$_msx_share"
 )
 
-_msx_file_search=(
-  "$_msx_share/files"
-  "$(cd "$(dirname "${BASH_SOURCE[0]}")" && echo "$PWD")/share/files"
-)
-
 readonly _msx_module_category=(
   "shell"
   "homebrew"
