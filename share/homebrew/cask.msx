@@ -22,33 +22,57 @@ _msx_module_main()
     /usr/local/bin/brew tap --quiet "$_tap"
   done
 
+  # Installed
+  mapfile -t _brew_cask_list < <(brew list --cask -1)
+  for _cask in "${_brew_cask_list[@]}"
+  do
+    for i in "${!_brew_cask[@]}"
+    do
+      if [[ ${_brew_cask[i]} == "$_cask" ]]
+      then
+        unset '_brew_cask[i]'
+      fi
+    done
+  done
+
+  # Uninstalled
+  for i in "${!_brew_cask_uninstall[@]}"
+  do
+    for _cask in "${_brew_cask_list[@]}"
+    do
+      if [[ "${_brew_cask_uninstall[$i]}" == "$_cask" ]]
+      then
+        __brew_cask_uninstall+=("${_brew_cask_uninstall[$i]}")
+      fi
+    done
+  done
+  _brew_cask_uninstall=("${__brew_cask_uninstall[@]}")
+
   # Uninstall Cask
   if [[ -n "${_brew_cask_uninstall[*]}" ]]
   then
-    (
-      if [[ "${_brew_cask_uninstall_zap:-true}" == true ]]
-      then
-        /usr/local/bin/brew uninstall --cask --zap --quiet ${_brew_cask_uninstall[*]}
-      else
-        /usr/local/bin/brew uninstall --cask --quiet ${_brew_cask_uninstall[*]}
-      fi
-    ) 2>&1 | grep -v "is not installed."
+    if [[ "${_brew_cask_uninstall_zap:-true}" == true ]]
+    then
+      /usr/local/bin/brew uninstall --cask --zap --quiet ${_brew_cask_uninstall[*]}
+    else
+      /usr/local/bin/brew uninstall --cask --quiet ${_brew_cask_uninstall[*]}
+    fi
   fi
 
   # Install Cask
   if [[ -n "${_brew_cask[*]}" ]]
   then
-    /usr/local/bin/brew install --cask --quiet ${_brew_cask[*]} 2>&1 | tr '\n' ' ' | grep -v "is already installed."
+    /usr/local/bin/brew install --cask --quiet ${_brew_cask[*]}
+  fi
 
-    # Upgrade Cask
-    if [[ "${_brew_cask_upgrade:-true}" == true ]]
+  # Upgrade Cask
+  if [[ "${_brew_cask_upgrade:-true}" == true ]]
+  then
+    if [[ ${_brew_cask_upgrade_greedy:-false} == true ]]
     then
-      if [[ ${_brew_cask_upgrade_greedy:-false} == true ]]
-      then
-        /usr/local/bin/brew upgrade --cask --greedy --quiet
-      else
-        /usr/local/bin/brew upgrade --cask --quiet
-      fi
+      /usr/local/bin/brew upgrade --cask --greedy --quiet
+    else
+      /usr/local/bin/brew upgrade --cask --quiet
     fi
   fi
 

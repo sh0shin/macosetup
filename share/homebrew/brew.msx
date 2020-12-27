@@ -29,22 +29,48 @@ _msx_module_main()
     /usr/local/bin/brew tap --quiet "$_tap"
   done
 
+  # Installed
+  mapfile -t _brew_formula_list < <(brew list --formula -1)
+  for _formula in "${_brew_formula_list[@]}"
+  do
+    for i in "${!_brew_formula[@]}"
+    do
+      if [[ ${_brew_formula[i]} == "$_formula" ]]
+      then
+        unset '_brew_formula[i]'
+      fi
+    done
+  done
+
+  # Uninstalled
+  for i in "${!_brew_formula_uninstall[@]}"
+  do
+    for _formula in "${_brew_formula_list[@]}"
+    do
+      if [[ "${_brew_formula_uninstall[$i]}" == "$_formula" ]]
+      then
+        __brew_formula_uninstall+=("${_brew_formula_uninstall[$i]}")
+      fi
+    done
+  done
+  _brew_formula_uninstall=("${__brew_formula_uninstall[@]}")
+
   # Uninstall Formula
   if [[ -n "${_brew_formula_uninstall[*]}" ]]
   then
-    /usr/local/bin/brew uninstall --formula --quiet ${_brew_formula_uninstall[*]} 2>&1 | grep -v "No such keg:"
+    /usr/local/bin/brew uninstall --formula --quiet ${_brew_formula_uninstall[*]}
   fi
 
   # Install Formula
   if [[ -n "${_brew_formula[*]}" ]]
   then
     /usr/local/bin/brew install --formula --quiet ${_brew_formula[*]}
+  fi
 
-    # Upgrade Formula
-    if [[ "${_brew_upgrade:-true}" == true ]]
-    then
-      /usr/local/bin/brew upgrade --formula --quiet
-    fi
+  # Upgrade Formula
+  if [[ "${_brew_upgrade:-true}" == true ]]
+  then
+    /usr/local/bin/brew upgrade --formula --quiet
   fi
 
   # Cleanup
