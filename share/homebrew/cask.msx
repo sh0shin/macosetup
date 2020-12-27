@@ -25,18 +25,20 @@ _msx_module_main()
   # Uninstall Cask
   if [[ -n "${_brew_cask_uninstall[*]}" ]]
   then
-    if [[ "${_brew_cask_uninstall_zap:-true}" == true ]]
-    then
-      /usr/local/bin/brew uninstall --cask --zap --quiet ${_brew_cask_uninstall[*]}
-    else
-      /usr/local/bin/brew uninstall --cask --quiet ${_brew_cask_uninstall[*]}
-    fi
+    (
+      if [[ "${_brew_cask_uninstall_zap:-true}" == true ]]
+      then
+        /usr/local/bin/brew uninstall --cask --zap --quiet ${_brew_cask_uninstall[*]}
+      else
+        /usr/local/bin/brew uninstall --cask --quiet ${_brew_cask_uninstall[*]}
+      fi
+    ) 2>&1 | grep -v "is not installed."
   fi
 
   # Install Cask
   if [[ -n "${_brew_cask[*]}" ]]
   then
-    /usr/local/bin/brew install --cask --quiet ${_brew_cask[*]}
+    /usr/local/bin/brew install --cask --quiet ${_brew_cask[*]} 2>&1 | tr '\n' ' ' | grep -v "is already installed."
 
     # Upgrade Cask
     if [[ "${_brew_cask_upgrade:-true}" == true ]]

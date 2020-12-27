@@ -34,14 +34,6 @@ List of [macOS releases](https://en.wikipedia.org/wiki/MacOS_version_history#Rel
  * `[W]` - Warning
  * `[X]` - Module executed
 
-## Known Errors
-Warning & Error outputs from `brew`, `cask` like these can be ignored.
-```
-Error: No such keg: /usr/local/Cellar/some-formula-name
-Warning: Cask 'some-cask-name' is already installed.
-Error: Cask 'soma-cask-name' is not installed.
-```
-
 ## Notes
 
 ### System Integrity Protection (SIP)
