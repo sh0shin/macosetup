@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 # shellcheck disable=SC1090
 # shellcheck disable=SC2034
+# shellcheck disable=SC2086
 # shellcheck disable=SC2154
 
 # defaults
@@ -13,33 +14,46 @@ _msx_module_appcheck=(
 _msx_module_main()
 {
   # Tapping homebrew/cask
-  brew tap homebrew/cask
+  /usr/local/bin/brew tap --quiet homebrew/cask
 
   # Cask taps
-  for _tap in "${_brew_cask_taps[@]}"
+  for _tap in "${_brew_cask_tap[@]}"
   do
-    brew tap "$_tap"
+    /usr/local/bin/brew tap --quiet "$_tap"
   done
 
-  # Install Casks
-  if [[ -n "${_brew_casks[*]}" ]]
+  # Uninstall Cask
+  if [[ -n "${_brew_cask_uninstall[*]}" ]]
   then
-    for _cask in "${_brew_casks[@]}"
-    do
-      brew info --cask "$_cask" | grep -qi "not installed" && \
-        brew install --cask "$_cask"
-    done
+    if [[ "${_brew_cask_uninstall_zap:-true}" == true ]]
+    then
+      /usr/local/bin/brew uninstall --cask --zap --quiet ${_brew_cask_uninstall[*]}
+    else
+      /usr/local/bin/brew uninstall --cask --quiet ${_brew_cask_uninstall[*]}
+    fi
+  fi
 
-    if [[ ${_brew_cask_upgrade_greedy:-false} == true ]]
+  # Install Cask
+  if [[ -n "${_brew_cask[*]}" ]]
+  then
+    /usr/local/bin/brew install --cask --quiet ${_brew_cask[*]}
+
+    # Upgrade Cask
+    if [[ "${_brew_cask_upgrade:-true}" == true ]]
     then
-      brew upgrade --cask --greedy
-    elif [[ ${_brew_cask_upgrade:-true} == true ]]
-    then
-      brew upgrade --cask
+      if [[ ${_brew_cask_upgrade_greedy:-false} == true ]]
+      then
+        /usr/local/bin/brew upgrade --cask --greedy --quiet
+      else
+        /usr/local/bin/brew upgrade --cask --quiet
+      fi
     fi
   fi
 
   # Cleanup
-  [[ ${_brew_cleanup:-false} == true ]] && brew cleanup --prune="${_brew_cleanup_prune:-0}"
+  if [[ "${_brew_cleanup:-false}" == true ]]
+  then
+    /usr/local/bin/brew cleanup --prune="${_brew_cleanup_prune:-0}" --quiet
+  fi
 }
 :
