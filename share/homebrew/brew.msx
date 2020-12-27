@@ -32,7 +32,7 @@ _msx_module_main()
   # Uninstall Formula
   if [[ -n "${_brew_formula_uninstall[*]}" ]]
   then
-    /usr/local/bin/brew uninstall --formula --quiet ${_brew_formula_uninstall[*]}
+    /usr/local/bin/brew uninstall --formula --quiet ${_brew_formula_uninstall[*]} 2>&1 | grep -qv "Error: No such keg:"
   fi
 
   # Install Formula
