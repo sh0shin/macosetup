@@ -11,6 +11,7 @@ max_line_length = 80
 trim_trailing_whitespace = true
 
 [*.{md,markdown}]
+indent_size = 1
 max_line_length = 0
 trim_trailing_whitespace = false
 

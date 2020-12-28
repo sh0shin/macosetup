@@ -1,10 +1,11 @@
 #!/usr/bin/env bash
 # shellcheck disable=SC1090
 # shellcheck disable=SC2034
+# shellcheck disable=SC2086
 # shellcheck disable=SC2154
 
 # defaults
-_msx_module_enabled="${_brew_cask_enabled:-true}"
+_msx_module_enabled="${_brew_cask_enabled:-false}"
 _msx_module_appcheck=(
   "/usr/local/bin/brew"
 )
@@ -13,33 +14,72 @@ _msx_module_appcheck=(
 _msx_module_main()
 {
   # Tapping homebrew/cask
-  brew tap homebrew/cask
+  /usr/local/bin/brew tap --quiet homebrew/cask
 
   # Cask taps
-  for _tap in "${_brew_cask_taps[@]}"
+  for _tap in "${_brew_cask_tap[@]}"
   do
-    brew tap "$_tap"
+    /usr/local/bin/brew tap --quiet "$_tap"
   done
 
-  # Install Casks
-  if [[ -n "${_brew_casks[*]}" ]]
-  then
-    for _cask in "${_brew_casks[@]}"
+  # Installed
+  mapfile -t _brew_cask_list < <(brew list --cask -1)
+  for _cask in "${_brew_cask_list[@]}"
+  do
+    for i in "${!_brew_cask[@]}"
     do
-      brew info --cask "$_cask" | grep -qi "not installed" && \
-        brew install --cask "$_cask"
+      if [[ ${_brew_cask[i]} == "$_cask" ]]
+      then
+        unset '_brew_cask[i]'
+      fi
     done
+  done
 
+  # Uninstalled
+  for i in "${!_brew_cask_uninstall[@]}"
+  do
+    for _cask in "${_brew_cask_list[@]}"
+    do
+      if [[ "${_brew_cask_uninstall[$i]}" == "$_cask" ]]
+      then
+        __brew_cask_uninstall+=("${_brew_cask_uninstall[$i]}")
+      fi
+    done
+  done
+  _brew_cask_uninstall=("${__brew_cask_uninstall[@]}")
+
+  # Uninstall Cask
+  if [[ -n "${_brew_cask_uninstall[*]}" ]]
+  then
+    if [[ "${_brew_cask_uninstall_zap:-true}" == true ]]
+    then
+      /usr/local/bin/brew uninstall --cask --zap --quiet ${_brew_cask_uninstall[*]}
+    else
+      /usr/local/bin/brew uninstall --cask --quiet ${_brew_cask_uninstall[*]}
+    fi
+  fi
+
+  # Install Cask
+  if [[ -n "${_brew_cask[*]}" ]]
+  then
+    /usr/local/bin/brew install --cask --quiet ${_brew_cask[*]}
+  fi
+
+  # Upgrade Cask
+  if [[ "${_brew_cask_upgrade:-true}" == true ]]
+  then
     if [[ ${_brew_cask_upgrade_greedy:-false} == true ]]
     then
-      brew upgrade --cask --greedy
-    elif [[ ${_brew_cask_upgrade:-true} == true ]]
-    then
-      brew upgrade --cask
+      /usr/local/bin/brew upgrade --cask --greedy --quiet
+    else
+      /usr/local/bin/brew upgrade --cask --quiet
     fi
   fi
 
   # Cleanup
-  [[ ${_brew_cleanup:-false} == true ]] && brew cleanup --prune="${_brew_cleanup_prune:-0}"
+  if [[ "${_brew_cleanup:-false}" == true ]]
+  then
+    /usr/local/bin/brew cleanup --prune="${_brew_cleanup_prune:-0}" --quiet
+  fi
 }
 :

@@ -4,7 +4,7 @@
 # shellcheck disable=SC2154
 
 # defaults
-_msx_module_enabled="${_clipy_enabled:-true}"
+_msx_module_enabled="${_clipy_enabled:-false}"
 _msx_module_appcheck=(
   "/Applications/Clipy.app"
 )
@@ -12,6 +12,7 @@ _msx_module_appcheck=(
 # module main function
 _msx_module_main()
 {
+  # TODO: Add descriptions
   defaults write com.clipy-app.Clipy SUEnableAutomaticChecks -bool "${_clipy_automatic_checks:-false}"
   defaults write com.clipy-app.Clipy kCPYCollectCrashReport -bool "${_clipy_collect_crash_report:-false}"
   defaults write com.clipy-app.Clipy kCPYPrefInputPasteCommandKey -bool "${_clipy_input_paste:-false}"

@@ -4,7 +4,7 @@
 # shellcheck disable=SC2154
 
 # defaults
-_msx_module_enabled="${_software_update_enabled:-true}"
+_msx_module_enabled="${_software_update_enabled:-false}"
 _msx_module_appcheck=()
 
 # module main function
