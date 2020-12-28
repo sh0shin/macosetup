@@ -1,5 +1,10 @@
 # TODO
 
+## Defaults wrapper
+```sh
+_msx_defaults(){}
+```
+
 ## Desktop Background
 ```sh
 rm "$HOME/Library/Application Support/Dock/desktoppicture.db"
