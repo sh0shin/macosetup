@@ -4,48 +4,48 @@
 # shellcheck disable=SC2154
 
 # defaults
-_msx_module_enabled="${_timemachine_enabled:-false}"
+_msx_module_enabled="${_time_machine_enabled:-false}"
 _msx_module_appcheck=()
 
 # module main function
 _msx_module_main()
 {
   # Back Up Automatically
-  sudo defaults write /Library/Preferences/com.apple.TimeMachine AutoBackup -bool "${_timemachine_autobackup:-false}"
+  sudo defaults write /Library/Preferences/com.apple.TimeMachine AutoBackup -bool "${_time_machine_auto_backup:-false}"
 
   # Skip System Files
-  sudo defaults write /Library/Preferences/com.apple.TimeMachine SkipSystemFiles -bool "${_timemachine_skipsystemfiles:-true}"
+  sudo defaults write /Library/Preferences/com.apple.TimeMachine SkipSystemFiles -bool "${_time_machine_skip_system_files:-true}"
 
   # Skip Paths
   # Defaults: /System/Library/CoreServices/backupd.bundle/Contents/Resources/StdExclusions.plist
-  sudo defaults write /Library/Preferences/com.apple.TimeMachine SkipPaths -array "${_timemachine_skip_paths[@]:-()}"
+  sudo defaults write /Library/Preferences/com.apple.TimeMachine SkipPaths -array "${_time_machine_skip_paths[@]:-()}"
 
   # Exclusions (Console only)
-  if [[ -n "${_timemachine_exclusions[*]:-()}" ]]
+  if [[ -n "${_time_machine_exclusions[*]:-()}" ]]
   then
-    for _exclusion in "${_timemachine_exclusions[@]}"
+    for _exclusion in "${_time_machine_exclusions[@]}"
     do
       [[ -e "$_exclusion" ]] && tmutil addexclusion "$_exclusion"
     done
   fi
 
   # Exclusions in $HOME (Console only)
-  if [[ -n "${_timemachine_exclusions_home[*]:-()}" ]]
+  if [[ -n "${_time_machine_exclusions_home[*]:-()}" ]]
   then
-    for _exclusion in "${_timemachine_exclusions_home[@]}"
+    for _exclusion in "${_time_machine_exclusions_home[@]}"
     do
       [[ -e "$HOME/$_exclusion" ]] && tmutil addexclusion "$HOME/$_exclusion"
     done
   fi
 
   # Back up while on battery power
-  sudo defaults write /Library/Preferences/com.apple.TimeMachine RequiresACPower -bool "${_timemachine_require_acpower:-true}"
+  sudo defaults write /Library/Preferences/com.apple.TimeMachine RequiresACPower -bool "${_time_machine_require_ac_power:-true}"
 
   # Notify after old backups are deleted
-  sudo defaults write /Library/Preferences/com.apple.TimeMachine AlwaysShowDeletedBackupsWarning -bool "${_timemachine_notify_deleted:-true}"
+  sudo defaults write /Library/Preferences/com.apple.TimeMachine AlwaysShowDeletedBackupsWarning -bool "${_time_machine_notify_deleted:-true}"
 
   # Other/Hidden
   # MaxSize
-  #sudo defaults write /Library/Preferences/com.apple.TimeMachine MaxSize -integer "${_timemachine_maxsize:-262144}"
+  #sudo defaults write /Library/Preferences/com.apple.TimeMachine MaxSize -integer "${_time_machine_max_size:-262144}"
 }
 :
