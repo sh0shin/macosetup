@@ -2,7 +2,7 @@
 
 ## Desktop Background
 ```sh
-rm $HOME/Library/Application Support/Dock/desktoppicture.db
+rm "$HOME/Library/Application Support/Dock/desktoppicture.db"
 
 sudo rm /System/Library/CoreServices/DefaultBackground.jpg
 sudo rm /System/Library/CoreServices/DefaultDesktop.heic
