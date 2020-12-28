@@ -5,7 +5,7 @@ Bash script based macOS setup environment
 ## Quick usage
 
 0. Disable SIP (optional but recommended)
-1. Create a configuration file (see: etc/default.cfg)
+1. Create a configuration file (see: etc/default.cfg) (all modules are disabled per default)
 2. Open Terminal
 3. Run `./macosetup -c path/to/your/config-file`
 4. Enable SIP (optional but recommended)
