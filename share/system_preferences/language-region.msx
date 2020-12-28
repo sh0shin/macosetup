@@ -10,7 +10,27 @@ _msx_module_appcheck=()
 # module main function
 _msx_module_main()
 {
-  # TODO
-  :
+  # Preferred languages
+  defaults write NSGlobalDomain AppleLanguages -array "${_language_region_languages[@]:-"en-DE"}"
+
+  # Region
+  defaults write NSGlobalDomain AppleLocale -string "${_language_region_locale:-"en_DE"}"
+
+  # First day of week
+  # Inherit
+
+  # Calendar
+  # Inherit
+
+  # Time format
+  # Inherit
+
+  # Temperature
+  defaults write NSGlobalDomain AppleTemperatureUnit -string "${_language_region_temperature:-Celsius}"
+
+  # Advanced
+  # Measurement units
+  defaults write NSGlobalDomain AppleMeasurementUnits -string "${_language_region_measurement_units:-Centimeters}"
+  defaults write NSGlobalDomain AppleMetricUnits -bool "${_language_region_metric_units:-true}"
 }
 :
