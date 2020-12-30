@@ -9,14 +9,14 @@
 #: ...
 
 # msx settings
-_msx_module_enabled="$sample_enabled"
-_msx_module_appcheck=(
+msx_module_enabled="$sample_enabled"
+msx_module_appcheck=(
   #"/System/Applications/Sample.app"
   #"/Applications/Sample.app"
 )
 
 # msx main
-_msx_module_main()
+msx_module_main()
 {
   # Preferences
   # Code
