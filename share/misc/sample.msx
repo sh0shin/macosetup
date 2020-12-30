@@ -3,20 +3,24 @@
 # shellcheck disable=SC2034
 # shellcheck disable=SC2154
 
-# defaults
-_msx_module_enabled="${_sample_enabled:-false}"
+# msx defaults
+: "${sample_enabled:=true}"
+: "${sample_message:="Hello macOSetup ;)"}"
+#: ...
+
+# msx settings
+_msx_module_enabled="$sample_enabled"
 _msx_module_appcheck=(
   #"/System/Applications/Sample.app"
   #"/Applications/Sample.app"
 )
 
-# module main function
+# msx main
 _msx_module_main()
 {
-
   # Preferences
   # Code
   # ...
-  echo "[I] Sample main"
+  echo "[I] $sample_message"
 }
 :
