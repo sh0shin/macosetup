@@ -3,13 +3,18 @@
 # shellcheck disable=SC2034
 # shellcheck disable=SC2154
 
-# defaults
-msx_module_enabled="${dock_icons_enabled:-false}"
+# msx defaults
+: "${dock_icons_enabled:=false}"
+: "${dock_icons_apps:=""}"
+: "${dock_icons_others:=""}"
+
+# msx settings
+msx_module_enabled="$dock_icons_enabled"
 msx_module_appcheck=(
   "/usr/local/bin/dockutil"
 )
 
-# module main function
+# msx main
 msx_module_main()
 {
   # Clear all Icons
