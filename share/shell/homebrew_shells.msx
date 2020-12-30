@@ -3,15 +3,20 @@
 # shellcheck disable=SC2034
 # shellcheck disable=SC2154
 
-# defaults
-msx_module_enabled="${homebrew_shells_enabled:-false}"
+# msx defaults
+: "${homebrew_shells_enabled:=false}"
+: "${homebrew_shells_bash:=false}"
+: "${homebrew_shells_zsh:=false}"
+
+# msx settings
+msx_module_enabled="$homebrew_shells_enabled"
 msx_module_appcheck=()
 
-# module main function
+# msx main
 msx_module_main()
 {
   # homebrew bash
-  if [[ "${homebrew_shells_bash:-false}" == true ]]
+  if [[ "$homebrew_shells_bash" == true ]]
   then
     grep -q "/usr/local/bin/bash" /private/etc/shells || \
     sudo tee -a /private/etc/shells >/dev/null <<'EOF'
@@ -20,7 +25,7 @@ EOF
   fi
 
   # homebrew zsh
-  if [[ "${homebrew_shells_zsh:-false}" == true ]]
+  if [[ "$homebrew_shells_zsh" == true ]]
   then
     grep -q "/usr/local/bin/zsh" /private/etc/shells || \
     sudo tee -a /private/etc/shells >/dev/null <<'EOF'
