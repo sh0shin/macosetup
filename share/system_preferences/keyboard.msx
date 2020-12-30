@@ -3,18 +3,31 @@
 # shellcheck disable=SC2034
 # shellcheck disable=SC2154
 
-# defaults
-msx_module_enabled="${keyboard_enabled:-false}"
+# msx defaults
+: "${keyboard_enabled:=false}"
+: "${keyboard_repeat:=2}"
+: "${keyboard_inital_repeat:=15}"
+: "${keyboard_fn_state:=true}"
+: "${keyboard_auto_spelling:=false}"
+: "${keyboard_auto_capitalise:=false}"
+: "${keyboard_space_fullstop:=false}"
+: "${keyboard_smart_quote:=false}"
+: "${keyboard_smart_dash:=false}"
+: "${keyboard_input_menu:=false}"
+: "${keyboard_ui_mode:=3}"
+
+# msx settings
+msx_module_enabled="$keyboard_enabled"
 msx_module_appcheck=()
 
-# module main function
+# msx main
 msx_module_main()
 {
   # Key Repeat Rate
-  defaults write NSGlobalDomain KeyRepeat -int "${keyboard_repeat:-2}"
+  defaults write NSGlobalDomain KeyRepeat -int "$keyboard_repeat"
 
   # Key Repeat (Fast) / Delay Until Repeat (Short)
-  defaults write NSGlobalDomain InitialKeyRepeat -int "${keyboard_inital_repeat:-15}"
+  defaults write NSGlobalDomain InitialKeyRepeat -int "$keyboard_inital_repeat"
 
   # Adjust keyboard brightness in low light
   #TODO
@@ -26,32 +39,32 @@ msx_module_main()
   #TODO
 
   # Use F1, F2, etc. keys as standard function keys
-  defaults write NSGlobalDomain com.apple.keyboard.fnState -bool "${keyboard_fn_state:-true}"
+  defaults write NSGlobalDomain com.apple.keyboard.fnState -bool "$keyboard_fn_state"
 
   # Text
   # Correct spelling automatically
-  defaults write NSGlobalDomain NSAutomaticSpellingCorrectionEnabled -bool "${keyboard_auto_spelling:-false}"
-  defaults write NSGlobalDomain WebAutomaticSpellingCorrectionEnabled -bool "${keyboard_auto_spelling:-false}"
+  defaults write NSGlobalDomain NSAutomaticSpellingCorrectionEnabled -bool "$keyboard_auto_spelling"
+  defaults write NSGlobalDomain WebAutomaticSpellingCorrectionEnabled -bool "$keyboard_auto_spelling"
 
   # Capitalise words automatically
-  defaults write NSGlobalDomain NSAutomaticCapitalizationEnabled -bool "${keyboard_auto_capitalise:-false}"
+  defaults write NSGlobalDomain NSAutomaticCapitalizationEnabled -bool "$keyboard_auto_capitalise"
 
   # Add full stop with double-space
-  defaults write NSGlobalDomain NSAutomaticPeriodSubstitutionEnabled -bool "${keyboard_space_fullstop:-false}"
+  defaults write NSGlobalDomain NSAutomaticPeriodSubstitutionEnabled -bool "$keyboard_space_fullstop"
 
   # Spelling
   #TODO
 
   # Use smart quotes and dashes
-  defaults write NSGlobalDomain NSAutomaticQuoteSubstitutionEnabled -bool "${keyboard_smart_quote:-false}"
-  defaults write NSGlobalDomain NSAutomaticDashSubstitutionEnabled -bool "${keyboard_smart_dash:-false}"
+  defaults write NSGlobalDomain NSAutomaticQuoteSubstitutionEnabled -bool "$keyboard_smart_quote"
+  defaults write NSGlobalDomain NSAutomaticDashSubstitutionEnabled -bool "$keyboard_smart_dash"
 
   # Shortcuts
   #TODO
 
   # Input Sources
   # Show input menu in menu bar
-  defaults write com.apple.TextInputMenu visible -bool "${keyboard_input_menu:-false}"
+  defaults write com.apple.TextInputMenu visible -bool "$keyboard_input_menu"
 
   # Dictation
   #TODO
@@ -61,6 +74,6 @@ msx_module_main()
   # Full Keyboard Access
   # 1 : Text boxes and lists only
   # 3 : All controls
-  defaults write NSGlobalDomain AppleKeyboardUIMode -int "${keyboard_ui_mode:-3}"
+  defaults write NSGlobalDomain AppleKeyboardUIMode -int "$keyboard_ui_mode"
 }
 :

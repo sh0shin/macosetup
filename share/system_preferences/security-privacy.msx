@@ -3,11 +3,21 @@
 # shellcheck disable=SC2034
 # shellcheck disable=SC2154
 
-# defaults
-msx_module_enabled="${security_privacy_enabled:-false}"
+# msx defaults
+: "${security_privacy_enabled:=false}"
+: "${lock_message:=macOSetup}"
+: "${filevault_enabled:=true}"
+: "${firewall_state:=off}"
+: "${firewall_blockall:=off}"
+: "${firewall_signed:=off}"
+: "${firewall_signedapp:=off}"
+: "${firewall_stealthmode:=off}"
+
+# msx settings
+msx_module_enabled="$security_privacy_enabled"
 msx_module_appcheck=()
 
-# module main function
+# msx main
 msx_module_main()
 {
   # General
@@ -16,16 +26,16 @@ msx_module_main()
   ##defaults write com.apple.screensaver askForPasswordDelay -int 0
 
   # Lock Message
-  if [[ -n "${lock_message:-macOSetup}" ]]
+  if [[ -n "$lock_message" ]]
   then
-    sudo defaults write /Library/Preferences/com.apple.loginwindow LoginwindowText -string "${lock_message:-macOSetup}"
+    sudo defaults write /Library/Preferences/com.apple.loginwindow LoginwindowText -string "$lock_message"
   else
     sudo defaults delete /Library/Preferences/com.apple.loginwindow LoginwindowText 2>/dev/null
   fi
 
   # FileVault
   filevault_status="$(sudo fdesetup isactive)"
-  if [[ "${filevault_enabled:-true}" == true ]]
+  if [[ "$filevault_enabled" == true ]]
   then
     # Enable
     if [[ "$filevault_status" = "false" ]]
@@ -50,22 +60,22 @@ msx_module_main()
   #/usr/libexec/ApplicationFirewall/socketfilterfw --help
 
   # Turn On/Off Firewall
-  sudo /usr/libexec/ApplicationFirewall/socketfilterfw --setglobalstate "${firewall_state:-off}"
+  sudo /usr/libexec/ApplicationFirewall/socketfilterfw --setglobalstate "$firewall_state"
 
   # Firewall Options
-  if [[ "${firewall_state:-off}" == "on" ]]
+  if [[ "$firewall_state" == "on" ]]
   then
     # Block all incoming connections
-    sudo /usr/libexec/ApplicationFirewall/socketfilterfw --setblockall "${firewall_blockall:-off}"
+    sudo /usr/libexec/ApplicationFirewall/socketfilterfw --setblockall "$firewall_blockall"
 
     # Automatically allow built-in software to receive incoming connections
-    sudo /usr/libexec/ApplicationFirewall/socketfilterfw --setallowsigned "${firewall_signed:-off}"
+    sudo /usr/libexec/ApplicationFirewall/socketfilterfw --setallowsigned "$firewall_signed"
 
     # Automatically allow downloaded signed software to recive incoming connections
-    sudo /usr/libexec/ApplicationFirewall/socketfilterfw --setallowsignedapp "${firewall_signedapp:-off}"
+    sudo /usr/libexec/ApplicationFirewall/socketfilterfw --setallowsignedapp "$firewall_signedapp"
 
     # Enable stealth mode
-    sudo /usr/libexec/ApplicationFirewall/socketfilterfw --setstealthmode "${firewall_stealthmode:-off}"
+    sudo /usr/libexec/ApplicationFirewall/socketfilterfw --setstealthmode "$firewall_stealthmode"
   fi
 
   # Privacy

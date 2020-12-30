@@ -3,21 +3,27 @@
 # shellcheck disable=SC2034
 # shellcheck disable=SC2154
 
-# defaults
-msx_module_enabled="${sound_enabled:-false}"
+# msx defaults
+: "${sound_enabled:=false}"
+: "${sound_effects:=/System/Library/Sounds/Basso.aiff}"
+: "${sound_play_effects:=true}"
+: "${sound_change_feedback:=false}"
+
+# msx settings
+msx_module_enabled="$sound_enabled"
 msx_module_appcheck=()
 
-# module main function
+# msx main
 msx_module_main()
 {
   # Sound Effects (/System/Library/Sounds/)
-  defaults write NSGlobalDomain com.apple.sound.beep.sound -string "${sound_effects:-/System/Library/Sounds/Basso.aiff}"
+  defaults write NSGlobalDomain com.apple.sound.beep.sound -string "$sound_effects"
 
   # Play user interface sound effects
-  defaults write NSGlobalDomain com.apple.sound.uiaudio.enabled -bool "${sound_play_effects:-true}"
+  defaults write NSGlobalDomain com.apple.sound.uiaudio.enabled -bool "$sound_play_effects"
 
   # Play feedback when volume is changed
-  defaults write NSGlobalDomain com.apple.sound.beep.feedback -bool "${sound_change_feedback:-false}"
+  defaults write NSGlobalDomain com.apple.sound.beep.feedback -bool "$sound_change_feedback"
 
   # Output
   # Input

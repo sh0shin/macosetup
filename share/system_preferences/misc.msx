@@ -3,42 +3,53 @@
 # shellcheck disable=SC2034
 # shellcheck disable=SC2154
 
-# defaults
-msx_module_enabled="${misc_enabled:-false}"
+# msx defaults
+: "${misc_enabled:=false}"
+: "${misc_allow_unknown_servers:=true}"
+: "${misc_admin_host_info:=HostName}"
+: "${misc_disable_fde_auto_login:=false}"
+: "${misc_logout_saves_state:=false}"
+: "${misc_nohidden_library:=false}"
+: "${misc_nohidden_volumes:=false}"
+: "${misc_root_volume_rename:=false}"
+: "${misc_root_volume_name:=macOSystem}"
+
+# msx settings
+msx_module_enabled="$misc_enabled"
 msx_module_appcheck=()
 
-# module main function
+# msx main
 msx_module_main()
 {
   # Disable 'You are attempting to connect to the server' dialog
   # https://support.apple.com/en-us/HT207112
-  sudo defaults write /Library/Preferences/com.apple.NetworkAuthorization AllowUnknownServers -bool "${misc_allow_unknown_servers:-true}"
+  sudo defaults write /Library/Preferences/com.apple.NetworkAuthorization AllowUnknownServers -bool "$misc_allow_unknown_servers"
 
   # Display Admin Host Info on loginwindow
-  sudo defaults write /Library/Preferences/com.apple.loginwindow AdminHostInfo -string "${misc_admin_host_info:-HostName}"
+  sudo defaults write /Library/Preferences/com.apple.loginwindow AdminHostInfo -string "$misc_admin_host_info"
 
   # Disable FileVault Auto Login
-  sudo defaults write /Library/Preferences/com.apple.loginwindow DisableFDEAutoLogin -bool "${misc_disable_fde_auto_login:-false}"
+  sudo defaults write /Library/Preferences/com.apple.loginwindow DisableFDEAutoLogin -bool "$misc_disable_fde_auto_login"
 
   # Disable Reopen windows when logging back in
-  defaults write com.apple.loginwindow TALLogoutSavesState -bool "${misc_logout_saves_state:-false}"
+  defaults write com.apple.loginwindow TALLogoutSavesState -bool "$misc_logout_saves_state"
 
   # Show ~/Library
-  if [[ "${misc_nohidden_library:-false}" == true ]]
+  if [[ "$misc_nohidden_library" == true ]]
   then
-    chflags nohidden ~/Library
+    chflags nohidden "$HOME/Library"
   fi
 
   # Show /Volumes
-  if [[ "${misc_nohidden_volumes:-false}" == true ]]
+  if [[ "$misc_nohidden_volumes" == true ]]
   then
     sudo chflags nohidden /Volumes
   fi
 
   # Rename /
-  if [[ "${misc_root_volume_rename:-false}" == true ]]
+  if [[ "$misc_root_volume_rename" == true ]]
   then
-    diskutil rename / "${misc_root_volume_name:-macOSystem}"
+    diskutil rename / "$misc_root_volume_name"
   fi
 
   # Change hibernate mode
@@ -69,7 +80,7 @@ msx_module_main()
     "/System/Library/CoreServices/Menu Extras/Volume.menu"
 
   # Show battery percent in taskbar
-  defaults write com.apple.menuextra.battery "ShowPercent" -string "${misc_show_battery_percentage:-NO}"
+  defaults write com.apple.menuextra.battery "ShowPercent" -string "NO"
 
   # Restart
   killall -1 SystemUIServer

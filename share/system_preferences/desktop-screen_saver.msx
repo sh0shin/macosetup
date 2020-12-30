@@ -3,11 +3,16 @@
 # shellcheck disable=SC2034
 # shellcheck disable=SC2154
 
-# defaults
-msx_module_enabled="${desktop_screensaver_enabled:-false}"
+# msx defaults
+: "${desktop_screensaver_enabled:=false}"
+: "${screensaver_idletime:=1200}"
+: "${screensaver_showclock:=false}"
+
+# msx settings
+msx_module_enabled="$desktop_screensaver_enabled"
 msx_module_appcheck=()
 
-# module main function
+# msx main
 msx_module_main()
 {
   # Desktop
@@ -15,9 +20,9 @@ msx_module_main()
 
   # Screen Saver
   # Start after
-  defaults -currentHost write com.apple.screensaver idleTime -int "${screensaver_idletime:-1200}"
+  defaults -currentHost write com.apple.screensaver idleTime -int "$screensaver_idletime"
 
   # Show with clock
-  defaults -currentHost write com.apple.screensaver showClock -bool "${screensaver_showclock:-false}"
+  defaults -currentHost write com.apple.screensaver showClock -bool "$screensaver_showclock"
 }
 :

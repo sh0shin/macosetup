@@ -3,44 +3,54 @@
 # shellcheck disable=SC2034
 # shellcheck disable=SC2154
 
-# defaults
-msx_module_enabled="${software_update_enabled:-false}"
+# msx defaults
+: "${software_update_enabled:=false}"
+: "${software_update_auto_check:=true}"
+: "${software_update_auto_download:=false}"
+: "${software_update_autoinstall_macos:=false}"
+: "${software_update_autoinstall_data_security:=true}"
+: "${software_update_list:=false}"
+: "${software_update_install_all:=false}"
+: "${software_update_install_recommended:=false}"
+
+# msx settings
+msx_module_enabled="$software_update_enabled"
 msx_module_appcheck=()
 
-# module main function
+# msx main
 msx_module_main()
 {
   # Automatically keep my Mac up to date
   # Advanced
   # Automatically
   # Check for updates
-  sudo defaults write /Library/Preferences/com.apple.SoftwareUpdate AutomaticCheckEnabled -bool "${software_update_auto_check:-true}"
+  sudo defaults write /Library/Preferences/com.apple.SoftwareUpdate AutomaticCheckEnabled -bool "$software_update_auto_check"
 
   # Download new updates when available
-  sudo defaults write /Library/Preferences/com.apple.SoftwareUpdate AutomaticDownload -bool "${software_update_auto_download:-false}"
+  sudo defaults write /Library/Preferences/com.apple.SoftwareUpdate AutomaticDownload -bool "$software_update_auto_download"
 
   # Install macOS updates
-  sudo defaults write /Library/Preferences/com.apple.SoftwareUpdate AutomaticallyInstallMacOSUpdates -bool "${software_update_autoinstall_macos:-false}"
+  sudo defaults write /Library/Preferences/com.apple.SoftwareUpdate AutomaticallyInstallMacOSUpdates -bool "$software_update_autoinstall_macos"
 
   # Install app updates from the App Store
   #TODO
 
   # Install system data files and security updates
-  sudo defaults write /Library/Preferences/com.apple.SoftwareUpdate ConfigDataInstall -bool "${software_update_autoinstall_data_security:-true}"
-  sudo defaults write /Library/Preferences/com.apple.SoftwareUpdate CriticalUpdateInstall -bool "${software_update_autoinstall_data_security:-true}"
+  sudo defaults write /Library/Preferences/com.apple.SoftwareUpdate ConfigDataInstall -bool "$software_update_autoinstall_data_security"
+  sudo defaults write /Library/Preferences/com.apple.SoftwareUpdate CriticalUpdateInstall -bool "$software_update_autoinstall_data_security"
 
   # Update
-  if [[ ${software_update_list:-false} == true ]]
+  if [[ "$software_update_list" == true ]]
   then
     softwareupdate --list
   fi
 
-  if [[ ${software_update_install_all:-false} == true ]]
+  if [[ "$software_update_install_all" == true ]]
   then
     softwareupdate --install --all
   fi
 
-  if [[ ${software_update_install_recommended:-false} == true ]]
+  if [[ "$software_update_install_recommended" == true ]]
   then
     softwareupdate --install --recommended
   fi

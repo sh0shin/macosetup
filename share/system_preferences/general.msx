@@ -3,15 +3,25 @@
 # shellcheck disable=SC2034
 # shellcheck disable=SC2154
 
-# defaults
-msx_module_enabled="${general_enabled:-false}"
+# msx defaults
+: "${general_enabled:=false}"
+: "${general_appearance:=dark}"
+: "${general_accent_colour:=0.847059 0.847059 0.862745}"
+: "${general_highlight_colour:=6}"
+: "${general_sidebar_icon_size:=1}"
+: "${general_autohide_menu_bar:=false}"
+: "${general_show_scroll_bars:=WhenScrolling}"
+: "${general_close_quit:=false}"
+
+# msx settings
+msx_module_enabled="$general_enabled"
 msx_module_appcheck=()
 
-# module main function
+# msx main
 msx_module_main()
 {
   # Appearance
-  case "${general_appearance:-dark}" in
+  case "$general_appearance" in
     # Dark
     Dark|dark)
       defaults write NSGlobalDomain AppleInterfaceStyle -string 'Dark'
@@ -23,23 +33,23 @@ msx_module_main()
   esac
 
   # Accent colour
-  defaults write NSGlobalDomain AppleHighlightColor -string "${general_accent_colour:-0.847059 0.847059 0.862745}"
+  defaults write NSGlobalDomain AppleHighlightColor -string "$general_accent_colour"
 
   # Highlight colour
-  defaults write NSGlobalDomain AppleAquaColorVariant -int "${general_highlight_colour:-6}"
+  defaults write NSGlobalDomain AppleAquaColorVariant -int "$general_highlight_colour"
 
   # Sidebar icon size
   # Small  : 1
   # Medium : 2
   # Large  : 3
-  defaults write NSGlobalDomain NSTableViewDefaultSizeMode -int "${general_sidebar_icon_size:-1}"
+  defaults write NSGlobalDomain NSTableViewDefaultSizeMode -int "$general_sidebar_icon_size"
 
   # Automatically hide and show the menu bar
-  defaults write NSGlobalDomain _HIHideMenuBar -bool "${general_autohide_menu_bar:-false}"
+  defaults write NSGlobalDomain _HIHideMenuBar -bool "$general_autohide_menu_bar"
 
   # Show scroll bars
   # 'Automatic', 'WhenScrolling', 'Always'
-  defaults write NSGlobalDomain AppleShowScrollBars -string "${general_show_scroll_bars:-WhenScrolling}"
+  defaults write NSGlobalDomain AppleShowScrollBars -string "$general_show_scroll_bars"
 
   # Click in the scroll bar to
   #TODO
@@ -51,7 +61,7 @@ msx_module_main()
   #TODO
 
   # Close windows when quitting an app
-  defaults write NSGlobalDomain NSQuitAlwaysKeepsWindows -bool "${general_close_quit:-false}"
+  defaults write NSGlobalDomain NSQuitAlwaysKeepsWindows -bool "$general_close_quit"
 
   # Recent items Documents, Apps and Servers
   #TODO

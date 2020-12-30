@@ -3,17 +3,23 @@
 # shellcheck disable=SC2034
 # shellcheck disable=SC2154
 
-# defaults
-msx_module_enabled="${siri_enabled:-false}"
+# msx defaults
+: "${siri_enabled:=false}"
+: "${siri_assistant_enabled:=false}"
+: "${siri_dictation_enabled:=false}"
+: "${siri_data_sharing_status:=0}"
+
+# msx settings
+msx_module_enabled="$siri_enabled"
 msx_module_appcheck=()
 
-# module main function
+# msx main
 msx_module_main()
 {
   # Enable Ask Siri
-  defaults write com.apple.assistant.support "Assistant Enabled" -bool "${siri_assistant_enabled:-false}"
-  defaults write com.apple.assistant.support "Dictation Enabled" -bool "${siri_dictation_enabled:-false}"
-  defaults write com.apple.assistant.support "Siri Data Sharing Opt-In Status" -int "${siri_data_sharing_status:-0}"
+  defaults write com.apple.assistant.support "Assistant Enabled" -bool "$siri_assistant_enabled"
+  defaults write com.apple.assistant.support "Dictation Enabled" -bool "$siri_dictation_enabled"
+  defaults write com.apple.assistant.support "Siri Data Sharing Opt-In Status" -int "$siri_data_sharing_status"
 
   # TODO
   # Keyboard Shortcut

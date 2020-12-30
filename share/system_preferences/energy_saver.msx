@@ -3,52 +3,65 @@
 # shellcheck disable=SC2034
 # shellcheck disable=SC2154
 
-# defaults
-msx_module_enabled="${energy_saver_enabled:-false}"
+# msx defaults
+: "${energy_saver_enabled:=false}"
+: "${battery_display_sleep:=5}"
+: "${battery_system_sleep:=5}"
+: "${battery_disk_sleep:=10}"
+: "${battery_reduce_brightness:=true}"
+: "${battery_power_nap:=false}"
+: "${adapter_display_sleep:=15}"
+: "${adapter_system_sleep:=15}"
+: "${adapter_disk_sleep:=10}"
+: "${adapter_wake_on_lan:=true}"
+: "${adapter_power_nap:=true}"
+
+# msx settings
+msx_module_enabled="${energy_saver_enabled:=false}"
 msx_module_appcheck=()
 
-# module main function
+# msx main
 msx_module_main()
 {
   # Battery
   # Turn display off after (n minutes)
-  sudo /usr/libexec/PlistBuddy -c "Set :'Battery Power':'Display Sleep Timer' ${battery_display_sleep:-5}" /Library/Preferences/com.apple.PowerManagement.plist || \
-    sudo /usr/libexec/PlistBuddy -c "Add :'Battery Power':'Display Sleep Timer' integer ${battery_display_sleep:-5}" /Library/Preferences/com.apple.PowerManagement.plist
+  sudo /usr/libexec/PlistBuddy -c "Set :'Battery Power':'Display Sleep Timer' $battery_display_sleep" /Library/Preferences/com.apple.PowerManagement.plist || \
+    sudo /usr/libexec/PlistBuddy -c "Add :'Battery Power':'Display Sleep Timer' integer $battery_display_sleep" /Library/Preferences/com.apple.PowerManagement.plist
 
-  sudo /usr/libexec/PlistBuddy -c "Set :'Battery Power':'System Sleep Timer' ${battery_system_sleep:-5}" /Library/Preferences/com.apple.PowerManagement.plist || \
-    sudo /usr/libexec/PlistBuddy -c "Add :'Battery Power':'System Sleep Timer' integer ${battery_system_sleep:-5}" /Library/Preferences/com.apple.PowerManagement.plist
+  sudo /usr/libexec/PlistBuddy -c "Set :'Battery Power':'System Sleep Timer' $battery_system_sleep" /Library/Preferences/com.apple.PowerManagement.plist || \
+    sudo /usr/libexec/PlistBuddy -c "Add :'Battery Power':'System Sleep Timer' integer $battery_system_sleep" /Library/Preferences/com.apple.PowerManagement.plist
 
   # Put hard disks to sleep when possible
-  sudo /usr/libexec/PlistBuddy -c "Set :'Battery Power':'Disk Sleep Timer' ${battery_disk_sleep:-10}" /Library/Preferences/com.apple.PowerManagement.plist || \
-    sudo /usr/libexec/PlistBuddy -c "Add :'Battery Power':'Disk Sleep Timer' integer ${battery_disk_sleep:-10}" /Library/Preferences/com.apple.PowerManagement.plist
+  sudo /usr/libexec/PlistBuddy -c "Set :'Battery Power':'Disk Sleep Timer' $battery_disk_sleep" /Library/Preferences/com.apple.PowerManagement.plist || \
+    sudo /usr/libexec/PlistBuddy -c "Add :'Battery Power':'Disk Sleep Timer' integer $battery_disk_sleep" /Library/Preferences/com.apple.PowerManagement.plist
 
   # Slight dim the display while on battery power
-  sudo /usr/libexec/PlistBuddy -c "Set :'Battery Power':ReduceBrightness ${battery_reduce_brightness:-true}" /Library/Preferences/com.apple.PowerManagement.plist || \
-    sudo /usr/libexec/PlistBuddy -c "Add :'Battery Power':ReduceBrightness bool ${battery_reduce_brightness:-true}" /Library/Preferences/com.apple.PowerManagement.plist
+  sudo /usr/libexec/PlistBuddy -c "Set :'Battery Power':ReduceBrightness $battery_reduce_brightness" /Library/Preferences/com.apple.PowerManagement.plist || \
+    sudo /usr/libexec/PlistBuddy -c "Add :'Battery Power':ReduceBrightness bool $battery_reduce_brightness" /Library/Preferences/com.apple.PowerManagement.plist
 
   # Enable Power Nap while on battery power
-  sudo /usr/libexec/PlistBuddy -c "Set :'Battery Power':DarkWakeBackgroundTasks ${battery_power_nap:-false}" /Library/Preferences/com.apple.PowerManagement.plist || \
-    sudo /usr/libexec/PlistBuddy -c "Add :'Battery Power':DarkWakeBackgroundTasks bool ${battery_power_nap:-false}" /Library/Preferences/com.apple.PowerManagement.plist
+  sudo /usr/libexec/PlistBuddy -c "Set :'Battery Power':DarkWakeBackgroundTasks $battery_power_nap" /Library/Preferences/com.apple.PowerManagement.plist || \
+    sudo /usr/libexec/PlistBuddy -c "Add :'Battery Power':DarkWakeBackgroundTasks bool $battery_power_nap" /Library/Preferences/com.apple.PowerManagement.plist
 
   # Power Adapter
   # Turn display off after (n minutes)
-  sudo /usr/libexec/PlistBuddy -c "Set :'AC Power':'Display Sleep Timer' ${adapter_display_sleep:-15}" /Library/Preferences/com.apple.PowerManagement.plist || \
-    sudo /usr/libexec/PlistBuddy -c "Add :'AC Power':'Display Sleep Timer' integer ${adapter_display_sleep:-15}" /Library/Preferences/com.apple.PowerManagement.plist
+  sudo /usr/libexec/PlistBuddy -c "Set :'AC Power':'Display Sleep Timer' $adapter_display_sleep" /Library/Preferences/com.apple.PowerManagement.plist || \
+    sudo /usr/libexec/PlistBuddy -c "Add :'AC Power':'Display Sleep Timer' integer $adapter_display_sleep" /Library/Preferences/com.apple.PowerManagement.plist
 
-  sudo /usr/libexec/PlistBuddy -c "Set :'AC Power':'System Sleep Timer' ${adapter_system_sleep:-15}" /Library/Preferences/com.apple.PowerManagement.plist || \
-    sudo /usr/libexec/PlistBuddy -c "Add :'AC Power':'System Sleep Timer' integer ${adapter_system_sleep:-15}" /Library/Preferences/com.apple.PowerManagement.plist
+  sudo /usr/libexec/PlistBuddy -c "Set :'AC Power':'System Sleep Timer' $adapter_system_sleep" /Library/Preferences/com.apple.PowerManagement.plist || \
+    sudo /usr/libexec/PlistBuddy -c "Add :'AC Power':'System Sleep Timer' integer $adapter_system_sleep" /Library/Preferences/com.apple.PowerManagement.plist
 
   # Put hard disks to sleep when possible
-  sudo /usr/libexec/PlistBuddy -c "Set :'AC Power':'Disk Sleep Timer' ${adapter_disk_sleep:-10}" /Library/Preferences/com.apple.PowerManagement.plist || \
-    sudo /usr/libexec/PlistBuddy -c "Add :'AC Power':'Disk Sleep Timer' integer ${adapter_disk_sleep:-10}" /Library/Preferences/com.apple.PowerManagement.plist
+  sudo /usr/libexec/PlistBuddy -c "Set :'AC Power':'Disk Sleep Timer' $adapter_disk_sleep" /Library/Preferences/com.apple.PowerManagement.plist || \
+    sudo /usr/libexec/PlistBuddy -c "Add :'AC Power':'Disk Sleep Timer' integer $adapter_disk_sleep" /Library/Preferences/com.apple.PowerManagement.plist
 
   # Wake for Wi-Fi/Ethernet network access
-  sudo /usr/libexec/PlistBuddy -c "Set :'AC Power':'Wake On LAN' ${adapter_wake_on_lan:-true}" /Library/Preferences/com.apple.PowerManagement.plist || \
-    sudo /usr/libexec/PlistBuddy -c "Add :'AC Power':'Wake On LAN' bool ${adapter_wake_on_lan:-true}" /Library/Preferences/com.apple.PowerManagement.plist
+  sudo /usr/libexec/PlistBuddy -c "Set :'AC Power':'Wake On LAN' $adapter_wake_on_lan" /Library/Preferences/com.apple.PowerManagement.plist || \
+    sudo /usr/libexec/PlistBuddy -c "Add :'AC Power':'Wake On LAN' bool $adapter_wake_on_lan" /Library/Preferences/com.apple.PowerManagement.plist
 
   # Enable Power Nap while plugged into a power adapter
-  sudo /usr/libexec/PlistBuddy -c "Set :'AC Power':DarkWakeBackgroundTasks ${adapter_power_nap:-true}" /Library/Preferences/com.apple.PowerManagement.plist || \
-    sudo /usr/libexec/PlistBuddy -c "Add :'AC Power':DarkWakeBackgroundTasks bool ${adapter_power_nap:-true}" /Library/Preferences/com.apple.PowerManagement.plist
+  sudo /usr/libexec/PlistBuddy -c "Set :'AC Power':DarkWakeBackgroundTasks $adapter_power_nap" /Library/Preferences/com.apple.PowerManagement.plist || \
+    sudo /usr/libexec/PlistBuddy -c "Add :'AC Power':DarkWakeBackgroundTasks bool $adapter_power_nap" /Library/Preferences/com.apple.PowerManagement.plist
 
   # Show battery status in menu bar (See: SystemPreferences/Misc.sh)
 }

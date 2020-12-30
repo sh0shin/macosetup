@@ -3,11 +3,14 @@
 # shellcheck disable=SC2034
 # shellcheck disable=SC2154
 
-# defaults
-msx_module_enabled="${extensions_enabled:-false}"
+# msx defaults
+: "${extensions_enabled:=false}"
+
+# msx settings
+msx_module_enabled="$extensions_enabled"
 msx_module_appcheck=()
 
-# module main function
+# msx main
 msx_module_main()
 {
   # TODO

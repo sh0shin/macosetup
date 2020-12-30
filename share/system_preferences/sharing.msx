@@ -3,31 +3,38 @@
 # shellcheck disable=SC2034
 # shellcheck disable=SC2154
 
-# defaults
-msx_module_enabled="${sharing_enabled:-false}"
+# msx defaults
+: "${sharing_enabled:=false}"
+: "${sharing_computername:=macosetup}"
+: "${sharing_remove_public_folder:=false}"
+: "${sharing_remotelogin:=off}"
+
+# msx settings
+msx_module_enabled="$sharing_enabled"
 msx_module_appcheck=()
 
-# module main function
+# msx main
 msx_module_main()
 {
   # Computer Name
-  #sudo systemsetup -setcomputername "${sharing_computername:-macOSetup}"
-  #sudo systemsetup -setlocalsubnetname "${sharing_computername:-macOSetup}"
-  sudo scutil --set ComputerName "${sharing_computername:-macOSetup}"
-  sudo scutil --set HostName "${sharing_computername:-macOSetup}"
-  sudo scutil --set LocalHostName "${sharing_computername:-macOSetup}"
-  sudo defaults write /Library/Preferences/SystemConfiguration/com.apple.smb.server NetBIOSName -string "${sharing_computername:-macOSetup}"
+  #sudo systemsetup -setcomputername "$sharing_computername"
+  #sudo systemsetup -setlocalsubnetname "$sharing_computername"
+  sudo scutil --set ComputerName "$sharing_computername"
+  sudo scutil --set HostName "$sharing_computername"
+  sudo scutil --set LocalHostName "$sharing_computername"
+  sudo defaults write /Library/Preferences/SystemConfiguration/com.apple.smb.server NetBIOSName -string "$sharing_computername"
 
   # File Sharing
   ## Remove Public Folder
-  if [[ "${sharing_remove_public_folder:-false}" == true ]]
+  if [[ "$sharing_remove_public_folder" == true ]]
   then
+    # TODO: don't use msx_fullename
     sharing_folder="${msx_fullname}’s Public Folder"
     sudo sharing -r "$sharing_folder"
     sudo rm -rf ~/Public
   fi
 
   # Remote Login
-  sudo systemsetup -f -setremotelogin "${sharing_remotelogin:-off}"
+  sudo systemsetup -f -setremotelogin "$sharing_remotelogin"
 }
 :

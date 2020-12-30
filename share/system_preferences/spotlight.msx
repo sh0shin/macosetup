@@ -3,11 +3,15 @@
 # shellcheck disable=SC2034
 # shellcheck disable=SC2154
 
-# defaults
-msx_module_enabled="${spotlight_enabled:-false}"
+# msx defaults
+: "${spotlight_enabled:=false}"
+: "${spotlight_suggestions_disabled:=true}"
+
+# msx settings
+msx_module_enabled="$spotlight_enabled"
 msx_module_appcheck=()
 
-# module main function
+# msx main
 msx_module_main()
 {
   # Search Results
@@ -35,7 +39,7 @@ msx_module_main()
     '{ enabled = 1; name = "SYSTEM_PREFS"; }'
 
   # Allow Spotlight Suggestions in Look up (disabled)
-  defaults write com.apple.lookup.shared LookupSuggestionsDisabled -bool "${spotlight_suggestions_disabled:-true}"
+  defaults write com.apple.lookup.shared LookupSuggestionsDisabled -bool "$spotlight_suggestions_disabled"
 
   # Privacy
   # Prevent Spotlight from searching these locations
