@@ -1,0 +1,8 @@
+bootstrap_user_name="superadmin"
+bootstrap_user_full_name="Super Admin"
+bootstrap_user_user_id=666
+bootstrap_user_shell="/bin/bash"
+bootstrap_user_password="-"
+bootstrap_user_hint="macOSetup Admin ;)"
+bootstrap_user_home="/Users/${bootstrap_user_name}"
+bootstrap_user_picture="$PWD/bootstrap.png"
