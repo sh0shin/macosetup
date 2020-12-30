@@ -3,17 +3,23 @@
 # shellcheck disable=SC2034
 # shellcheck disable=SC2154
 
-# defaults
-msx_module_enabled="${screenshot_enabled:-false}"
+# msx defaults
+: "${screenshot_enabled:=false}"
+: "${screenshot_location:=$HOME/Pictures/Screenshots}"
+: "${screenshot_disable_shadow:=true}"
+: "${screenshot_type:=png}"
+
+# msx settings
+msx_module_enabled="$screenshot_enabled"
 msx_module_appcheck=()
 
-# module main function
+# msx main
 msx_module_main()
 {
-  [[ -d "${screenshot_location:-$HOME/Pictures/Screenshots}" ]] || mkdir -p "${screenshot_location:-$HOME/Pictures/Screenshots}"
+  [[ -d "$screenshot_location" ]] || mkdir -p "$screenshot_location"
 
-  defaults write com.apple.screencapture disable-shadow -bool "${screenshot_disable_shadow:-true}"
-  defaults write com.apple.screencapture location -string "${screenshot_location:-$HOME/Pictures/Screenshots}"
-  defaults write com.apple.screencapture type -string "${screenshot_type:-png}"
+  defaults write com.apple.screencapture disable-shadow -bool "$screenshot_disable_shadow"
+  defaults write com.apple.screencapture location -string "$screenshot_location"
+  defaults write com.apple.screencapture type -string "$screenshot_type"
 }
 :
