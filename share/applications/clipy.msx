@@ -4,20 +4,20 @@
 # shellcheck disable=SC2154
 
 # defaults
-_msx_module_enabled="${_clipy_enabled:-false}"
-_msx_module_appcheck=(
+msx_module_enabled="${clipy_enabled:-false}"
+msx_module_appcheck=(
   "/Applications/Clipy.app"
 )
 
 # module main function
-_msx_module_main()
+msx_module_main()
 {
   # TODO: Add descriptions
-  defaults write com.clipy-app.Clipy SUEnableAutomaticChecks -bool "${_clipy_automatic_checks:-false}"
-  defaults write com.clipy-app.Clipy kCPYCollectCrashReport -bool "${_clipy_collect_crash_report:-false}"
-  defaults write com.clipy-app.Clipy kCPYPrefInputPasteCommandKey -bool "${_clipy_input_paste:-false}"
-  defaults write com.clipy-app.Clipy kCPYPrefMaxHistorySizeKey -int "${_clipy_max_history:-540}"
-  defaults write com.clipy-app.Clipy kCPYPrefShowStatusItemKey -int "${_clipy_show_status:-2}"
-  defaults write com.clipy-app.Clipy loginItem -bool "${_clipy_login_item:-true}"
+  defaults write com.clipy-app.Clipy SUEnableAutomaticChecks -bool "${clipy_automatic_checks:-false}"
+  defaults write com.clipy-app.Clipy kCPYCollectCrashReport -bool "${clipy_collect_crash_report:-false}"
+  defaults write com.clipy-app.Clipy kCPYPrefInputPasteCommandKey -bool "${clipy_input_paste:-false}"
+  defaults write com.clipy-app.Clipy kCPYPrefMaxHistorySizeKey -int "${clipy_max_history:-540}"
+  defaults write com.clipy-app.Clipy kCPYPrefShowStatusItemKey -int "${clipy_show_status:-2}"
+  defaults write com.clipy-app.Clipy loginItem -bool "${clipy_login_item:-true}"
 }
 :

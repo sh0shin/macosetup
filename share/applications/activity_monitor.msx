@@ -4,20 +4,20 @@
 # shellcheck disable=SC2154
 
 # defaults
-_msx_module_enabled="${_activity_monitor_enabled:-false}"
-_msx_module_appcheck=()
+msx_module_enabled="${activity_monitor_enabled:-false}"
+msx_module_appcheck=()
 
 # module main function
-_msx_module_main()
+msx_module_main()
 {
   # Dock Icon
   # Show CPU Usage
-  defaults write com.apple.ActivityMonitor IconType -int "${_activity_monitor_icon:-5}"
+  defaults write com.apple.ActivityMonitor IconType -int "${activity_monitor_icon:-5}"
 
   # Disk (Data)
-  defaults write com.apple.ActivityMonitor DiskGraphType -int "${_activity_monitor_disk_graph:-1}"
+  defaults write com.apple.ActivityMonitor DiskGraphType -int "${activity_monitor_disk_graph:-1}"
 
   # Network (Data)
-  defaults write com.apple.ActivityMonitor NetworkGraphType -int "${_activity_monitor_network_graph:-1}"
+  defaults write com.apple.ActivityMonitor NetworkGraphType -int "${activity_monitor_network_graph:-1}"
 }
 :

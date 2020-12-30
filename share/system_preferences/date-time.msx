@@ -4,20 +4,20 @@
 # shellcheck disable=SC2154
 
 # defaults
-_msx_module_enabled="${_date_time_enabled:-false}"
-_msx_module_appcheck=()
+msx_module_enabled="${date_time_enabled:-false}"
+msx_module_appcheck=()
 
 # module main function
-_msx_module_main()
+msx_module_main()
 {
   # Set date and time automatically (NTP)
-  sudo systemsetup -setusingnetworktime "${_date_time_usingnetworktime:-on}"
-  sudo systemsetup -setnetworktimeserver "${_date_time_networktimeserver:-de.pool.ntp.org}"
+  sudo systemsetup -setusingnetworktime "${date_time_usingnetworktime:-on}"
+  sudo systemsetup -setnetworktimeserver "${date_time_networktimeserver:-de.pool.ntp.org}"
 
   # Time Zone
-  sudo systemsetup -settimezone "${_date_time_timezone:-Europe/Berlin}"
+  sudo systemsetup -settimezone "${date_time_timezone:-Europe/Berlin}"
 
   # Clock
-  defaults write com.apple.menuextra.clock DateFormat -string "${_date_time_dateformat:-EEE d. MMM HH:mm:ss}"
+  defaults write com.apple.menuextra.clock DateFormat -string "${date_time_dateformat:-EEE d. MMM HH:mm:ss}"
 }
 :

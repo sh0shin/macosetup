@@ -4,14 +4,14 @@
 # shellcheck disable=SC2154
 
 # defaults
-_msx_module_enabled="${_general_enabled:-false}"
-_msx_module_appcheck=()
+msx_module_enabled="${general_enabled:-false}"
+msx_module_appcheck=()
 
 # module main function
-_msx_module_main()
+msx_module_main()
 {
   # Appearance
-  case "${_general_appearance:-dark}" in
+  case "${general_appearance:-dark}" in
     # Dark
     Dark|dark)
       defaults write NSGlobalDomain AppleInterfaceStyle -string 'Dark'
@@ -23,23 +23,23 @@ _msx_module_main()
   esac
 
   # Accent colour
-  defaults write NSGlobalDomain AppleHighlightColor -string "${_general_accent_colour:-0.847059 0.847059 0.862745}"
+  defaults write NSGlobalDomain AppleHighlightColor -string "${general_accent_colour:-0.847059 0.847059 0.862745}"
 
   # Highlight colour
-  defaults write NSGlobalDomain AppleAquaColorVariant -int "${_general_highlight_colour:-6}"
+  defaults write NSGlobalDomain AppleAquaColorVariant -int "${general_highlight_colour:-6}"
 
   # Sidebar icon size
   # Small  : 1
   # Medium : 2
   # Large  : 3
-  defaults write NSGlobalDomain NSTableViewDefaultSizeMode -int "${_general_sidebar_icon_size:-1}"
+  defaults write NSGlobalDomain NSTableViewDefaultSizeMode -int "${general_sidebar_icon_size:-1}"
 
   # Automatically hide and show the menu bar
-  defaults write NSGlobalDomain _HIHideMenuBar -bool "${_general_autohide_menu_bar:-false}"
+  defaults write NSGlobalDomain _HIHideMenuBar -bool "${general_autohide_menu_bar:-false}"
 
   # Show scroll bars
   # 'Automatic', 'WhenScrolling', 'Always'
-  defaults write NSGlobalDomain AppleShowScrollBars -string "${_general_show_scroll_bars:-WhenScrolling}"
+  defaults write NSGlobalDomain AppleShowScrollBars -string "${general_show_scroll_bars:-WhenScrolling}"
 
   # Click in the scroll bar to
   #TODO
@@ -51,7 +51,7 @@ _msx_module_main()
   #TODO
 
   # Close windows when quitting an app
-  defaults write NSGlobalDomain NSQuitAlwaysKeepsWindows -bool "${_general_close_quit:-false}"
+  defaults write NSGlobalDomain NSQuitAlwaysKeepsWindows -bool "${general_close_quit:-false}"
 
   # Recent items Documents, Apps and Servers
   #TODO

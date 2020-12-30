@@ -5,13 +5,13 @@
 # shellcheck disable=SC2154
 
 # defaults
-_msx_module_enabled="${_brew_enabled:-false}"
-_msx_module_appcheck=(
+msx_module_enabled="${brew_enabled:-false}"
+msx_module_appcheck=(
   "/Library/Developer/CommandLineTools" # xCode
 )
 
 # module main function
-_msx_module_main()
+msx_module_main()
 {
   # Install Homebrew
   if [[ ! -x /usr/local/bin/brew ]]
@@ -21,62 +21,62 @@ _msx_module_main()
   fi
 
   # Analytics
-  /usr/local/bin/brew analytics --quiet "${_brew_analytics:-off}"
+  /usr/local/bin/brew analytics --quiet "${brew_analytics:-off}"
 
   # Tap
-  for _tap in "${_brew_tap[@]}"
+  for tap in "${brew_tap[@]}"
   do
-    /usr/local/bin/brew tap --quiet "$_tap"
+    /usr/local/bin/brew tap --quiet "$tap"
   done
 
   # Installed
-  mapfile -t _brew_formula_list < <(brew list --formula -1)
-  for _formula in "${_brew_formula_list[@]}"
+  mapfile -t brew_formula_list < <(brew list --formula -1)
+  for formula in "${brew_formula_list[@]}"
   do
-    for i in "${!_brew_formula[@]}"
+    for i in "${!brew_formula[@]}"
     do
-      if [[ ${_brew_formula[i]} == "$_formula" ]]
+      if [[ ${brew_formula[i]} == "$formula" ]]
       then
-        unset '_brew_formula[i]'
+        unset 'brew_formula[i]'
       fi
     done
   done
 
   # Uninstalled
-  for i in "${!_brew_formula_uninstall[@]}"
+  for i in "${!brew_formula_uninstall[@]}"
   do
-    for _formula in "${_brew_formula_list[@]}"
+    for formula in "${brew_formula_list[@]}"
     do
-      if [[ "${_brew_formula_uninstall[$i]}" == "$_formula" ]]
+      if [[ "${brew_formula_uninstall[$i]}" == "$formula" ]]
       then
-        __brew_formula_uninstall+=("${_brew_formula_uninstall[$i]}")
+        _brew_formula_uninstall+=("${brew_formula_uninstall[$i]}")
       fi
     done
   done
-  _brew_formula_uninstall=("${__brew_formula_uninstall[@]}")
+  brew_formula_uninstall=("${_brew_formula_uninstall[@]}")
 
   # Uninstall Formula
-  if [[ -n "${_brew_formula_uninstall[*]}" ]]
+  if [[ -n "${brew_formula_uninstall[*]}" ]]
   then
-    /usr/local/bin/brew uninstall --formula --quiet ${_brew_formula_uninstall[*]}
+    /usr/local/bin/brew uninstall --formula --quiet ${brew_formula_uninstall[*]}
   fi
 
   # Install Formula
-  if [[ -n "${_brew_formula[*]}" ]]
+  if [[ -n "${brew_formula[*]}" ]]
   then
-    /usr/local/bin/brew install --formula --quiet ${_brew_formula[*]}
+    /usr/local/bin/brew install --formula --quiet ${brew_formula[*]}
   fi
 
   # Upgrade Formula
-  if [[ "${_brew_upgrade:-true}" == true ]]
+  if [[ "${brew_upgrade:-true}" == true ]]
   then
     /usr/local/bin/brew upgrade --formula --quiet
   fi
 
   # Cleanup
-  if [[ "${_brew_cleanup:-false}" == true ]]
+  if [[ "${brew_cleanup:-false}" == true ]]
   then
-    /usr/local/bin/brew cleanup --prune="${_brew_cleanup_prune:-0}" --quiet
+    /usr/local/bin/brew cleanup --prune="${brew_cleanup_prune:-0}" --quiet
   fi
 }
 :

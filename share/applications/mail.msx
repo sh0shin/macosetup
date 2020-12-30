@@ -4,14 +4,14 @@
 # shellcheck disable=SC2154
 
 # defaults
-_msx_module_enabled="${_mail_enabled:-false}"
-_msx_module_appcheck=(
+msx_module_enabled="${mail_enabled:-false}"
+msx_module_appcheck=(
   #"/System/Applications/Sample.app"
   #"/Applications/Sample.app"
 )
 
 # module main function
-_msx_module_main()
+msx_module_main()
 {
   # TODO: hardcoded!
 

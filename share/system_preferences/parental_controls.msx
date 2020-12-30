@@ -4,11 +4,11 @@
 # shellcheck disable=SC2154
 
 # defaults
-_msx_module_enabled="${_parental_controls_enabled:-false}"
-_msx_module_appcheck=()
+msx_module_enabled="${parental_controls_enabled:-false}"
+msx_module_appcheck=()
 
 # module main function
-_msx_module_main()
+msx_module_main()
 {
   # TODO
   :

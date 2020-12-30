@@ -4,49 +4,49 @@
 # shellcheck disable=SC2154
 
 # defaults
-_msx_module_enabled="${_dock_enabled:-false}"
-_msx_module_appcheck=()
+msx_module_enabled="${dock_enabled:-false}"
+msx_module_appcheck=()
 
 # module main function
-_msx_module_main()
+msx_module_main()
 {
   # Size
-  defaults write com.apple.dock tilesize -int "${_dock_size:-48}"
+  defaults write com.apple.dock tilesize -int "${dock_size:-48}"
 
   # Magnification
-  defaults write com.apple.dock magnification -bool "${_dock_magnification:-false}"
-  defaults write com.apple.dock largesize -int "${_dock_magnification_size:-64}"
+  defaults write com.apple.dock magnification -bool "${dock_magnification:-false}"
+  defaults write com.apple.dock largesize -int "${dock_magnification_size:-64}"
 
   # Position on screen
   # 'left', 'bottom', 'right'
-  defaults write com.apple.dock orientation -string "${_dock_position:-bottom}"
+  defaults write com.apple.dock orientation -string "${dock_position:-bottom}"
 
   # Minimise windows using
   # 'genie', 'scale'
-  defaults write com.apple.dock mineffect -string "${_dock_minimise_effect:-genie}"
+  defaults write com.apple.dock mineffect -string "${dock_minimise_effect:-genie}"
 
   # Prefer tabs when opening documents
   #TODO
 
   # Double-click a window's title bar to
   # 'None', 'Mimimize', 'Maximize' (zoom)
-  defaults write NSGlobalDomain AppleActionOnDoubleClick -string "${_dock_double_click_window_title:-Maximize}"
+  defaults write NSGlobalDomain AppleActionOnDoubleClick -string "${dock_double_click_window_title:-Maximize}"
 
   # Minimise windows into application icon
-  defaults write com.apple.dock minimize-to-application -bool "${_dock_minimize_window_into_app:-true}"
+  defaults write com.apple.dock minimize-to-application -bool "${dock_minimize_window_into_app:-true}"
 
   # Animate opening applications
-  defaults write com.apple.dock launchanim -bool "${_dock_animate_open:-false}"
+  defaults write com.apple.dock launchanim -bool "${dock_animate_open:-false}"
 
   # Automatically hide and show the Dock
-  defaults write com.apple.dock autohide -bool "${_dock_autohide:-false}"
+  defaults write com.apple.dock autohide -bool "${dock_autohide:-false}"
   defaults write com.apple.dock autohide-delay -float 0
 
   # Show indicators for open applications
-  defaults write com.apple.dock show-process-indicators -bool "${_dock_show_indicators_open:-true}"
+  defaults write com.apple.dock show-process-indicators -bool "${dock_show_indicators_open:-true}"
 
   # Show recent applications in Dock
-  defaults write com.apple.dock show-recents -bool "${_dock_show_recent_app:-false}"
+  defaults write com.apple.dock show-recents -bool "${dock_show_recent_app:-false}"
 
   # Restart
   killall Dock

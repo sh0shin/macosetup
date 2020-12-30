@@ -4,11 +4,11 @@
 # shellcheck disable=SC2154
 
 # defaults
-_msx_module_enabled="${_xcode_enabled:-false}"
-_msx_module_appcheck=()
+msx_module_enabled="${xcode_enabled:-false}"
+msx_module_appcheck=()
 
 # module main function
-_msx_module_main()
+msx_module_main()
 {
 
   # Install Xcode Command Line Tools

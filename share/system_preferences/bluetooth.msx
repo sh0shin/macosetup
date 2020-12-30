@@ -4,11 +4,11 @@
 # shellcheck disable=SC2154
 
 # defaults
-_msx_module_enabled="${_bluetooth_enabled:-false}"
-_msx_module_appcheck=()
+msx_module_enabled="${bluetooth_enabled:-false}"
+msx_module_appcheck=()
 
 # module main function
-_msx_module_main()
+msx_module_main()
 {
   # Turn Bluetooth On/Off
   #sudo defaults write /Library/Preferences/com.apple.Bluetooth ControllerPowerState -int 0
@@ -18,10 +18,10 @@ _msx_module_main()
 
   # Advanced
   # Open Bluetooth Setup Assistant at startup if no keyboard is detected
-  defaults write com.apple.systempreferences BluetoothAutoSeekKeyboard -bool "${_bluetooth_auto_seek:-false}"
+  defaults write com.apple.systempreferences BluetoothAutoSeekKeyboard -bool "${bluetooth_auto_seek:-false}"
 
   # Open Bluetooth Setup Assistant at startup if no mouse or trackpad is detected
-  defaults write com.apple.systempreferences BluetoothAutoSeekPointingDevice -bool "${_bluetooth_auto_seek:-false}"
+  defaults write com.apple.systempreferences BluetoothAutoSeekPointingDevice -bool "${bluetooth_auto_seek:-false}"
 
   # Allow Bluetooth devices to wake this computer
   #TODO

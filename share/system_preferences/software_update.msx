@@ -4,43 +4,43 @@
 # shellcheck disable=SC2154
 
 # defaults
-_msx_module_enabled="${_software_update_enabled:-false}"
-_msx_module_appcheck=()
+msx_module_enabled="${software_update_enabled:-false}"
+msx_module_appcheck=()
 
 # module main function
-_msx_module_main()
+msx_module_main()
 {
   # Automatically keep my Mac up to date
   # Advanced
   # Automatically
   # Check for updates
-  sudo defaults write /Library/Preferences/com.apple.SoftwareUpdate AutomaticCheckEnabled -bool "${_software_update_auto_check:-true}"
+  sudo defaults write /Library/Preferences/com.apple.SoftwareUpdate AutomaticCheckEnabled -bool "${software_update_auto_check:-true}"
 
   # Download new updates when available
-  sudo defaults write /Library/Preferences/com.apple.SoftwareUpdate AutomaticDownload -bool "${_software_update_auto_download:-false}"
+  sudo defaults write /Library/Preferences/com.apple.SoftwareUpdate AutomaticDownload -bool "${software_update_auto_download:-false}"
 
   # Install macOS updates
-  sudo defaults write /Library/Preferences/com.apple.SoftwareUpdate AutomaticallyInstallMacOSUpdates -bool "${_software_update_autoinstall_macos:-false}"
+  sudo defaults write /Library/Preferences/com.apple.SoftwareUpdate AutomaticallyInstallMacOSUpdates -bool "${software_update_autoinstall_macos:-false}"
 
   # Install app updates from the App Store
   #TODO
 
   # Install system data files and security updates
-  sudo defaults write /Library/Preferences/com.apple.SoftwareUpdate ConfigDataInstall -bool "${_software_update_autoinstall_data_security:-true}"
-  sudo defaults write /Library/Preferences/com.apple.SoftwareUpdate CriticalUpdateInstall -bool "${_software_update_autoinstall_data_security:-true}"
+  sudo defaults write /Library/Preferences/com.apple.SoftwareUpdate ConfigDataInstall -bool "${software_update_autoinstall_data_security:-true}"
+  sudo defaults write /Library/Preferences/com.apple.SoftwareUpdate CriticalUpdateInstall -bool "${software_update_autoinstall_data_security:-true}"
 
   # Update
-  if [[ ${_software_update_list:-false} == true ]]
+  if [[ ${software_update_list:-false} == true ]]
   then
     softwareupdate --list
   fi
 
-  if [[ ${_software_update_install_all:-false} == true ]]
+  if [[ ${software_update_install_all:-false} == true ]]
   then
     softwareupdate --install --all
   fi
 
-  if [[ ${_software_update_install_recommended:-false} == true ]]
+  if [[ ${software_update_install_recommended:-false} == true ]]
   then
     softwareupdate --install --recommended
   fi
