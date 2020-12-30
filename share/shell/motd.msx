@@ -3,8 +3,12 @@
 # shellcheck disable=SC2034
 # shellcheck disable=SC2154
 
-# defaults
-msx_module_enabled="${motd_enabled:-false}"
+# msx defaults
+: "${motd_enabled:=false}"
+: "${motd_file:=""}"
+
+# msx settings
+msx_module_enabled="$motd_enabled"
 msx_module_appcheck=()
 
 # module main function
