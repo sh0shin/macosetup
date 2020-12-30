@@ -3,11 +3,15 @@
 # shellcheck disable=SC2034
 # shellcheck disable=SC2154
 
-# defaults
-msx_module_enabled="${sysctl_enabled:-false}"
+# msx defaults
+: "${sysctl_enabled:=false}"
+: "${sysctl_flags:=""}"
+
+# msx settings
+msx_module_enabled="$sysctl_enabled"
 msx_module_appcheck=()
 
-# module main function
+# msx main
 msx_module_main()
 {
   # sysctl.conf
