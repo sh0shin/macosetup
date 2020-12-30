@@ -3,23 +3,47 @@
 # shellcheck disable=SC2034
 # shellcheck disable=SC2154
 
-# defaults
-_msx_module_enabled="${_finder_enabled:-false}"
-_msx_module_appcheck=()
+# msx defaults
+: "${finder_enabled:=false}"
+: "${finder_desktop_show_hdd:=false}"
+: "${finder_desktop_show_external_hdd:=false}"
+: "${finder_desktop_show_removal:=true}"
+: "${finder_desktop_show_servers:=true}"
+: "${finder_new_window_target:=PfHm}"
+: "${finder_show_all_files:=true}"
+: "${finder_extension_change_warning:=false}"
+: "${finder_remove_from_icloud_warning:=true}"
+: "${finder_warn_on_empty_trash:=false}"
+: "${finder_remove_old_trash:=false}"
+: "${finder_sort_folders_first:=true}"
+: "${finder_default_search:=SCcf}"
+: "${finder_desktop_view_group_by:=None}"
+: "${finder_desktop_view_arrange_by:=grid}"
+: "${finder_desktop_view_grid_spacing:=21}"
+: "${finder_desktop_view_icon_size:=48}"
+: "${finder_view_style:=Nlsv}"
+: "${finder_show_all_extensions:=true}"
+: "${finder_posix_path_in_title:=true}"
+: "${finder_disable_ds_network:=true}"
+: "${finder_disable_ds_usb:=true}"
 
-# module main function
-_msx_module_main()
+# msx settings
+msx_module_enabled="${finder_enabled:=false}"
+msx_module_appcheck=()
+
+# msx main
+msx_module_main()
 {
   # General
   # Show these items on the desktop
   # Hard disks
-  defaults write com.apple.finder ShowHardDrivesOnDesktop -bool "${_finder_desktop_show_hdd:-false}"
+  defaults write com.apple.finder ShowHardDrivesOnDesktop -bool "$finder_desktop_show_hdd"
   # External disks
-  defaults write com.apple.finder ShowExternalHardDrivesOnDesktop -bool "${_finder_desktop_show_external_hdd:-false}"
+  defaults write com.apple.finder ShowExternalHardDrivesOnDesktop -bool "$finder_desktop_show_external_hdd"
   # CDs, DVDs and iPods
-  defaults write com.apple.finder ShowRemovableMediaOnDesktop -bool "${_finder_desktop_show_removal:-false}"
+  defaults write com.apple.finder ShowRemovableMediaOnDesktop -bool "$finder_desktop_show_removal"
   # Connected servers
-  defaults write com.apple.finder ShowMountedServersOnDesktop -bool "${_finder_desktop_show_servers:-true}"
+  defaults write com.apple.finder ShowMountedServersOnDesktop -bool "$finder_desktop_show_servers"
 
   # New Finder windows show
   # Computer     : 'PfCm'
@@ -29,7 +53,7 @@ _msx_module_main()
   # Documents    : 'PfDo'
   # iCloud Drive : 'PfID'
   # Other...     : 'PfLo'
-  defaults write com.apple.finder NewWindowTarget -string "${_finder_new_window_target:-PfHm}"
+  defaults write com.apple.finder NewWindowTarget -string "$finder_new_window_target"
   #defaults write com.apple.finder NewWindowTargetPath -string "file://{PATH}"
   defaults delete com.apple.finder NewWindowTargetPath 2>/dev/null
 
@@ -42,64 +66,64 @@ _msx_module_main()
 
   # Advanced
   # Show all files
-  defaults write com.apple.finder AppleShowAllFiles -bool "${_finder_show_all_files:-true}"
+  defaults write com.apple.finder AppleShowAllFiles -bool "$finder_show_all_files"
 
   # Show warning before changing an extension
-  defaults write com.apple.finder FXEnableExtensionChangeWarning -bool "${_finder_extension_change_warning:-false}"
+  defaults write com.apple.finder FXEnableExtensionChangeWarning -bool "$finder_extension_change_warning"
 
   # Show warning before removing from iCloud Drive
-  defaults write com.apple.finder FXEnableRemoveFromICloudDriveWarning -bool "${_finder_remove_from_icloud_warning:-true}"
+  defaults write com.apple.finder FXEnableRemoveFromICloudDriveWarning -bool "$finder_remove_from_icloud_warning"
 
   # Show warning before emtying the Trash
-  defaults write com.apple.finder WarnOnEmptyTrash -bool "${_finder_warn_on_empty_trash:-false}"
+  defaults write com.apple.finder WarnOnEmptyTrash -bool "$finder_warn_on_empty_trash"
 
   # Remove items from the Trash after 30 days
-  defaults write com.apple.finder FXRemoveOldTrashItems -bool "${_finder_remove_old_trash:-false}"
+  defaults write com.apple.finder FXRemoveOldTrashItems -bool "$finder_remove_old_trash"
 
   # Keep folders on top
   # In windows when sorting by name
-  defaults write com.apple.finder _FXSortFoldersFirst -bool "${_finder_sort_folders_first:-true}"
+  defaults write com.apple.finder _FXSortFoldersFirst -bool "$finder_sort_folders_first"
 
   # On Desktop
-  defaults write com.apple.finder _FXSortFoldersFirstOnDesktop -bool "${_finder_sort_folders_first:-true}"
+  defaults write com.apple.finder _FXSortFoldersFirstOnDesktop -bool "$finder_sort_folders_first"
 
   # When performing a search
   # Search This Mac               : `SCev`
   # Search the Current Folder     : `SCcf`
   # Use the Previous Search Scope : `SCsp`
-  defaults write com.apple.finder FXDefaultSearchScope -string "${_finder_default_search:-SCcf}"
+  defaults write com.apple.finder FXDefaultSearchScope -string "$finder_default_search"
 
   # View Options
-  /usr/libexec/PlistBuddy -c "Set :DesktopViewSettings:GroupBy ${_finder_desktop_view_group_by:-None}" ~/Library/Preferences/com.apple.finder.plist || \
-    /usr/libexec/PlistBuddy -c "Add :DesktopViewSettings:GroupBy string ${_finder_desktop_view_group_by:-None}" ~/Library/Preferences/com.apple.finder.plist
+  /usr/libexec/PlistBuddy -c "Set :DesktopViewSettings:GroupBy $finder_desktop_view_group_by" ~/Library/Preferences/com.apple.finder.plist || \
+    /usr/libexec/PlistBuddy -c "Add :DesktopViewSettings:GroupBy string $finder_desktop_view_group_by" ~/Library/Preferences/com.apple.finder.plist
 
-  /usr/libexec/PlistBuddy -c "Set :DesktopViewSettings:IconViewSettings:arrangeBy ${_finder_desktop_view_arrange_by:-grid}" ~/Library/Preferences/com.apple.finder.plist || \
-    /usr/libexec/PlistBuddy -c "Add :DesktopViewSettings:IconViewSettings:arrangeBy string ${_finder_desktop_view_arrange_by:-grid}" ~/Library/Preferences/com.apple.finder.plist
+  /usr/libexec/PlistBuddy -c "Set :DesktopViewSettings:IconViewSettings:arrangeBy $finder_desktop_view_arrange_by" ~/Library/Preferences/com.apple.finder.plist || \
+    /usr/libexec/PlistBuddy -c "Add :DesktopViewSettings:IconViewSettings:arrangeBy string $finder_desktop_view_arrange_by" ~/Library/Preferences/com.apple.finder.plist
 
-  /usr/libexec/PlistBuddy -c "Set :DesktopViewSettings:IconViewSettings:gridSpacing ${_finder_desktop_view_grid_spacing:-21}" ~/Library/Preferences/com.apple.finder.plist || \
-    /usr/libexec/PlistBuddy -c "Add :DesktopViewSettings:IconViewSettings:gridSpacing integer ${_finder_desktop_view_grid_spacing:-21}" ~/Library/Preferences/com.apple.finder.plist
+  /usr/libexec/PlistBuddy -c "Set :DesktopViewSettings:IconViewSettings:gridSpacing $finder_desktop_view_grid_spacing" ~/Library/Preferences/com.apple.finder.plist || \
+    /usr/libexec/PlistBuddy -c "Add :DesktopViewSettings:IconViewSettings:gridSpacing integer $finder_desktop_view_grid_spacing" ~/Library/Preferences/com.apple.finder.plist
 
-  /usr/libexec/PlistBuddy -c "Set :DesktopViewSettings:IconViewSettings:iconSize ${_finder_desktop_view_icon_size:-48}" ~/Library/Preferences/com.apple.finder.plist || \
-    /usr/libexec/PlistBuddy -c "Add :DesktopViewSettings:IconViewSettings:iconSize integer ${_finder_desktop_view_icon_size:-48}" ~/Library/Preferences/com.apple.finder.plist
+  /usr/libexec/PlistBuddy -c "Set :DesktopViewSettings:IconViewSettings:iconSize $finder_desktop_view_icon_size" ~/Library/Preferences/com.apple.finder.plist || \
+    /usr/libexec/PlistBuddy -c "Add :DesktopViewSettings:IconViewSettings:iconSize integer $finder_desktop_view_icon_size" ~/Library/Preferences/com.apple.finder.plist
 
   # View Style
   # Icons:    icnv
   # List:     Nlsv
   # Columns:  clmv
   # Gallery:  glyv
-  defaults write com.apple.finder FXPreferredViewStyle -string "${_finder_view_style:-Nlsv}"
+  defaults write com.apple.finder FXPreferredViewStyle -string "$finder_view_style"
 
   # Other
 
   # Show All File Extensions
-  defaults write NSGlobalDomain AppleShowAllExtensions -bool "${_finder_show_all_extensions:-true}"
+  defaults write NSGlobalDomain AppleShowAllExtensions -bool "$finder_show_all_extensions"
 
   # Show POSIX path in title
-  defaults write com.apple.finder _FXShowPosixPathInTitle -bool "${_finder_posix_path_in_title:-true}"
+  defaults write com.apple.finder _FXShowPosixPathInTitle -bool "$finder_posix_path_in_title"
 
   # Disable .DS_Store on Network and USB
-  defaults write com.apple.desktopservices DSDontWriteNetworkStores -bool "${_finder_disable_ds_network:-true}"
-  defaults write com.apple.desktopservices DSDontWriteUSBStores -bool "${_finder_disable_ds_usb:-true}"
+  defaults write com.apple.desktopservices DSDontWriteNetworkStores -bool "$finder_disable_ds_network"
+  defaults write com.apple.desktopservices DSDontWriteUSBStores -bool "$finder_disable_ds_usb"
 
   # Restart
   killall Finder

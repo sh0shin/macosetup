@@ -3,12 +3,16 @@
 # shellcheck disable=SC2034
 # shellcheck disable=SC2154
 
-# defaults
-_msx_module_enabled="${_sysprefs_enabled:-false}"
-_msx_module_appcheck=()
+# msx defaults
+: "${sysprefs_enabled:=false}"
+#: "${sysprefs_hidden:=}"
 
-# module main function
-_msx_module_main()
+# msx settings
+msx_module_enabled="${sysprefs_enabled:=false}"
+msx_module_appcheck=()
+
+# msx main
+msx_module_main()
 {
   # Hidden
   # Accessibility:          com.apple.preference.universalaccess
@@ -41,6 +45,6 @@ _msx_module_main()
   # Users & Groups:         com.apple.preferences.users
   # iCloud:                 com.apple.preferences.icloud
   # ...
-  defaults write com.apple.systempreferences HiddenPreferencePanes -array "${_sysprefs_hidden[@]:-()}"
+  defaults write com.apple.systempreferences HiddenPreferencePanes -array "${sysprefs_hidden[@]}"
 }
 :

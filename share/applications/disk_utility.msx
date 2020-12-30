@@ -3,14 +3,18 @@
 # shellcheck disable=SC2034
 # shellcheck disable=SC2154
 
-# defaults
-_msx_module_enabled="${_disk_utility_enabled:-false}"
-_msx_module_appcheck=()
+# msx defaults
+: "${disk_utility_enabled:=false}"
+: "${disk_utility_show_all:=true}"
 
-# module main function
-_msx_module_main()
+# msx settings
+msx_module_enabled="$disk_utility_enabled"
+msx_module_appcheck=()
+
+# msx main
+msx_module_main()
 {
   # Show All Devices
-  defaults write com.apple.DiskUtility SidebarShowAllDevices -bool "${_disk_utility_show_all:-true}"
+  defaults write com.apple.DiskUtility SidebarShowAllDevices -bool "$disk_utility_show_all"
 }
 :

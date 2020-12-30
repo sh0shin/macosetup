@@ -3,24 +3,39 @@
 # shellcheck disable=SC2034
 # shellcheck disable=SC2154
 
-# defaults
-_msx_module_enabled="${_missioncontrol_enabled:-false}"
-_msx_module_appcheck=()
+# msx defaults
+: "${missioncontrol_enabled:=false}"
+: "${missioncontrol_auto_rearrange_spaces:=false}"
+: "${missioncontrol_switch_to_space:=true}"
+: "${missioncontrol_group_by_app:=true}"
+: "${missioncontrol_displays_have_spaces:=false}"
+: "${missioncontrol_hc_tl:=2}"
+: "${missioncontrol_hc_tl_mod:=0}"
+: "${missioncontrol_hc_tr:=0}"
+: "${missioncontrol_hc_tr_mod:=0}"
+: "${missioncontrol_hc_bl:=3}"
+: "${missioncontrol_hc_bl_mod:=0}"
+: "${missioncontrol_hc_br:=10}"
+: "${missioncontrol_hc_br_mod:=0}"
 
-# module main function
-_msx_module_main()
+# msx settings
+msx_module_enabled="$missioncontrol_enabled"
+msx_module_appcheck=()
+
+# msx main
+msx_module_main()
 {
   # Automatically rearrange Spaces based on most recent use
-  defaults write com.apple.dock mru-spaces -bool "${_missioncontrol_auto_rearrange_spaces:-false}"
+  defaults write com.apple.dock mru-spaces -bool "$missioncontrol_auto_rearrange_spaces"
 
   # When switching to an application, switch to a Space with open windows for the application
-  defaults write NSGlobalDomain AppleSpacesSwitchOnActivate -bool "${_missioncontrol_switch_to_space:-true}"
+  defaults write NSGlobalDomain AppleSpacesSwitchOnActivate -bool "$missioncontrol_switch_to_space"
 
   # Group windows by application
-  defaults write com.apple.dock expose-group-by-app -bool "${_missioncontrol_group_by_app:-true}"
+  defaults write com.apple.dock expose-group-by-app -bool "$missioncontrol_group_by_app"
 
   # Displays have separate Spaces
-  defaults write com.apple.spaces spans-displays -bool "${_missioncontrol_displays_have_spaces:-false}"
+  defaults write com.apple.spaces spans-displays -bool "$missioncontrol_displays_have_spaces"
 
   # Dashboard
   # TODO
@@ -42,16 +57,16 @@ _msx_module_main()
   # 12 : Notification Center
   ##
   # Top left
-  defaults write com.apple.dock wvous-tl-corner   -int "${_missioncontrol_hc_tl:-2}"
-  defaults write com.apple.dock wvous-tl-modifier -int "${_missioncontrol_hc_tl_mod:-0}"
+  defaults write com.apple.dock wvous-tl-corner   -int "$missioncontrol_hc_tl"
+  defaults write com.apple.dock wvous-tl-modifier -int "$missioncontrol_hc_tl_mod"
   # Top right
-  defaults write com.apple.dock wvous-tr-corner   -int "${_missioncontrol_hc_tr:-0}"
-  defaults write com.apple.dock wvous-tr-modifier -int "${_missioncontrol_hc_tr_mod:-0}"
+  defaults write com.apple.dock wvous-tr-corner   -int "$missioncontrol_hc_tr"
+  defaults write com.apple.dock wvous-tr-modifier -int "$missioncontrol_hc_tr_mod"
   # Bottom left
-  defaults write com.apple.dock wvous-bl-corner   -int "${_missioncontrol_hc_bl:-3}"
-  defaults write com.apple.dock wvous-bl-modifier -int "${_missioncontrol_hc_bl_mod:-0}"
+  defaults write com.apple.dock wvous-bl-corner   -int "$missioncontrol_hc_bl"
+  defaults write com.apple.dock wvous-bl-modifier -int "$missioncontrol_hc_bl_mod"
   # Bottom right
-  defaults write com.apple.dock wvous-br-corner   -int "${_missioncontrol_hc_br:-10}"
-  defaults write com.apple.dock wvous-br-modifier -int "${_missioncontrol_hc_br_mod:-0}"
+  defaults write com.apple.dock wvous-br-corner   -int "$missioncontrol_hc_br"
+  defaults write com.apple.dock wvous-br-modifier -int "$missioncontrol_hc_br_mod"
 }
 :

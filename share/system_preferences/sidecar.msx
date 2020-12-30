@@ -3,12 +3,15 @@
 # shellcheck disable=SC2034
 # shellcheck disable=SC2154
 
-# defaults
-_msx_module_enabled="${_sidecar_enabled:-false}"
-_msx_module_appcheck=()
+# msx defaults
+: "${sidecar_enabled:=false}"
 
-# module main function
-_msx_module_main()
+# msx settings
+msx_module_enabled="$sidecar_enabled"
+msx_module_appcheck=()
+
+# msx main
+msx_module_main()
 {
   # Show Sidebar
   #defaults write com.apple.sidecar.display sidebarShown -bool false

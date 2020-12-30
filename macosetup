@@ -1,24 +1,25 @@
 #!/usr/bin/env bash
 # shellcheck disable=SC1090
 # shellcheck disable=SC2034
+# shellcheck disable=SC2153
 # shellcheck disable=SC2154
 
 # defaults
-_msx_prefix="/usr/local"
-_msx_etc="$_msx_prefix/etc/macosetup"
-_msx_share="$_msx_prefix/share/macosetup"
+msx_prefix="/usr/local"
+msx_etc="$msx_prefix/etc/macosetup"
+msx_share="$msx_prefix/share/macosetup"
 
-_msx_config_search=(
+msx_config_search=(
   "$(cd "$(dirname "${BASH_SOURCE[0]}")" && echo "$PWD")/etc"
-  "$_msx_etc"
+  "$msx_etc"
 )
-_msx_config=""
-_msx_module_search=(
+msx_config=""
+msx_module_search=(
   "$(cd "$(dirname "${BASH_SOURCE[0]}")" && echo "$PWD")/share"
-  "$_msx_share"
+  "$msx_share"
 )
 
-readonly _msx_module_category=(
+readonly msx_module_category=(
   "shell"
   "homebrew"
   "system_preferences"
@@ -27,16 +28,16 @@ readonly _msx_module_category=(
 )
 
 # user
-readonly _msx_username="$(whoami)"
-readonly _msx_fullname="$(finger -m "${_msx_username}" | awk '/Name:/ { print $4 }')"
-readonly _msx_sip_status="$(csrutil status | awk -F'status: ' '{print $2}')"
+readonly msx_username="$(whoami)"
+readonly msx_fullname="$(finger -m "${msx_username}" | awk '/Name:/ { print $4 }')"
+readonly msx_sip_status="$(csrutil status | awk -F'status: ' '{print $2}')"
 
 # version
-readonly _msx_self="$(basename "$0")"
-readonly _msx_version="v0.0.1"
-readonly _msx_url="https://sh0shin.org/macosetup"
+readonly msx_self="$(basename "$0")"
+readonly msx_version="v0.0.1"
+readonly msx_url="https://sh0shin.org/macosetup"
 
-_msx_check_support()
+msx_check_support()
 {
   if [[ "$OSTYPE" != darwin* ]]
   then
@@ -45,55 +46,55 @@ _msx_check_support()
   fi
 }
 
-_msx_check_sip()
+msx_check_sip()
 {
-  if [[ "$_msx_sip_status" == "enabled" ]]
+  if [[ "$msx_sip_status" == "enabled" ]]
   then
     echo "[W] SIP is enabled."
     echo "[W] some settings may fail!"
     read -p "press RETURN to continue." -r
-  elif [[ "$_msx_sip_status" == "disabled." ]]
+  elif [[ "$msx_sip_status" == "disabled." ]]
   then
     echo "[I] SIP is disabled!"
   fi
 }
 
-_msx_check_config()
+msx_check_config()
 {
-  if [[ -e "$_msx_config" ]]
+  if [[ -e "$msx_config" ]]
   then
-    source "$_msx_config"
-    echo "[C] $(basename "${_msx_config%.cfg}")"
+    source "$msx_config"
+    echo "[C] $(basename "${msx_config%.cfg}")"
   else
-    # TODO: search config in $_msx_config_search
-    echo "[E] config not found: $_msx_config"
+    # TODO: search config in $msx_config_search
+    echo "[E] config not found: $msx_config"
     exit 1
   fi
 }
 
-_msx_module_get()
+msx_module_get()
 {
-  local _msx_module_wanted _msx_wanted _msx_category _msx_search _msx_module_found
-  _msx_module_wanted=("$@")
+  local msx_module_wanted msx_wanted msx_category msx_search msx_module_found
+  msx_module_wanted=("$@")
 
-  for _msx_wanted in "${_msx_module_wanted[@]:-"all"}"
+  for msx_wanted in "${msx_module_wanted[@]:-"all"}"
   do
-    for _msx_category in "${_msx_module_category[@]}"
+    for msx_category in "${msx_module_category[@]}"
     do
-      for _msx_search in "${_msx_module_search[@]}"
+      for msx_search in "${msx_module_search[@]}"
       do
-        if [[ -d "$_msx_search/$_msx_category" ]]
+        if [[ -d "$msx_search/$msx_category" ]]
         then
           # all modules
-          if [[ "$_msx_wanted" == "all" ]]
+          if [[ "$msx_wanted" == "all" ]]
           then
-            _msx_module_found+="$(echo -n "$_msx_search/$_msx_category"/*.msx) "
+            msx_module_found+="$(echo -n "$msx_search/$msx_category"/*.msx) "
             break
           # wanted module(s)
           else
-            if [[ -f "$_msx_search/$_msx_category/$_msx_wanted.msx" ]]
+            if [[ -f "$msx_search/$msx_category/$msx_wanted.msx" ]]
             then
-              _msx_module_found+="$_msx_search/$_msx_category/$_msx_wanted.msx "
+              msx_module_found+="$msx_search/$msx_category/$msx_wanted.msx "
               break
             fi
           fi
@@ -101,99 +102,99 @@ _msx_module_get()
       done
     done
   done
-  echo "$_msx_module_found"
+  echo "$msx_module_found"
 }
 
-_msx_module_list()
+msx_module_list()
 {
-  local _msx_module_wanted _msx_module_found _msx_module
-  _msx_module_wanted=("$@")
-  _msx_module_found=$(_msx_module_get "${_msx_module_wanted[@]}")
+  local msx_module_wanted msx_module_found msx_module
+  msx_module_wanted=("$@")
+  msx_module_found=$(msx_module_get "${msx_module_wanted[@]}")
 
   # only wanted module
-  if [[ -n "${_msx_module_wanted[*]}" ]] && [[ -z "$_msx_module_found" ]]
+  if [[ -n "${msx_module_wanted[*]}" ]] && [[ -z "$msx_module_found" ]]
   then
-    for _msx_module in "${_msx_module_wanted[@]}"
+    for msx_module in "${msx_module_wanted[@]}"
     do
-      echo "module $_msx_module not found!"
+      echo "module $msx_module not found!"
     done
     return 1
   fi
 
   # all modules
-  for _msx_module in $_msx_module_found
+  for msx_module in $msx_module_found
   do
-    local _category_tmp="${_msx_module%/*}"
-    local _module_tmp="${_msx_module##*/}"
+    local _category_tmp="${msx_module%/*}"
+    local _module_tmp="${msx_module##*/}"
 
-    local _category="${_category_tmp##*/}"
-    local _module="${_module_tmp%.msx}"
+    local _category="${category_tmp##*/}"
+    local _module="${module_tmp%.msx}"
 
-    echo "${_category} ${_module}"
+    echo "${category} ${module}"
   done | column -t
 }
 
-_msx_module_run()
+msx_module_run()
 {
-  local _msx_module_found _msx_module_path _msx_module_name_msx _msx_module_name
-  local _msx_module_app _msx_module_app_found
+  local msx_module_found msx_module_path msx_module_name_msx msx_module_name
+  local msx_module_app msx_module_app_found
 
-  _msx_module_found="$1"
-  _msx_module_app_found=0
+  msx_module_found="$1"
+  msx_module_app_found=0
 
-  for _msx_module_path in $_msx_module_found
+  for msx_module_path in $msx_module_found
   do
-    _msx_module_name_msx="${_msx_module_path##*/}"
-    _msx_module_name="${_msx_module_name_msx%.msx}"
+    msx_module_name_msx="${msx_module_path##*/}"
+    msx_module_name="${msx_module_name_msx%.msx}"
 
-    source "$_msx_module_path"
+    source "$msx_module_path"
 
     # enabled
-    if [[ "$_msx_module_enabled" == true ]]
+    if [[ "$msx_module_enabled" == true ]]
     then
 
       # app check
-      if [[ -n "${_msx_module_appcheck[*]}" ]]
+      if [[ -n "${msx_module_appcheck[*]}" ]]
       then
-        for _msx_module_app in "${_msx_module_appcheck[@]}"
+        for msx_module_app in "${msx_module_appcheck[@]}"
         do
-          if [[ -e "$_msx_module_app" ]]
+          if [[ -e "$msx_module_app" ]]
           then
-            _msx_module_app_found=1
+            msx_module_app_found=1
           fi
         done
 
         # app not found
-        if [[ "$_msx_module_app_found" -ne 1 ]]
+        if [[ "$msx_module_app_found" -ne 1 ]]
         then
           break
         fi
       fi
 
       # main
-      if [[ $(type -t _msx_module_main) == "function" ]]
+      if [[ $(type -t msx_module_main) == "function" ]]
       then
-        echo "[M] $_msx_module_name"
-        _msx_module_main
+        echo "[M] $msx_module_name"
+        msx_module_main
       else
-        echo "[X] $_msx_module_name"
+        echo "[X] $msx_module_name"
       fi
 
     else
-      echo "[D] $_msx_module_name"
+      echo "[D] $msx_module_name"
     fi
   done
 }
 
-_msx_show_usage()
+msx_show_usage()
 {
-  echo "$_msx_self $_msx_version ( $_msx_url )"
-  echo "Usage: $_msx_self [-Dhl] -c config [-m module ]"
+  echo "$msx_self $msx_version ( $msx_url )"
+  echo "Usage: $msx_self [-Dhl] -c config [-m module ]"
 }
 
-_msx_show_help()
+msx_show_help()
 {
-  _msx_show_usage
+  msx_show_usage
   echo "Options:"
   echo "  -D        : Enable debug output"
   echo "  -c config : Use configuration file (required)"
@@ -204,17 +205,17 @@ _msx_show_help()
   exit 1
 }
 
-_msx_main()
+msx_main()
 {
-  _msx_check_support
-  _msx_check_sip
-  _msx_check_config # search_config?!
+  msx_check_support
+  msx_check_sip
+  msx_check_config # search_config?!
 
-  local _msx_module_wanted _msx_module_found
-  _msx_module_wanted=("$@")
-  _msx_module_found=$(_msx_module_get "${_msx_module_wanted[@]}")
+  local msx_module_wanted msx_module_found
+  msx_module_wanted=("$@")
+  msx_module_found=$(msx_module_get "${msx_module_wanted[@]}")
 
-  _msx_module_run "$_msx_module_found"
+  msx_module_run "$msx_module_found"
 
   echo "[I] done."
 }
@@ -227,51 +228,51 @@ do
       set -x
     ;;
     c)
-      _msx_config="$OPTARG"
+      msx_config="$OPTARG"
       ;;
     h)
-      _msx_show_help
+      msx_show_help
       ;;
     l)
-      _msx_module_list "${_msx_module_select[@]}"
+      msx_module_list "${msx_module_select[@]}"
       exit 0
       ;;
     m)
-      _msx_module_select+=("$OPTARG")
+      msx_module_select+=("$OPTARG")
       ;;
     \?)
       echo "-$OPTARG is invalid!"
-      _msx_show_usage
+      msx_show_usage
       exit 1
       ;;
     :)
       echo "-$OPTARG requires an argument!"
-      _msx_show_usage
+      msx_show_usage
       exit 1
       ;;
     *)
-      _msx_show_usage
+      msx_show_usage
       exit 1
     ;;
   esac
 done
 
-if [[ -z "$_msx_config" ]]
+if [[ -z "$msx_config" ]]
 then
   if [[ -n "$MSX_CONFIG" ]] && \
      [[ -e "$MSX_CONFIG" ]]
   then
-    _msx_config="$MSX_CONFIG"
+    msx_config="$MSX_CONFIG"
   else
     echo "-c is mandatory!"
-    _msx_show_usage
+    msx_show_usage
     exit 1
   fi
 fi
 
 if [[ "$OPTIND" -eq 1 ]] || [[ "$OPTIND" -le "$#" ]]
 then
-  _msx_show_usage
+  msx_show_usage
 else
-  _msx_main "${_msx_module_select[@]}"
+  msx_main "${msx_module_select[@]}"
 fi

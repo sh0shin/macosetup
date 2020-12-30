@@ -3,18 +3,26 @@
 # shellcheck disable=SC2034
 # shellcheck disable=SC2154
 
-# defaults
-_msx_module_enabled="${_language_region_enabled:-false}"
-_msx_module_appcheck=()
+# msx defaults
+: "${language_region_enabled:=false}"
+: "${language_region_languages:="en-DE"}"
+: "${language_region_locale:="en_DE"}"
+: "${language_region_temperature:=Celsius}"
+: "${language_region_measurement_units:=Centimeters}"
+: "${language_region_metric_units:=true}"
 
-# module main function
-_msx_module_main()
+# msx settings
+msx_module_enabled="$language_region_enabled"
+msx_module_appcheck=()
+
+# msx main
+msx_module_main()
 {
   # Preferred languages
-  defaults write NSGlobalDomain AppleLanguages -array "${_language_region_languages[@]:-"en-DE"}"
+  defaults write NSGlobalDomain AppleLanguages -array "${language_region_languages[@]}"
 
   # Region
-  defaults write NSGlobalDomain AppleLocale -string "${_language_region_locale:-"en_DE"}"
+  defaults write NSGlobalDomain AppleLocale -string "$language_region_locale"
 
   # First day of week
   # Inherit
@@ -26,11 +34,11 @@ _msx_module_main()
   # Inherit
 
   # Temperature
-  defaults write NSGlobalDomain AppleTemperatureUnit -string "${_language_region_temperature:-Celsius}"
+  defaults write NSGlobalDomain AppleTemperatureUnit -string "$language_region_temperature"
 
   # Advanced
   # Measurement units
-  defaults write NSGlobalDomain AppleMeasurementUnits -string "${_language_region_measurement_units:-Centimeters}"
-  defaults write NSGlobalDomain AppleMetricUnits -bool "${_language_region_metric_units:-true}"
+  defaults write NSGlobalDomain AppleMeasurementUnits -string "$language_region_measurement_units"
+  defaults write NSGlobalDomain AppleMetricUnits -bool "$language_region_metric_units"
 }
 :

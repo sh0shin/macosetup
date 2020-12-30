@@ -4,71 +4,81 @@
 # shellcheck disable=SC2086
 # shellcheck disable=SC2154
 
-# defaults
-_msx_module_enabled="${_brew_cask_enabled:-false}"
-_msx_module_appcheck=(
+# msx defaults
+: "${brew_cask_enabled:=false}"
+#: "${brew_cask_tap:=}"
+#: "${brew_cask_uninstall:=}"
+: "${brew_cask_uninstall_zap:=true}"
+: "${brew_cask_upgrade:=true}"
+: "${brew_cask_upgrade_greedy:=false}"
+: "${brew_cleanup:=false}"
+: "${brew_cleanup_prune:=0}"
+
+# msx settings
+msx_module_enabled="$brew_cask_enabled"
+msx_module_appcheck=(
   "/usr/local/bin/brew"
 )
 
-# module main function
-_msx_module_main()
+# msx main
+msx_module_main()
 {
   # Tapping homebrew/cask
   /usr/local/bin/brew tap --quiet homebrew/cask
 
   # Cask taps
-  for _tap in "${_brew_cask_tap[@]}"
+  for tap in "${brew_cask_tap[@]}"
   do
-    /usr/local/bin/brew tap --quiet "$_tap"
+    /usr/local/bin/brew tap --quiet "$tap"
   done
 
   # Installed
   mapfile -t _brew_cask_list < <(brew list --cask -1)
-  for _cask in "${_brew_cask_list[@]}"
+  for _cask in "${brew_cask_list[@]}"
   do
-    for i in "${!_brew_cask[@]}"
+    for i in "${!brew_cask[@]}"
     do
-      if [[ ${_brew_cask[i]} == "$_cask" ]]
+      if [[ ${brew_cask[i]} == "$cask" ]]
       then
-        unset '_brew_cask[i]'
+        unset 'brew_cask[i]'
       fi
     done
   done
 
   # Uninstalled
-  for i in "${!_brew_cask_uninstall[@]}"
+  for i in "${!brew_cask_uninstall[@]}"
   do
-    for _cask in "${_brew_cask_list[@]}"
+    for cask in "${brew_cask_list[@]}"
     do
-      if [[ "${_brew_cask_uninstall[$i]}" == "$_cask" ]]
+      if [[ "${brew_cask_uninstall[$i]}" == "$cask" ]]
       then
-        __brew_cask_uninstall+=("${_brew_cask_uninstall[$i]}")
+        _brew_cask_uninstall+=("${brew_cask_uninstall[$i]}")
       fi
     done
   done
-  _brew_cask_uninstall=("${__brew_cask_uninstall[@]}")
+  brew_cask_uninstall=("${_brew_cask_uninstall[@]}")
 
   # Uninstall Cask
-  if [[ -n "${_brew_cask_uninstall[*]}" ]]
+  if [[ -n "${brew_cask_uninstall[*]}" ]]
   then
-    if [[ "${_brew_cask_uninstall_zap:-true}" == true ]]
+    if [[ "$brew_cask_uninstall_zap" == true ]]
     then
-      /usr/local/bin/brew uninstall --cask --zap --quiet ${_brew_cask_uninstall[*]}
+      /usr/local/bin/brew uninstall --cask --zap --quiet ${brew_cask_uninstall[*]}
     else
-      /usr/local/bin/brew uninstall --cask --quiet ${_brew_cask_uninstall[*]}
+      /usr/local/bin/brew uninstall --cask --quiet ${brew_cask_uninstall[*]}
     fi
   fi
 
   # Install Cask
-  if [[ -n "${_brew_cask[*]}" ]]
+  if [[ -n "${brew_cask[*]}" ]]
   then
-    /usr/local/bin/brew install --cask --quiet ${_brew_cask[*]}
+    /usr/local/bin/brew install --cask --quiet ${brew_cask[*]}
   fi
 
   # Upgrade Cask
-  if [[ "${_brew_cask_upgrade:-true}" == true ]]
+  if [[ "$brew_cask_upgrade" == true ]]
   then
-    if [[ ${_brew_cask_upgrade_greedy:-false} == true ]]
+    if [[ "$brew_cask_upgrade_greedy" == true ]]
     then
       /usr/local/bin/brew upgrade --cask --greedy --quiet
     else
@@ -77,9 +87,9 @@ _msx_module_main()
   fi
 
   # Cleanup
-  if [[ "${_brew_cleanup:-false}" == true ]]
+  if [[ "$brew_cleanup" == true ]]
   then
-    /usr/local/bin/brew cleanup --prune="${_brew_cleanup_prune:-0}" --quiet
+    /usr/local/bin/brew cleanup --prune="$brew_cleanup_prune" --quiet
   fi
 }
 :

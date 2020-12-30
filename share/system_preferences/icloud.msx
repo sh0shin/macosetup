@@ -3,14 +3,18 @@
 # shellcheck disable=SC2034
 # shellcheck disable=SC2154
 
-# defaults
-_msx_module_enabled="${_icloud_enabled:-false}"
-_msx_module_appcheck=()
+# msx defaults
+: "${icloud_enabled:=false}"
+: "${icloud_new_docs_to_cloud:=false}"
 
-# module main function
-_msx_module_main()
+# msx settings
+msx_module_enabled="$icloud_enabled"
+msx_module_appcheck=()
+
+# msx main
+msx_module_main()
 {
   # Default Save Location
-  defaults write NSGlobalDomain NSDocumentSaveNewDocumentsToCloud -bool "${_icloud_new_docs_to_cloud:-false}"
+  defaults write NSGlobalDomain NSDocumentSaveNewDocumentsToCloud -bool "$icloud_new_docs_to_cloud"
 }
 :

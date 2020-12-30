@@ -3,12 +3,15 @@
 # shellcheck disable=SC2034
 # shellcheck disable=SC2154
 
-# defaults
-_msx_module_enabled="${_trackpad_enabled:-false}"
-_msx_module_appcheck=()
+# msx defaults
+: "${trackpad_enabled:=false}"
 
-# module main function
-_msx_module_main()
+# msx settings
+msx_module_enabled="${trackpad_enabled:=false}"
+msx_module_appcheck=()
+
+# msx main
+msx_module_main()
 {
   # TODO
   :

@@ -3,25 +3,30 @@
 # shellcheck disable=SC2034
 # shellcheck disable=SC2154
 
-# defaults
-_msx_module_enabled="${_dock_icons_enabled:-false}"
-_msx_module_appcheck=(
+# msx defaults
+: "${dock_icons_enabled:=false}"
+: "${dock_icons_apps:=""}"
+: "${dock_icons_others:=""}"
+
+# msx settings
+msx_module_enabled="$dock_icons_enabled"
+msx_module_appcheck=(
   "/usr/local/bin/dockutil"
 )
 
-# module main function
-_msx_module_main()
+# msx main
+msx_module_main()
 {
   # Clear all Icons
   defaults write com.apple.dock persistent-apps -array
   defaults write com.apple.dock persistent-others -array
 
   # Apps
-  for _app in "${_dock_icons_apps[@]}"
+  for app in "${dock_icons_apps[@]}"
   do
-    if [ -e "$_app" ]
+    if [ -e "$app" ]
     then
-      /usr/local/bin/dockutil --no-restart --section apps --add "$_app"
+      /usr/local/bin/dockutil --no-restart --section apps --add "$app"
     fi
   done
 
@@ -29,11 +34,11 @@ _msx_module_main()
   # Downloads
   /usr/local/bin/dockutil --no-restart --section others --add ~/Downloads --view list --display folder
 
-  for _other in "${_dock_icons_others[@]}"
+  for other in "${dock_icons_others[@]}"
   do
-    if [ -e "$_other" ]
+    if [ -e "$other" ]
     then
-      /usr/local/bin/dockutil --no-restart --section others --add "$_other"
+      /usr/local/bin/dockutil --no-restart --section others --add "$other"
     fi
   done
 

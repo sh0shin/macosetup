@@ -3,21 +3,25 @@
 # shellcheck disable=SC2034
 # shellcheck disable=SC2154
 
-# defaults
-_msx_module_enabled="${_motd_enabled:-false}"
-_msx_module_appcheck=()
+# msx defaults
+: "${motd_enabled:=false}"
+: "${motd_file:=""}"
 
-# module main function
-_msx_module_main()
+# msx settings
+msx_module_enabled="$motd_enabled"
+msx_module_appcheck=()
+
+# msx main
+msx_module_main()
 {
   sudo touch /private/etc/motd
   sudo chown root:admin /private/etc/motd
   sudo chmod 0664 /private/etc/motd
 
-  if [[ -n "$_motd_file" ]] && \
-     [[ -e "$_motd_file" ]]
+  if [[ -n "$motd_file" ]] && \
+     [[ -e "$motd_file" ]]
   then
-    cat "$_motd_file" >/private/etc/motd
+    cat "$motd_file" >/private/etc/motd
   else
     cat <<EOF >/private/etc/motd
                               _______ _______         __

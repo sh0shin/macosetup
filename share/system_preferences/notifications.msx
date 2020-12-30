@@ -3,17 +3,21 @@
 # shellcheck disable=SC2034
 # shellcheck disable=SC2154
 
-# defaults
-_msx_module_enabled="${_notifications_enabled:-false}"
-_msx_module_appcheck=()
+# msx defaults
+: "${notifications_enabled:=false}"
+: "${notifications_sort_order:=1}"
 
-# module main function
-_msx_module_main()
+# msx settings
+msx_module_enabled="$notifications_enabled"
+msx_module_appcheck=()
+
+# msx main
+msx_module_main()
 {
   # Notification Centre sort order:
   # Recents         - 0
   # Recents by App  - 1
   # Manually by App - 2
-  defaults write com.apple.ncprefs sort_order -int "${_notifications_sort_order:-1}"
+  defaults write com.apple.ncprefs sort_order -int "$notifications_sort_order"
 }
 :
