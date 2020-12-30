@@ -3,17 +3,22 @@
 # shellcheck disable=SC2034
 # shellcheck disable=SC2154
 
-# defaults
-msx_module_enabled="${iterm_enabled:-false}"
+# msx defaults
+: "${iterm_enabled:=false}"
+: "${iterm_prefs_custom:=false}"
+: "${iterm_prefs_custom_folder:=~/.config/iterm2}"
+
+# msx settings
+msx_module_enabled="$iterm_enabled"
 msx_module_appcheck=(
   "/Applications/iTerm.app"
 )
 
-# module main function
+# msx main
 msx_module_main()
 {
   # Prefs From Custom Folder
-  defaults write com.googlecode.iterm2 LoadPrefsFromCustomFolder -bool "${iterm_prefs_custom:-false}"
-  defaults write com.googlecode.iterm2 PrefsCustomFolder -string "${iterm_prefs_custom_folder:-~/.iterm2}"
+  defaults write com.googlecode.iterm2 LoadPrefsFromCustomFolder -bool "$iterm_prefs_custom"
+  defaults write com.googlecode.iterm2 PrefsCustomFolder -string "$iterm_prefs_custom_folder"
 }
 :
