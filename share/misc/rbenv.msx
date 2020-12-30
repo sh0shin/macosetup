@@ -3,24 +3,34 @@
 # shellcheck disable=SC2034
 # shellcheck disable=SC2154
 
-# defaults
-msx_module_enabled="${rbenv_enabled:-false}"
+# msx defaults
+: "${rbenv_enabled:=false}"
+: "${rbenv_root:=$HOME/.rbenv}"
+: "${rbenv_git_enabled:=false}"
+: "${rbenv_git_url:=https://github.com/rbenv/rbenv.git}"
+: "${rbenv_build_enabled:=false}"
+: "${rbenv_build_git_enabled:=false}"
+: "${rbenv_build_git_url:=https://github.com/rbenv/ruby-build.git}"
+: "${rbenv_versions:=""}"
+
+# msx settings
+msx_module_enabled="$rbenv_enabled"
 msx_module_appcheck=()
 
-# module main function
+# msx main
 msx_module_main()
 {
-  export RBENV_ROOT="${rbenv_root:-$HOME/.rbenv}"
+  export RBENV_ROOT="$rbenv_root"
   export PATH="$RBENV_ROOT/bin:$PATH"
 
   # rbenv from git
-  if [[ "${rbenv_git_enabled:-false}" == true ]]
+  if [[ "$rbenv_git_enabled" == true ]]
   then
     if [[ -d "$RBENV_ROOT/.git" ]]
     then
       ( cd "$RBENV_ROOT" && git pull )
     else
-      git clone "${rbenv_git_url:-https://github.com/rbenv/rbenv.git}" "$RBENV_ROOT"
+      git clone "$rbenv_git_url" "$RBENV_ROOT"
     fi
   fi
 
@@ -32,16 +42,16 @@ msx_module_main()
   fi
 
   # ruby-build from git
-  if [[ "${rbenv_build_enabled:-false}" == true ]]
+  if [[ "$rbenv_build_enabled" == true ]]
   then
-    if [[ "${rbenv_build_git_enabled:-false}" == true ]]
+    if [[ "$rbenv_build_git_enabled" == true ]]
     then
       if [[ -d "$RBENV_ROOT/plugins/ruby-build/.git" ]]
       then
         ( cd "$RBENV_ROOT/plugins/ruby-build" && git pull )
       else
         mkdir "$RBENV_ROOT/plugins/ruby-build"
-        git clone "${rbenv_build_git_url:-https://github.com/rbenv/ruby-build.git}" "$RBENV_ROOT/plugins/ruby-build"
+        git clone "$rbenv_build_git_url" "$RBENV_ROOT/plugins/ruby-build"
       fi
     fi
   fi
