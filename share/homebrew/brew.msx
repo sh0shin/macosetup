@@ -4,13 +4,23 @@
 # shellcheck disable=SC2086
 # shellcheck disable=SC2154
 
-# defaults
-msx_module_enabled="${brew_enabled:-false}"
+# msx defaults
+: "${brew_enabled:=false}"
+: "${brew_analytics:=off}"
+#: "${brew_tap:=}"
+#: "${brew_formula:=}"
+#: "${brew_formula_uninstall:=}"
+: "${brew_upgrade:=true}"
+: "${brew_cleanup:=false}"
+: "${brew_cleanup_prune:=0}"
+
+# msx settings
+msx_module_enabled="$brew_enabled"
 msx_module_appcheck=(
   "/Library/Developer/CommandLineTools" # xCode
 )
 
-# module main function
+# msx main
 msx_module_main()
 {
   # Install Homebrew
@@ -21,7 +31,7 @@ msx_module_main()
   fi
 
   # Analytics
-  /usr/local/bin/brew analytics --quiet "${brew_analytics:-off}"
+  /usr/local/bin/brew analytics --quiet "$brew_analytics"
 
   # Tap
   for tap in "${brew_tap[@]}"
@@ -68,15 +78,15 @@ msx_module_main()
   fi
 
   # Upgrade Formula
-  if [[ "${brew_upgrade:-true}" == true ]]
+  if [[ "$brew_upgrade" == true ]]
   then
     /usr/local/bin/brew upgrade --formula --quiet
   fi
 
   # Cleanup
-  if [[ "${brew_cleanup:-false}" == true ]]
+  if [[ "$brew_cleanup" == true ]]
   then
-    /usr/local/bin/brew cleanup --prune="${brew_cleanup_prune:-0}" --quiet
+    /usr/local/bin/brew cleanup --prune="$brew_cleanup_prune" --quiet
   fi
 }
 :

@@ -4,13 +4,23 @@
 # shellcheck disable=SC2086
 # shellcheck disable=SC2154
 
-# defaults
-msx_module_enabled="${brew_cask_enabled:-false}"
+# msx defaults
+: "${brew_cask_enabled:=false}"
+#: "${brew_cask_tap:=}"
+#: "${brew_cask_uninstall:=}"
+: "${brew_cask_uninstall_zap:=true}"
+: "${brew_cask_upgrade:=true}"
+: "${brew_cask_upgrade_greedy:=false}"
+: "${brew_cleanup:=false}"
+: "${brew_cleanup_prune:=0}"
+
+# msx settings
+msx_module_enabled="$brew_cask_enabled"
 msx_module_appcheck=(
   "/usr/local/bin/brew"
 )
 
-# module main function
+# msx main
 msx_module_main()
 {
   # Tapping homebrew/cask
@@ -51,7 +61,7 @@ msx_module_main()
   # Uninstall Cask
   if [[ -n "${brew_cask_uninstall[*]}" ]]
   then
-    if [[ "${brew_cask_uninstall_zap:-true}" == true ]]
+    if [[ "$brew_cask_uninstall_zap" == true ]]
     then
       /usr/local/bin/brew uninstall --cask --zap --quiet ${brew_cask_uninstall[*]}
     else
@@ -66,9 +76,9 @@ msx_module_main()
   fi
 
   # Upgrade Cask
-  if [[ "${brew_cask_upgrade:-true}" == true ]]
+  if [[ "$brew_cask_upgrade" == true ]]
   then
-    if [[ ${brew_cask_upgrade_greedy:-false} == true ]]
+    if [[ "$brew_cask_upgrade_greedy" == true ]]
     then
       /usr/local/bin/brew upgrade --cask --greedy --quiet
     else
@@ -77,9 +87,9 @@ msx_module_main()
   fi
 
   # Cleanup
-  if [[ "${brew_cleanup:-false}" == true ]]
+  if [[ "$brew_cleanup" == true ]]
   then
-    /usr/local/bin/brew cleanup --prune="${brew_cleanup_prune:-0}" --quiet
+    /usr/local/bin/brew cleanup --prune="$brew_cleanup_prune" --quiet
   fi
 }
 :
