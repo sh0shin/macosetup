@@ -11,7 +11,7 @@
 msx_module_enabled="$motd_enabled"
 msx_module_appcheck=()
 
-# module main function
+# msx main
 msx_module_main()
 {
   sudo touch /private/etc/motd
