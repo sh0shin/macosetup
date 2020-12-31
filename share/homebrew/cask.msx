@@ -33,8 +33,8 @@ msx_module_main()
   done
 
   # Installed
-  mapfile -t _brew_cask_list < <(brew list --cask -1)
-  for _cask in "${brew_cask_list[@]}"
+  mapfile -t brew_cask_list < <(brew list --cask -1)
+  for cask in "${brew_cask_list[@]}"
   do
     for i in "${!brew_cask[@]}"
     do
