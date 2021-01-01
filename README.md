@@ -1,6 +1,6 @@
 # macOSetup
 
-Bash script based macOS setup environment
+macOS setup & configuration automation
 
 ## Quick usage
 
