@@ -16,6 +16,17 @@ sudo ln -s $HOME/Pictures/macOSetup.jpg /System/Library/CoreServices/DefaultBack
 sudo ln -s $HOME/Pictures/macOSetup.heic /System/Library/CoreServices/DefaultDesktop.heic
 ```
 
+## Homebrew
+```sh
+# change mode
+sudo chown root:admin /usr/local
+sudo chmod 2775 /usr/local
+# hint: umask 0002
+# or
+sudo chmod 2770 /usr/local
+# hint: umask 0007
+```
+
 ## Finder
 ```sh
 defaults write com.apple.finder ShowStatusBar -bool true
