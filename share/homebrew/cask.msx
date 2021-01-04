@@ -13,6 +13,12 @@ _msx_module_appcheck=(
 # module main function
 _msx_module_main()
 {
+  # Default settings
+  export HOMEBREW_NO_ANALYTICS=true
+  export HOMEBREW_NO_AUTO_UPDATE=true
+  export HOMEBREW_NO_EMOJI=true
+  export HOMEBREW_NO_GITHUB_API=true
+
   # Tapping homebrew/cask
   /usr/local/bin/brew tap --quiet homebrew/cask
 
