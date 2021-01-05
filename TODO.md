@@ -19,7 +19,7 @@ sudo ln -s "$HOME/Pictures/macOSetup.heic" /System/Library/CoreServices/DefaultD
 ## Loginscreen (FDE)
 ```sh
 # Get codename
-CODENAME="$(awk -F'macOS ' '/SOFTWARE LICENSE AGREEMENT FOR macOS / {print $NF}' "/System/Library/CoreServices/Setup Assistant.app/Contents/Resources/en.lproj/OSXSoftwareLicense.|  rtf")"
+CODENAME="$(awk -F'macOS ' '/SOFTWARE LICENSE AGREEMENT FOR macOS / {print $NF}' "/System/Library/CoreServices/Setup Assistant.app/Contents/Resources/en.lproj/OSXSoftwareLicense.rtf")"
 
 # Check
 echo "$CODENAME"
