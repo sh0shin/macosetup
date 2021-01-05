@@ -50,3 +50,9 @@ sudo chmod 2770 /usr/local
 defaults write com.apple.finder ShowStatusBar -bool true
 defaults write com.apple.finder ShowPathbar -bool true
 ```
+
+## User infos
+```sh
+dscl . -read /Users/<USERNAME> RealName
+dscl . -read /Users/<USERNAME> GeneratedUID
+```
