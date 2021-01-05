@@ -5,19 +5,33 @@
 _msx_defaults(){}
 ```
 
-## Desktop Background
+## Default Desktop/Background
 ```sh
 rm "$HOME/Library/Application Support/Dock/desktoppicture.db"
 
 sudo rm /System/Library/CoreServices/DefaultBackground.jpg
 sudo rm /System/Library/CoreServices/DefaultDesktop.heic
 
-sudo ln -s $HOME/Pictures/macOSetup.jpg /System/Library/CoreServices/DefaultBackground.jpg
-sudo ln -s $HOME/Pictures/macOSetup.heic /System/Library/CoreServices/DefaultDesktop.heic
+sudo ln -s "$HOME/Pictures/macOSetup.jpg" /System/Library/CoreServices/DefaultBackground.jpg
+sudo ln -s "$HOME/Pictures/macOSetup.heic" /System/Library/CoreServices/DefaultDesktop.heic
 ```
 
-## Bootscreen
+## Loginscreen (FDE)
 ```sh
+# Get codename
+CODENAME="$(awk -F'macOS ' '/SOFTWARE LICENSE AGREEMENT FOR macOS / {print $NF}' "/System/Library/CoreServices/Setup Assistant.app/Contents/Resources/en.lproj/OSXSoftwareLicense.|  rtf")"
+
+# Check
+echo "$CODENAME"
+
+# Mojave
+sudo cp "$HOME/Pictures/macOSetup.heic" "/Library/Desktop Pictures/<CODENAME>.heic"
+
+# Catalina+
+sudo cp "$HOME/Pictures/macOSetup.heic" "/System/Library/Desktop Pictures/<CODENAME>.heic"
+
+# Update preboot
+sudo diskutil apfs updatePreboot /
 ```
 
 ## Homebrew
@@ -35,11 +49,4 @@ sudo chmod 2770 /usr/local
 ```sh
 defaults write com.apple.finder ShowStatusBar -bool true
 defaults write com.apple.finder ShowPathbar -bool true
-```
-
-## Misc
-
-### Get codename
-```sh
-awk -F'macOS ' '/SOFTWARE LICENSE AGREEMENT FOR macOS / {print $NF}' "/System/Library/CoreServices/Setup Assistant.app/Contents/Resources/en.lproj/OSXSoftwareLicense.rtf"
 ```
