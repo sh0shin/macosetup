@@ -5,9 +5,11 @@
 # shellcheck disable=SC2154
 
 # msx defaults
+# Cask
 : "${brew_cask_enabled:=false}"
-#: "${brew_cask_tap:=}"
-#: "${brew_cask_uninstall:=}"
+#: "${brew_cask_tap:=()}"
+#: "${brew_cask:=()}"
+#: "${brew_cask_uninstall:=()}"
 : "${brew_cask_uninstall_zap:=true}"
 : "${brew_cask_upgrade:=true}"
 : "${brew_cask_upgrade_greedy:=false}"

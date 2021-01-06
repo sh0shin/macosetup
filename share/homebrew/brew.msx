@@ -5,6 +5,7 @@
 # shellcheck disable=SC2154
 
 # msx defaults
+# Brew
 : "${brew_enabled:=false}"
 : "${brew_analytics:="off"}"
 #: "${brew_tap:=()}"
