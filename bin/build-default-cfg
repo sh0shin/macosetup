@@ -32,4 +32,5 @@ msx_diff=$(diff -q "$PWD/etc/default.cfg" "$PWD/etc/default.cfg.new")
 if [[ -n "$msx_diff" ]]
 then
   mv "$PWD/etc/default.cfg.new" "$PWD/etc/default.cfg"
+  truncate -s -1 "$PWD/etc/default.cfg"
 fi
