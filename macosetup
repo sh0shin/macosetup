@@ -29,7 +29,8 @@ readonly msx_module_category=(
 
 # user
 readonly msx_username="$(whoami)"
-readonly msx_fullname="$(finger -m "${msx_username}" | awk '/Name:/ { print $4 }')"
+#readonly msx_fullname="$(finger -m "${msx_username}" | awk '/Name:/ { print $4 }')"
+readonly msx_fullname="$(dscl . read "/Users/$msx_username" RealName | column -x | tr -d '\t' | awk '/RealName: /{print $2}')"
 readonly msx_sip_status="$(csrutil status | awk -F'status: ' '{print $2}')"
 
 # version
