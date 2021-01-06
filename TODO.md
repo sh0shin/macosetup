@@ -59,3 +59,14 @@ defaults write com.apple.finder ShowPathbar -bool true
 dscl . -read /Users/<USERNAME> RealName
 dscl . -read /Users/<USERNAME> GeneratedUID
 ```
+
+
+## App Store
+Install or uninstall with `mas`
+```
+408981434 iMovie
+409183694 Keynote
+409201541 Pages
+682658836 GarageBand
+409203825 Numbers
+```
