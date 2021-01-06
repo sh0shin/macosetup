@@ -5,7 +5,7 @@
 
 # msx defaults
 : "${sysctl_enabled:=false}"
-: "${sysctl_flags:=""}"
+#: "${sysctl_flags:=()}"
 
 # msx settings
 msx_module_enabled="$sysctl_enabled"

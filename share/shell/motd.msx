@@ -4,6 +4,7 @@
 # shellcheck disable=SC2154
 
 # msx defaults
+# Motd
 : "${motd_enabled:=false}"
 : "${motd_file:=""}"
 

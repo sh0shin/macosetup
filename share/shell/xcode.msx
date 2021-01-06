@@ -4,6 +4,7 @@
 # shellcheck disable=SC2154
 
 # msx defaults
+# Xcode
 : "${xcode_enabled:=false}"
 
 # msx settings

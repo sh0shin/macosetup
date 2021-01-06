@@ -4,6 +4,7 @@
 # shellcheck disable=SC2154
 
 # msx defaults
+# Homebrew Shells
 : "${homebrew_shells_enabled:=false}"
 : "${homebrew_shells_bash:=false}"
 : "${homebrew_shells_zsh:=false}"
