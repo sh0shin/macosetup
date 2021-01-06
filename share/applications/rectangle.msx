@@ -15,7 +15,7 @@
 # Check for updates automatically
 : "${rectangle_automatic_checks:=false}"
 # Move to adjacent display on repeated left or right commands (0=disabled, 1=enabled)
-: "${rectangle_subsequent_execution_mode:=1}"
+: "${rectangle_subsequent_execution_mode:=0}"
 # Gaps between windows
 : "${rectangle_gap_size:=0}"
 # Remove keyboard shortcut restrictions
