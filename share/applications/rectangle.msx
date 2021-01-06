@@ -4,6 +4,7 @@
 # shellcheck disable=SC2154
 
 # msx defaults
+# Rectangle
 : "${rectangle_enabled:=false}"
 # Preferences
 # Launch on login
