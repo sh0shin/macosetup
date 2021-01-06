@@ -1,0 +1,52 @@
+#!/usr/bin/env bash
+# shellcheck disable=SC1090
+# shellcheck disable=SC2034
+# shellcheck disable=SC2154
+
+# msx defaults
+: "${rectangle_enabled:=true}"
+# Preferences
+# Launch on login
+: "${rectangle_launch_on_login:=true}"
+# Snap windows by dragging (1=enabled, 2=disabled)
+: "${rectangle_window_snapping:=1}"
+# Hide menu bar icon
+: "${rectangle_hide_menubar_icon:=false}"
+# Check for updates automatically
+: "${rectangle_automatic_checks:=false}"
+# Move to adjacent display on repeated left or right commands (0=disabled, 1=enabled)
+: "${rectangle_subsequent_execution_mode:=1}"
+# Gaps between windows
+: "${rectangle_gap_size:=0}"
+# Remove keyboard shortcut restrictions
+: "${rectangle_allow_any_shortcut:=false}"
+# Restore window size when unsnapped (1=enabled, 2=disbaled)
+: "${rectangle_unsnap_restore:=1}"
+# Restore Default Shortcuts (true=Rectangle, false=Spectacle)
+: "${alternate_default_shortcuts:=true}"
+
+# msx settings
+msx_module_enabled="$rectangle_enabled"
+msx_module_appcheck=(
+  "$HOME/Applications/Rectangle.app"
+  "/Applications/Rectangle.app"
+  "/System/Applications/Rectangle.app"
+)
+
+# msx main
+msx_module_main()
+{
+  defaults write com.knollsoft.Rectangle launchOnLogin -bool "$rectangle_launch_on_login"
+  defaults write com.knollsoft.Rectangle windowSnapping -int "$rectangle_window_snapping"
+  defaults write com.knollsoft.Rectangle hideMenubarIcon -bool "$rectangle_hide_menubar_icon"
+  defaults write com.knollsoft.Rectangle SUEnableAutomaticChecks -bool "$rectangle_automatic_checks"
+  defaults write com.knollsoft.Rectangle subsequentExecutionMode -int "$rectangle_subsequent_execution_mode"
+  defaults write com.knollsoft.Rectangle gapSize -int "$rectangle_gap_size"
+  defaults write com.knollsoft.Rectangle allowAnyShortcut -bool "$rectangle_allow_any_shortcut"
+  defaults write com.knollsoft.Rectangle unsnapRestore -int "$rectangle_unsnap_restore"
+  defaults write com.knollsoft.Rectangle alternateDefaultShortcuts -bool "$alternate_default_shortcuts"
+
+  killall Rectangle
+  open "$msx_module_app_open"
+}
+:
