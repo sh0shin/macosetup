@@ -137,7 +137,7 @@ msx_module_list()
 msx_module_run()
 {
   local msx_module_found msx_module_path msx_module_name_msx msx_module_name
-  local msx_module_app msx_module_app_found
+  local msx_module_app msx_module_app_found msx_module_app_open
 
   msx_module_found="$1"
   msx_module_app_found=0
@@ -161,6 +161,7 @@ msx_module_run()
           if [[ -e "$msx_module_app" ]]
           then
             msx_module_app_found=1
+            msx_module_app_open="$msx_module_app"
           fi
         done
 
