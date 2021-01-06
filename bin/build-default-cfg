@@ -24,7 +24,7 @@ do
     echo "## $(basename "${msx%.msx}" | sed 's/[-_]/ /g')"
 
     awk '/^# msx defaults$/{config=1; next} /^# msx settings$/{config=0} config' "$msx" | \
-      sed -e 's/: "${\(.*\):=\(.*\)}"/\1=\2/g'
+      sed -e 's/^\(#\)\{0,1\}: "${\(.*\):=\(.*\)}"/\2=\3/g'
   done
 done > "$PWD/etc/default.cfg.new"
 
