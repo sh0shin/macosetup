@@ -4,6 +4,7 @@
 # shellcheck disable=SC2154
 
 # msx defaults
+# Notifications
 : "${notifications_enabled:=false}"
 : "${notifications_sort_order:=1}"
 

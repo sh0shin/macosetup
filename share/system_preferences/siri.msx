@@ -4,6 +4,7 @@
 # shellcheck disable=SC2154
 
 # msx defaults
+# Siri
 : "${siri_enabled:=false}"
 : "${siri_assistant_enabled:=false}"
 : "${siri_dictation_enabled:=false}"

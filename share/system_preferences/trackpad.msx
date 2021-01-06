@@ -4,6 +4,7 @@
 # shellcheck disable=SC2154
 
 # msx defaults
+# Trackpad
 : "${trackpad_enabled:=false}"
 
 # msx settings

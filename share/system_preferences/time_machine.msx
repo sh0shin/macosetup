@@ -4,6 +4,7 @@
 # shellcheck disable=SC2154
 
 # msx defaults
+# Time Machine
 : "${time_machine_enabled:=false}"
 : "${time_machine_auto_backup:=false}"
 : "${time_machine_skip_system_files:=true}"

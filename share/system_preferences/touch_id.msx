@@ -4,6 +4,7 @@
 # shellcheck disable=SC2154
 
 # msx defaults
+# Touch ID
 : "${touch_id_enabled:=false}"
 
 # msx settings

@@ -4,6 +4,7 @@
 # shellcheck disable=SC2154
 
 # msx defaults
+# Desktop & Screen Saver
 : "${desktop_screensaver_enabled:=false}"
 : "${screensaver_idletime:=1200}"
 : "${screensaver_showclock:=false}"

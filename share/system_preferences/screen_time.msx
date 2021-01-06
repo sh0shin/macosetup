@@ -4,6 +4,7 @@
 # shellcheck disable=SC2154
 
 # msx defaults
+# Screen Time
 : "${screen_time_enabled:=false}"
 
 # msx settings

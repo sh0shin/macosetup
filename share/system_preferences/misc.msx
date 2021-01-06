@@ -4,6 +4,7 @@
 # shellcheck disable=SC2154
 
 # msx defaults
+# Misc
 : "${misc_enabled:=false}"
 : "${misc_allow_unknown_servers:=true}"
 : "${misc_admin_host_info:=HostName}"

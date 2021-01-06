@@ -4,6 +4,7 @@
 # shellcheck disable=SC2154
 
 # msx defaults
+# Internet Accounts
 : "${internet_accounts_enabled:=false}"
 
 # msx settings

@@ -4,6 +4,7 @@
 # shellcheck disable=SC2154
 
 # msx defaults
+# Sharing
 : "${sharing_enabled:=false}"
 : "${sharing_computername:=macosetup}"
 : "${sharing_remove_public_folder:=false}"

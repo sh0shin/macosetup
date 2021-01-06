@@ -4,6 +4,7 @@
 # shellcheck disable=SC2154
 
 # msx defaults
+# Date & Time
 : "${date_time_enabled:=false}"
 : "${date_time_usingnetworktime:=on}"
 : "${date_time_networktimeserver:=de.pool.ntp.org}"

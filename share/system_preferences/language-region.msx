@@ -4,6 +4,7 @@
 # shellcheck disable=SC2154
 
 # msx defaults
+# Language & Region
 : "${language_region_enabled:=false}"
 : "${language_region_languages:="en-DE"}"
 : "${language_region_locale:="en_DE"}"

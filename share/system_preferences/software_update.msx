@@ -4,6 +4,7 @@
 # shellcheck disable=SC2154
 
 # msx defaults
+# Software Update
 : "${software_update_enabled:=false}"
 : "${software_update_auto_check:=true}"
 : "${software_update_auto_download:=false}"

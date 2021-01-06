@@ -4,6 +4,7 @@
 # shellcheck disable=SC2154
 
 # msx defaults
+# Energy Saver
 : "${energy_saver_enabled:=false}"
 : "${battery_display_sleep:=5}"
 : "${battery_system_sleep:=5}"

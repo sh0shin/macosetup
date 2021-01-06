@@ -4,6 +4,7 @@
 # shellcheck disable=SC2154
 
 # msx defaults
+# Dock
 : "${dock_enabled:=false}"
 : "${dock_size:=48}"
 : "${dock_magnification:=false}"

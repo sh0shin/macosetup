@@ -4,6 +4,7 @@
 # shellcheck disable=SC2154
 
 # msx defaults
+# Wallet & Apple Pay
 : "${wallet_apple_pay_enabled:=false}"
 
 # msx settings

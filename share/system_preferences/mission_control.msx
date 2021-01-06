@@ -4,6 +4,7 @@
 # shellcheck disable=SC2154
 
 # msx defaults
+# Mission Control
 : "${missioncontrol_enabled:=false}"
 : "${missioncontrol_auto_rearrange_spaces:=false}"
 : "${missioncontrol_switch_to_space:=true}"

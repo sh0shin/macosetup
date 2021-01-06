@@ -4,6 +4,7 @@
 # shellcheck disable=SC2154
 
 # msx defaults
+# Spotlight
 : "${spotlight_enabled:=false}"
 : "${spotlight_suggestions_disabled:=true}"
 

@@ -4,13 +4,14 @@
 # shellcheck disable=SC2154
 
 # msx defaults
+# General
 : "${general_enabled:=false}"
-: "${general_appearance:=dark}"
-: "${general_accent_colour:=0.847059 0.847059 0.862745}"
+: "${general_appearance:="dark"}"
+: "${general_accent_colour:="0.847059 0.847059 0.862745"}"
 : "${general_highlight_colour:=6}"
 : "${general_sidebar_icon_size:=1}"
 : "${general_autohide_menu_bar:=false}"
-: "${general_show_scroll_bars:=WhenScrolling}"
+: "${general_show_scroll_bars:="WhenScrolling"}"
 : "${general_close_quit:=false}"
 
 # msx settings

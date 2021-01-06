@@ -4,6 +4,7 @@
 # shellcheck disable=SC2154
 
 # msx defaults
+# iCloud
 : "${icloud_enabled:=false}"
 : "${icloud_new_docs_to_cloud:=false}"
 
