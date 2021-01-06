@@ -28,9 +28,14 @@ do
   done
 done > "$PWD/etc/default.cfg.new"
 
-msx_diff=$(diff -q "$PWD/etc/default.cfg" "$PWD/etc/default.cfg.new")
+# current hack
+truncate -s -1 "$PWD/etc/default.cfg.new"
+
+msx_diff=$(diff -u "$PWD/etc/default.cfg" "$PWD/etc/default.cfg.new")
 if [[ -n "$msx_diff" ]]
 then
+  echo "default.cfg updated"
   mv "$PWD/etc/default.cfg.new" "$PWD/etc/default.cfg"
-  truncate -s -1 "$PWD/etc/default.cfg"
+else
+  rm "$PWD/etc/default.cfg.new"
 fi
