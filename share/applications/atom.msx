@@ -5,7 +5,7 @@
 
 # msx defaults
 : "${atom_enabled:=false}"
-#: "${atom_packages:=}"
+#: "${atom_packages:=()}"
 
 # msx settings
 msx_module_enabled="$atom_enabled"

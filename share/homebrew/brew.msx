@@ -6,10 +6,10 @@
 
 # msx defaults
 : "${brew_enabled:=false}"
-: "${brew_analytics:=off}"
-#: "${brew_tap:=}"
-#: "${brew_formula:=}"
-#: "${brew_formula_uninstall:=}"
+: "${brew_analytics:="off"}"
+#: "${brew_tap:=()}"
+#: "${brew_formula:=()}"
+#: "${brew_formula_uninstall:=()}"
 : "${brew_upgrade:=true}"
 : "${brew_cleanup:=false}"
 : "${brew_cleanup_prune:=0}"
