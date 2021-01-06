@@ -1,0 +1,35 @@
+#!/usr/bin/env bash
+#
+
+msx_category=(
+  shell
+  homebrew
+  system_preferences
+  applications
+  misc
+)
+
+for cat in "${msx_category[@]}"
+do
+  echo "# $cat"
+  msx_found=$(find "$PWD/share/$cat" -type f -iname '*.msx' | sort -u)
+
+  for msx in $msx_found
+  do
+    if [[ "$msx" =~ sample\.msx ]]
+    then
+      continue
+    fi
+
+    echo "## $(basename "${msx%.msx}" | sed 's/[-_]/ /g')"
+
+    awk '/^# msx defaults$/{config=1; next} /^# msx settings$/{config=0} config' "$msx" | \
+      sed -e 's/: "${\(.*\):=\(.*\)}"/\1=\2/g'
+  done
+done > "$PWD/etc/default.cfg.new"
+
+msx_diff=$(diff -q "$PWD/etc/default.cfg" "$PWD/etc/default.cfg.new")
+if [[ -n "$msx_diff" ]]
+then
+  mv "$PWD/etc/default.cfg.new" "$PWD/etc/default.cfg"
+fi
