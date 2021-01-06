@@ -21,7 +21,7 @@ do
       continue
     fi
 
-    echo "## $(basename "${msx%.msx}" | sed 's/[-_]/ /g')"
+    echo "## -m $(basename "${msx%.msx}")"
 
     awk '/^# msx defaults$/{config=1; next} /^# msx settings$/{config=0} config' "$msx" | \
       sed -e 's/^\(#\)\{0,1\}: "${\(.*\):=\(.*\)}"/\2=\3/g'
