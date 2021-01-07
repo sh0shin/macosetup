@@ -60,7 +60,6 @@ dscl . -read /Users/<USERNAME> RealName
 dscl . -read /Users/<USERNAME> GeneratedUID
 ```
 
-
 ## App Store
 Install or uninstall with `mas`
 ```
@@ -69,4 +68,11 @@ Install or uninstall with `mas`
 409201541 Pages
 682658836 GarageBand
 409203825 Numbers
+```
+
+## Config check
+Check configuration syntax with something like this
+```sh
+CONFIG_SYNTAX="(^\s*#|^\s*$|^\s*[a-z_][^[:space:]]*=[^;&\(\`]*$)"
+grep -E -iv "$CONFIG_SYNTAX" "$1"
 ```
