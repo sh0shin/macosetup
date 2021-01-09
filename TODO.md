@@ -51,6 +51,8 @@ sudo chmod 2770 /usr/local
 ## Dock
 ```sh
 defaults write com.apple.dock showhidden -bool true
+defaults write com.apple.dock expose-animation-duration -float 0.1
+defaults write com.apple.dock autohide-time-modifier -float 0
 ```
 
 ## Finder
@@ -67,6 +69,13 @@ defaults write NSGlobalDomain PMPrintingExpandedStateForPrint2 -bool true
 #defaults write com.apple.finder InterfaceLevel simple
 #defaults write com.apple.finder ProhibitFinderPreferences -bool true
 #defaults write com.apple.finder ProhibitGoToFolder -bool true
+
+defaults write com.apple.finder DisableAllAnimations -bool true
+```
+
+## Misc
+```sh
+defaults write NSGlobalDomain NSWindowResizeTime -float 0.001
 ```
 
 ## User infos
