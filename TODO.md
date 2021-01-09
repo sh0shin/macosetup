@@ -48,10 +48,25 @@ sudo chmod 2770 /usr/local
 # hint: umask 0007
 ```
 
+## Dock
+```sh
+defaults write com.apple.dock showhidden -bool true
+```
+
 ## Finder
 ```sh
-defaults write com.apple.finder ShowStatusBar -bool true
+defaults write com.apple.finder OpenWindowForNewRemovableDisk -bool false
 defaults write com.apple.finder ShowPathbar -bool true
+defaults write com.apple.finder ShowStatusBar -bool true
+
+defaults write NSGlobalDomain NSNavPanelExpandedStateForSaveMode -bool true
+defaults write NSGlobalDomain NSNavPanelExpandedStateForSaveMode2 -bool true
+defaults write NSGlobalDomain PMPrintingExpandedStateForPrint -bool true
+defaults write NSGlobalDomain PMPrintingExpandedStateForPrint2 -bool true
+
+#defaults write com.apple.finder InterfaceLevel simple
+#defaults write com.apple.finder ProhibitFinderPreferences -bool true
+#defaults write com.apple.finder ProhibitGoToFolder -bool true
 ```
 
 ## User infos
