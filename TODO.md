@@ -69,6 +69,7 @@ defaults write NSGlobalDomain PMPrintingExpandedStateForPrint2 -bool true
 #defaults write com.apple.finder InterfaceLevel simple
 #defaults write com.apple.finder ProhibitFinderPreferences -bool true
 #defaults write com.apple.finder ProhibitGoToFolder -bool true
+#defaults write com.apple.finder ProhibitConnectTo -bool true
 
 defaults write com.apple.finder DisableAllAnimations -bool true
 ```
