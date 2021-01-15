@@ -57,7 +57,11 @@ defaults write com.apple.dock autohide-time-modifier -float 0
 
 ## Finder
 ```sh
+defaults write com.apple.frameworks.diskimages auto-open-ro-root -bool false
+defaults write com.apple.frameworks.diskimages auto-open-rw-root -bool false
 defaults write com.apple.finder OpenWindowForNewRemovableDisk -bool false
+
+
 defaults write com.apple.finder ShowPathbar -bool true
 defaults write com.apple.finder ShowStatusBar -bool true
 
