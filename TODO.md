@@ -13,8 +13,11 @@ sudo mount -uw /
 sudo rm /System/Library/CoreServices/DefaultBackground.jpg
 sudo rm /System/Library/CoreServices/DefaultDesktop.heic
 
-sudo ln -s "$HOME/Pictures/macOSetup.jpg" /System/Library/CoreServices/DefaultBackground.jpg
-sudo ln -s "$HOME/Pictures/macOSetup.heic" /System/Library/CoreServices/DefaultDesktop.heic
+sudo ln -fs "/opt/macosetup/Pictures/macOSetup.jpg" /System/Library/CoreServices/DefaultBackground.jpg
+sudo ln -fs "/opt/macosetup/Pictures/macOSetup.heic" /System/Library/CoreServices/DefaultDesktop.heic
+
+csrutil authenticated-root disable
+bless --folder /Volumes/.../System/Library/CoreServices --bootefi --create-snapshot
 
 sudo diskutil quiet apfs updatePreboot /
 ```
