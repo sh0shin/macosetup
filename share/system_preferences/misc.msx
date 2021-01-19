@@ -60,7 +60,7 @@ msx_module_main()
   # Menu Extras (System UI Server)
 
   # TODO
-  exit 0
+  return
 
   defaults write com.apple.systemuiserver "NSStatusItem Visible Siri" -bool false
 
