@@ -19,10 +19,11 @@ List of [macOS releases](https://en.wikipedia.org/wiki/MacOS_version_history#Rel
  * 10.13 - High Sierra
  * 10.14 - Mojave
  * 10.15 - Catalina
+ * 11 - Big Sur (soon)
 
 ### Unsupported versions
 
- * 11 - Big Sur (soon)
+ * < 10.13 - High Sierra
 
 ## Outputs
 
