@@ -35,6 +35,7 @@ msx_module_main()
   done
 
   # Installed
+  # BUG: not found mapfile
   mapfile -t brew_cask_list < <(brew list --cask -1)
   for cask in "${brew_cask_list[@]}"
   do

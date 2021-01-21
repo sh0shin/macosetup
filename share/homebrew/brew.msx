@@ -41,6 +41,7 @@ msx_module_main()
   done
 
   # Installed
+  # BUG: not found mapfile
   mapfile -t brew_formula_list < <(brew list --formula -1)
   for formula in "${brew_formula_list[@]}"
   do
