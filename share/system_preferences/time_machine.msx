@@ -15,7 +15,7 @@
 : "${time_machine_notify_deleted:=true}"
 
 # msx settings
-msx_module_enabled="$time_machine"
+msx_module_enabled="$time_machine_enabled"
 msx_module_appcheck=()
 
 # msx main
