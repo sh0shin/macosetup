@@ -3,6 +3,7 @@
 # shellcheck disable=SC2034
 # shellcheck disable=SC2086
 # shellcheck disable=SC2154
+# shellcheck disable=SC2207
 
 # msx defaults
 # Cask
@@ -36,7 +37,8 @@ msx_module_main()
 
   # Installed
   # BUG: not found mapfile
-  mapfile -t brew_cask_list < <(brew list --cask -1)
+  #mapfile -t brew_cask_list < <(brew list --cask -1)
+  brew_cask_list=( $(brew list --cask -1) )
   for cask in "${brew_cask_list[@]}"
   do
     for i in "${!brew_cask[@]}"
