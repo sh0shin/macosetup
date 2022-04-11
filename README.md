@@ -2,6 +2,8 @@
 
 macOS setup & configuration automation
 
+**CURRENTLY UNMAINTAINED!**
+
 ## Quick usage
 
 0. Disable SIP (optional but recommended)
